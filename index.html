@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Green Country AI Services — Operations Hub</title>
+<title>GCAI Hub</title>
+<meta name="description" content="Green Country AI Services — Operations Hub">
+<meta name="theme-color" content="#00d084">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GCAI Hub">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" id="manifest-link">
+<link rel="icon" type="image/svg+xml" id="favicon-link">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -727,6 +735,9 @@
     <div class="nav-item" onclick="showTab('prompts', this)"><span class="nav-icon">≡</span> Prompt Library</div>
     <div class="nav-section-label" style="margin-top:16px">Finance</div>
     <div class="nav-item" onclick="showTab('financials', this)"><span class="nav-icon">$</span> Financials</div>
+    <div class="nav-section-label" style="margin-top:16px">System</div>
+    <div class="nav-item" onclick="showTab('discord', this)"><span class="nav-icon">◉</span> Discord</div>
+    <div class="nav-item" onclick="showTab('settings', this)"><span class="nav-icon">⚙</span> Settings</div>
 
     <div class="sidebar-bottom">
       <div class="partner-block">
@@ -812,7 +823,7 @@
                 <div class="team-avatar" style="background:var(--surface2);color:var(--text-muted)">J</div>
                 <div class="team-info">
                   <div class="team-name">Johnny</div>
-                  <div class="team-role">Partner — Pending</div>
+                  <div class="team-role">Owner / Operator</div>
                 </div>
                 <span class="badge badge-muted">Locked</span>
               </div>
@@ -1099,6 +1110,189 @@
       </div>
     </div>
 
+    <!-- ══ DISCORD ══ -->
+    <div class="tab-panel" id="tab-discord">
+      <div class="section-header">
+        <div class="section-title">Discord</div>
+        <div class="section-sub">// Green Country AI Services Server — Johnny's build</div>
+      </div>
+
+      <div class="migration-bar" id="discord-status-bar">
+        🔒 &nbsp; DORMANT — Paste webhook URL in Settings to activate Discord alerts.
+      </div>
+
+      <div class="grid-2" style="margin-bottom:18px">
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Webhook Alerts</div><span class="badge badge-muted" id="webhook-badge">Inactive</span></div>
+          <div class="panel-body">
+            <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);line-height:1.8;margin-bottom:16px">
+              When active, the hub fires a Discord message automatically on these events:
+            </p>
+            <table class="data-table">
+              <thead><tr><th>Event</th><th>Channel</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>New client added</td><td>#client-updates</td><td><span class="badge badge-muted" id="wh-s1">Waiting</span></td></tr>
+                <tr><td>Prospect moved in pipeline</td><td>#pipeline-alerts</td><td><span class="badge badge-muted" id="wh-s2">Waiting</span></td></tr>
+                <tr><td>Task marked complete</td><td>#athena-log</td><td><span class="badge badge-muted" id="wh-s3">Waiting</span></td></tr>
+                <tr><td>Task assigned to Athena</td><td>#athena-log</td><td><span class="badge badge-muted" id="wh-s4">Waiting</span></td></tr>
+                <tr><td>Task assigned to Celeste</td><td>#celeste-log</td><td><span class="badge badge-muted" id="wh-s5">Waiting</span></td></tr>
+              </tbody>
+            </table>
+            <button class="btn btn-primary" style="margin-top:14px" onclick="testWebhook()">Send Test Message</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Bot Status</div></div>
+          <div class="panel-body">
+            <div style="display:flex;flex-direction:column;gap:12px">
+
+              <div class="team-card" style="opacity:0.5;border-style:dashed">
+                <div class="team-avatar" style="background:var(--blue-dim);color:var(--blue);font-size:18px">A</div>
+                <div class="team-info">
+                  <div class="team-name">Athena</div>
+                  <div class="team-role" style="margin-bottom:4px">AI Agent Bot</div>
+                  <div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted)">Commands: !status !task !report</div>
+                </div>
+                <span class="badge badge-muted">No Token</span>
+              </div>
+
+              <div class="team-card" style="opacity:0.5;border-style:dashed">
+                <div class="team-avatar" style="background:var(--green-dim);color:var(--green);font-size:18px">C</div>
+                <div class="team-info">
+                  <div class="team-name">Celeste</div>
+                  <div class="team-role" style="margin-bottom:4px">AI Agent Bot</div>
+                  <div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted)">Commands: !status !task !report</div>
+                </div>
+                <span class="badge badge-muted">No Token</span>
+              </div>
+
+            </div>
+            <div style="margin-top:16px;padding:12px;background:var(--surface2);border-radius:6px;border:1px solid var(--border2)">
+              <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);line-height:1.8">
+                Bot tokens added in Settings when ready.<br>
+                Using Johnny's Discord server on go-live.<br>
+                Bot invite links generated per token.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header"><div class="panel-title">Activity Feed</div><span style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted)">Last 20 events sent to Discord</span></div>
+        <div class="panel-body" id="discord-feed">
+          <div class="empty-state"><div class="empty-icon">◉</div><div class="empty-label">No activity yet — webhook inactive</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SETTINGS ══ -->
+    <div class="tab-panel" id="tab-settings">
+      <div class="section-header">
+        <div class="section-title">Settings</div>
+        <div class="section-sub">// Stack config · Integrations · Access control</div>
+      </div>
+
+      <div class="grid-2" style="margin-bottom:18px">
+
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Discord Integration</div></div>
+          <div class="panel-body" style="display:flex;flex-direction:column;gap:14px">
+            <div class="form-group">
+              <div class="form-label">Webhook URL (from Johnny's server)</div>
+              <input class="form-input" id="discord-webhook-input" placeholder="https://discord.com/api/webhooks/..." style="width:100%;font-size:12px">
+              <div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted);margin-top:4px">Paste Johnny's webhook URL here to activate all Discord alerts</div>
+            </div>
+            <div class="form-group">
+              <div class="form-label">Athena Bot Token</div>
+              <input class="form-input" id="athena-token-input" placeholder="Discord bot token — add when ready" style="width:100%;font-size:12px" type="password">
+            </div>
+            <div class="form-group">
+              <div class="form-label">Celeste Bot Token</div>
+              <input class="form-input" id="celeste-token-input" placeholder="Discord bot token — add when ready" style="width:100%;font-size:12px" type="password">
+            </div>
+            <button class="btn btn-primary" style="align-self:flex-start" onclick="saveDiscordSettings()">Save & Activate</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Stack Config</div></div>
+          <div class="panel-body" style="display:flex;flex-direction:column;gap:14px">
+            <div class="form-group">
+              <div class="form-label">Vapi.ai API Key</div>
+              <input class="form-input" placeholder="Paste when account is created" style="width:100%;font-size:12px" type="password">
+            </div>
+            <div class="form-group">
+              <div class="form-label">Supabase URL</div>
+              <input class="form-input" id="supabase-url-input" placeholder="https://xxxx.supabase.co — activates on go-live" style="width:100%;font-size:12px">
+            </div>
+            <div class="form-group">
+              <div class="form-label">Supabase Anon Key</div>
+              <input class="form-input" placeholder="Supabase public key" style="width:100%;font-size:12px" type="password">
+            </div>
+            <div class="form-group">
+              <div class="form-label">GoHighLevel API Key</div>
+              <input class="form-input" placeholder="GHL Agency key" style="width:100%;font-size:12px" type="password">
+            </div>
+            <button class="btn btn-ghost" style="align-self:flex-start">Save Keys</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="panel">
+        <div class="panel-header"><div class="panel-title">Partner Access Control</div></div>
+        <div class="panel-body">
+          <table class="data-table">
+            <thead><tr><th>Member</th><th>Role</th><th>Type</th><th>Access</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:600">Jason</td>
+                <td>Owner / Operator</td>
+                <td><span class="badge badge-muted">Human</span></td>
+                <td><span class="badge badge-green">Full</span></td>
+                <td><span class="badge badge-green">Active</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600">Athena</td>
+                <td>AI Agent — Build & Research</td>
+                <td><span class="badge badge-blue">Agent</span></td>
+                <td><span class="badge badge-amber">Tasks + Prompts</span></td>
+                <td><span class="badge badge-green">Active</span></td>
+              </tr>
+              <tr style="opacity:0.45">
+                <td style="font-weight:600">Johnny</td>
+                <td>Owner / Operator</td>
+                <td><span class="badge badge-muted">Human</span></td>
+                <td><span class="badge badge-muted">Full — Pending</span></td>
+                <td><span class="badge badge-muted">Go-Live</span></td>
+              </tr>
+              <tr style="opacity:0.45">
+                <td style="font-weight:600">Celeste</td>
+                <td>AI Agent — Operations</td>
+                <td><span class="badge badge-blue">Agent</span></td>
+                <td><span class="badge badge-muted">TBD</span></td>
+                <td><span class="badge badge-muted">Go-Live</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:18px">
+        <div class="panel-header"><div class="panel-title">Data & Migration</div></div>
+        <div class="panel-body" style="display:flex;gap:12px;flex-wrap:wrap">
+          <button class="btn btn-ghost" onclick="exportData()">Export All Data (JSON)</button>
+          <button class="btn btn-ghost" onclick="clearData()" style="color:var(--red);border-color:var(--red-dim)">Clear All Local Data</button>
+        </div>
+        <div style="padding:0 18px 16px;font-family:var(--font-mono);font-size:10px;color:var(--text-muted);line-height:1.8">
+          Export your data before migrating to Supabase on go-live.<br>
+          The import tool will be available in the cloud version.
+        </div>
+      </div>
+    </div>
+
   </div><!-- /main -->
 </div><!-- /layout -->
 
@@ -1169,6 +1363,7 @@ function addClient() {
   DataLayer.set('clients', clients);
   document.getElementById('c-name').value = '';
   document.getElementById('c-niche').value = '';
+  discordAlert(`📋 New client onboarded: **${client.name}** (${client.pkg} — $${client.pkg==='Pro'?'1,500':'750'}/mo)`, 'client');
   renderClients();
   refreshStats();
 }
@@ -1208,13 +1403,18 @@ function addTask() {
   tasks.push(task);
   DataLayer.set('tasks', tasks);
   document.getElementById('t-desc').value = '';
+
+  discordAlert(`⬡ New task assigned to **${task.owner}**: ${task.desc} [${task.priority}]`, 'task');
   renderTasks();
   refreshStats();
 }
 
 function completeTask(id) {
   const t = tasks.find(t => t.id === id);
-  if (t) t.status = t.status === 'Done' ? 'Open' : 'Done';
+  if (t) {
+    t.status = t.status === 'Done' ? 'Open' : 'Done';
+    if (t.status === 'Done') discordAlert(`✅ Task completed by **${t.owner}**: ${t.desc}`, 'task');
+  }
   DataLayer.set('tasks', tasks);
   renderTasks();
   refreshStats();
@@ -1268,7 +1468,9 @@ function addProspect() {
 function moveProspect(id) {
   const p = prospects.find(p => p.id === id);
   if (!p || !stageNext[p.stage]) return;
+  const oldStage = stageMap[p.stage];
   p.stage = stageNext[p.stage];
+  discordAlert(`◎ Pipeline move: **${p.name}** → ${stageMap[p.stage]}`, 'pipeline');
   DataLayer.set('prospects', prospects);
   renderPipeline();
   refreshStats();
@@ -1306,11 +1508,169 @@ function addPrompt() {
   alert('Prompt builder coming soon — Athena will populate this library.');
 }
 
+// ── DISCORD ──
+function getWebhook() {
+  return localStorage.getItem('gcai_discord_webhook') || '';
+}
+
+async function discordAlert(message, type) {
+  const url = getWebhook();
+  if (!url || !url.startsWith('https://discord.com/api/webhooks/')) return;
+  const colors = { client: 0x00d084, pipeline: 0xf5a623, task: 0x4fc3f7, system: 0xffffff };
+  const payload = {
+    embeds: [{
+      title: '🟢 Green Country AI Services',
+      description: message,
+      color: colors[type] || colors.system,
+      footer: { text: 'GCAI Hub · ' + new Date().toLocaleString() }
+    }]
+  };
+  try {
+    await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    logDiscordActivity(message, type);
+  } catch(e) { console.warn('Discord webhook failed:', e); }
+}
+
+function logDiscordActivity(message, type) {
+  let feed = DataLayer.get('discord_feed');
+  feed.unshift({ message, type, time: new Date().toLocaleString() });
+  if (feed.length > 20) feed = feed.slice(0, 20);
+  DataLayer.set('discord_feed', feed);
+  renderDiscordFeed();
+}
+
+function renderDiscordFeed() {
+  const feed = DataLayer.get('discord_feed');
+  const el = document.getElementById('discord-feed');
+  if (!el) return;
+  if (!feed.length) {
+    el.innerHTML = `<div class="empty-state"><div class="empty-icon">◉</div><div class="empty-label">No activity yet — webhook inactive</div></div>`;
+    return;
+  }
+  const typeColor = { client: 'badge-green', pipeline: 'badge-amber', task: 'badge-blue', system: 'badge-muted' };
+  el.innerHTML = feed.map(f => `
+    <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)">
+      <span class="badge ${typeColor[f.type]||'badge-muted'}" style="flex-shrink:0;margin-top:2px">${f.type}</span>
+      <div style="flex:1;font-size:13px">${f.message}</div>
+      <div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted);flex-shrink:0">${f.time}</div>
+    </div>`).join('');
+}
+
+function updateWebhookStatus() {
+  const url = getWebhook();
+  const active = url && url.startsWith('https://discord.com/api/webhooks/');
+  const badge = document.getElementById('webhook-badge');
+  const bar   = document.getElementById('discord-status-bar');
+  const statuses = ['wh-s1','wh-s2','wh-s3','wh-s4','wh-s5'];
+  if (badge) {
+    badge.className = active ? 'badge badge-green' : 'badge badge-muted';
+    badge.textContent = active ? 'Active' : 'Inactive';
+  }
+  if (bar) {
+    bar.style.background = active ? 'var(--green-dim)' : 'var(--amber-dim)';
+    bar.style.borderColor = active ? 'var(--green)' : 'var(--amber)';
+    bar.style.color = active ? 'var(--green)' : 'var(--amber)';
+    bar.innerHTML = active ? '✅ &nbsp; ACTIVE — Discord alerts firing on all hub events.' : '🔒 &nbsp; DORMANT — Paste webhook URL in Settings to activate Discord alerts.';
+  }
+  statuses.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.className = active ? 'badge badge-green' : 'badge badge-muted';
+      el.textContent = active ? 'Active' : 'Waiting';
+    }
+  });
+  const inp = document.getElementById('discord-webhook-input');
+  if (inp && url) inp.value = url;
+}
+
+function saveDiscordSettings() {
+  const url = document.getElementById('discord-webhook-input').value.trim();
+  if (url && !url.startsWith('https://discord.com/api/webhooks/')) {
+    alert('Invalid webhook URL. Must start with https://discord.com/api/webhooks/');
+    return;
+  }
+  localStorage.setItem('gcai_discord_webhook', url);
+  updateWebhookStatus();
+  if (url) discordAlert('✅ Green Country AI Hub connected to Discord.', 'system');
+  alert(url ? 'Discord activated! A test message was sent.' : 'Discord webhook cleared.');
+}
+
+async function testWebhook() {
+  const url = getWebhook();
+  if (!url) { alert('No webhook URL saved. Go to Settings > Discord Integration.'); return; }
+  await discordAlert('🧪 Test message from GCAI Hub — Discord integration is working.', 'system');
+  alert('Test message sent to Discord!');
+}
+
+// ── SETTINGS ──
+function exportData() {
+  const data = {
+    clients: DataLayer.get('clients'),
+    tasks: DataLayer.get('tasks'),
+    prospects: DataLayer.get('prospects'),
+    discord_feed: DataLayer.get('discord_feed'),
+    exported: new Date().toISOString()
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'gcai_data_export_' + new Date().toISOString().split('T')[0] + '.json';
+  a.click();
+}
+
+function clearData() {
+  if (!confirm('Delete ALL local data? This cannot be undone.')) return;
+  ['clients','tasks','prospects','discord_feed'].forEach(k => DataLayer.set(k, []));
+  clients = []; tasks = []; prospects = [];
+  renderClients(); renderTasks(); renderPipeline(); refreshStats(); renderDiscordFeed();
+  alert('All data cleared.');
+}
+
+// ── PWA SETUP ──
+(function() {
+  const faviconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5" fill="#00d084"/><text x="50" y="68" font-family="Arial Black,sans-serif" font-weight="900" font-size="44" fill="#000" text-anchor="middle">AI</text></svg>`;
+  const faviconBlob = new Blob([faviconSvg], {type:'image/svg+xml'});
+  const faviconUrl  = URL.createObjectURL(faviconBlob);
+  document.getElementById('favicon-link').href = faviconUrl;
+
+  const manifest = {
+    name: "Green Country AI Services",
+    short_name: "GCAI Hub",
+    description: "Green Country AI Services — Operations Hub",
+    start_url: "./",
+    display: "standalone",
+    background_color: "#0a0e0f",
+    theme_color: "#00d084",
+    orientation: "landscape",
+    icons: [{ src: faviconUrl, sizes: "any", type: "image/svg+xml", purpose: "any maskable" }]
+  };
+  const manifestBlob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
+  document.getElementById('manifest-link').href = URL.createObjectURL(manifestBlob);
+
+  if ('serviceWorker' in navigator) {
+    const swCode = `const CACHE='gcai-v1';self.addEventListener('install',e=>{self.skipWaiting()});self.addEventListener('activate',e=>{self.clients.claim()});self.addEventListener('fetch',e=>{e.respondWith(fetch(e.request).catch(()=>caches.match(e.request)))});`;
+    const swUrl = URL.createObjectURL(new Blob([swCode], {type:'application/javascript'}));
+    navigator.serviceWorker.register(swUrl).catch(()=>{});
+  }
+
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    const btn = document.createElement('button');
+    btn.className = 'btn btn-ghost';
+    btn.style.cssText = 'padding:4px 12px;font-size:11px;font-family:var(--font-mono);letter-spacing:0.06em';
+    btn.textContent = '⬇ Install App';
+    btn.onclick = () => { e.prompt(); btn.remove(); };
+    document.querySelector('.topbar-right').prepend(btn);
+  });
+})();
+
 // ── INIT ──
 renderClients();
 renderTasks();
 renderPipeline();
 refreshStats();
+updateWebhookStatus();
+renderDiscordFeed();
 </script>
 </body>
 </html>
