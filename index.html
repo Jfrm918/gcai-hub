@@ -3,2313 +3,775 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GCAI Hub</title>
-<meta name="description" content="Green Country AI Services — Operations Hub">
-<meta name="theme-color" content="#00d084">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="GCAI Hub">
-<meta name="mobile-web-app-capable" content="yes">
-<link rel="manifest" id="manifest-link">
-<link rel="icon" type="image/svg+xml" id="favicon-link">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<title>GCAI Hub — New Tabs Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg:          #0a0e0f;
-    --surface:     #111618;
-    --surface2:    #171d1f;
-    --border:      #1f2a2d;
-    --border2:     #2a3840;
-    --green:       #00d084;
-    --green-dim:   #00d08422;
-    --green-mid:   #00d08455;
-    --amber:       #f5a623;
-    --amber-dim:   #f5a62322;
-    --red:         #ff4757;
-    --red-dim:     #ff475722;
-    --blue:        #4fc3f7;
-    --blue-dim:    #4fc3f722;
-    --text:        #e8f0f2;
-    --text-dim:    #7a9099;
-    --text-muted:  #3d5560;
-    --font-head:   'Barlow Condensed', sans-serif;
-    --font-mono:   'DM Mono', monospace;
-    --font-body:   'Barlow', sans-serif;
-  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #080b12;
+    --surface: rgba(255,255,255,0.04);
+    --surface-hover: rgba(255,255,255,0.07);
+    --border: rgba(255,255,255,0.08);
+    --border-bright: rgba(255,255,255,0.15);
+    --text: #e8eaf0;
+    --muted: #6b7280;
+    --accent: #00d4a0;
+    --accent-dim: rgba(0,212,160,0.12);
+    --accent-glow: rgba(0,212,160,0.25);
+    --gold: #f5a623;
+    --gold-dim: rgba(245,166,35,0.12);
+    --blue: #4da6ff;
+    --blue-dim: rgba(77,166,255,0.10);
+    --red: #ff5e5e;
+  }
 
   body {
+    font-family: 'DM Sans', sans-serif;
     background: var(--bg);
     color: var(--text);
-    font-family: var(--font-body);
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    min-height: 100vh;
+    padding: 0;
+    overflow-x: hidden;
   }
 
-  /* ── TOPBAR ── */
-  .topbar {
+  /* starfield */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 15% 20%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 60%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 15%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 75%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 88%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 45%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 92% 30%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(2px 2px at 60% 40%, rgba(0,212,160,0.3) 0%, transparent 100%),
+      radial-gradient(2px 2px at 30% 80%, rgba(77,166,255,0.2) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* nebula blobs */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 600px 400px at 10% 20%, rgba(0,212,160,0.04) 0%, transparent 70%),
+      radial-gradient(ellipse 500px 600px at 90% 80%, rgba(77,166,255,0.04) 0%, transparent 70%),
+      radial-gradient(ellipse 400px 300px at 50% 50%, rgba(245,166,35,0.02) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  /* TAB NAV */
+  .tab-nav {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 24px;
-    height: 54px;
-    background: var(--surface);
+    gap: 4px;
     border-bottom: 1px solid var(--border);
-    flex-shrink: 0;
+    margin-bottom: 2.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
+  .tab-nav::-webkit-scrollbar { display: none; }
 
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .logo-mark {
-    width: 32px;
-    height: 32px;
-    background-image: url('gcai-logo.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .logo-text {
-    font-family: var(--font-head);
-    font-weight: 800;
-    font-size: 17px;
-    letter-spacing: 0.05em;
-    color: var(--text);
-    text-transform: uppercase;
-  }
-
-  .logo-text span { color: var(--green); }
-
-  .prelaunch-badge {
-    font-family: var(--font-mono);
-    font-size: 9px;
+  .tab-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
     font-weight: 500;
-    letter-spacing: 0.15em;
-    color: var(--amber);
-    background: var(--amber-dim);
-    border: 1px solid var(--amber);
-    border-radius: 3px;
-    padding: 2px 8px;
-    text-transform: uppercase;
-    animation: pulse-badge 2s ease-in-out infinite;
-  }
-
-  @keyframes pulse-badge {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
-  }
-
-  .topbar-right {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .agent-pill {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 5px 12px;
-    background: var(--surface2);
-    border: 1px solid var(--border2);
-    border-radius: 20px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-  }
-
-  .agent-pill .dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-  }
-
-  .dot-green { background: var(--green); box-shadow: 0 0 6px var(--green); animation: blink 2s ease infinite; }
-  .dot-amber { background: var(--amber); opacity: 0.5; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
-
-  .clock {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--text-dim);
-  }
-
-  /* ── LAYOUT ── */
-  .layout {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-  }
-
-  /* ── SIDEBAR ── */
-  .sidebar {
-    width: 200px;
-    background: var(--surface);
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    padding: 20px 0;
-    flex-shrink: 0;
-  }
-
-  .nav-section-label {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.18em;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    padding: 0 20px 8px;
-  }
-
-  .nav-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-family: var(--font-head);
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    border-left: 3px solid transparent;
-    transition: all 0.15s;
-    user-select: none;
-  }
-
-  .nav-item:hover { color: var(--text); background: var(--surface2); }
-  .nav-item.active { color: var(--green); border-left-color: var(--green); background: var(--green-dim); }
-
-  .nav-icon { font-size: 15px; width: 18px; text-align: center; }
-
-  .sidebar-bottom {
-    margin-top: auto;
-    padding: 16px 20px;
-    border-top: 1px solid var(--border);
-  }
-
-  .partner-block {
-    background: var(--surface2);
-    border: 1px dashed var(--border2);
-    border-radius: 6px;
-    padding: 12px;
-  }
-
-  .partner-label {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-
-  .partner-slot {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 0;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--text-muted);
-  }
-
-  .lock-icon { font-size: 12px; opacity: 0.5; }
-
-  /* ── MAIN ── */
-  .main {
-    flex: 1;
-    overflow-y: auto;
-    padding: 28px;
-    background: var(--bg);
-  }
-
-  .main::-webkit-scrollbar { width: 6px; }
-  .main::-webkit-scrollbar-track { background: transparent; }
-  .main::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
-
-  .tab-panel { display: none; animation: fadein 0.2s ease; }
-  .tab-panel.active { display: block; }
-  @keyframes fadein { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
-
-  /* ── SECTION HEADER ── */
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    margin-bottom: 24px;
-  }
-
-  .section-title {
-    font-family: var(--font-head);
-    font-weight: 800;
-    font-size: 26px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--text);
-  }
-
-  .section-sub {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--text-muted);
     letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 0.75rem 1.25rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+    margin-bottom: -1px;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* PANELS */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* SECTION HEADER */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
   }
 
-  /* ── STAT GRID ── */
-  .stat-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    margin-bottom: 28px;
-  }
-
-  .stat-card {
+  /* GLASS CARD */
+  .glass {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 18px 20px;
-    position: relative;
-    overflow: hidden;
+    border-radius: 12px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .glass:hover { border-color: var(--border-bright); background: var(--surface-hover); }
+
+  /* PACKAGE GRID */
+  .pkg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
   }
 
-  .stat-card::before {
+  .pkg-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.75rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .pkg-card:hover { border-color: var(--border-bright); transform: translateY(-2px); }
+  .pkg-card.featured { border-color: rgba(0,212,160,0.3); }
+  .pkg-card.featured::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
   }
 
-  .stat-card.green::before { background: var(--green); }
-  .stat-card.amber::before { background: var(--amber); }
-  .stat-card.blue::before { background: var(--blue); }
-  .stat-card.red::before { background: var(--red); }
-
-  .stat-label {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-
-  .stat-value {
-    font-family: var(--font-head);
-    font-weight: 800;
-    font-size: 32px;
-    letter-spacing: 0.02em;
-    line-height: 1;
-  }
-
-  .stat-card.green .stat-value { color: var(--green); }
-  .stat-card.amber .stat-value { color: var(--amber); }
-  .stat-card.blue .stat-value { color: var(--blue); }
-  .stat-card.red .stat-value { color: var(--text); }
-
-  .stat-sub {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--text-muted);
-    margin-top: 6px;
-  }
-
-  /* ── GRID 2-COL ── */
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
-  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin-bottom: 18px; }
-
-  /* ── PANEL ── */
-  .panel {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-
-  .panel-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .panel-title {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-  }
-
-  .panel-action {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--green);
-    cursor: pointer;
-    background: none;
-    border: none;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .panel-action:hover { text-decoration: underline; }
-
-  .panel-body { padding: 18px; }
-
-  /* ── TABLE ── */
-  .data-table { width: 100%; border-collapse: collapse; }
-  .data-table th {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    text-align: left;
-    padding: 8px 12px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .data-table td {
-    padding: 11px 12px;
-    font-size: 13px;
-    border-bottom: 1px solid var(--border);
-    vertical-align: middle;
-  }
-
-  .data-table tr:last-child td { border-bottom: none; }
-  .data-table tr:hover td { background: var(--surface2); }
-
-  /* ── BADGES ── */
-  .badge {
+  .pkg-badge {
     display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 3px;
-  }
-
-  .badge-green  { color: var(--green);  background: var(--green-dim);  border: 1px solid var(--green-mid); }
-  .badge-amber  { color: var(--amber);  background: var(--amber-dim);  border: 1px solid #f5a62355; }
-  .badge-red    { color: var(--red);    background: var(--red-dim);    border: 1px solid #ff475744; }
-  .badge-blue   { color: var(--blue);   background: var(--blue-dim);   border: 1px solid #4fc3f744; }
-  .badge-muted  { color: var(--text-muted); background: var(--surface2); border: 1px solid var(--border2); }
-
-  /* ── EMPTY STATE ── */
-  .empty-state {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--text-muted);
-  }
-
-  .empty-icon { font-size: 28px; margin-bottom: 12px; opacity: 0.4; }
-  .empty-label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  /* ── PIPELINE ── */
-  .pipeline-cols {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-  }
-
-  .pipe-col {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    min-height: 320px;
-  }
-
-  .pipe-col-header {
-    padding: 12px 14px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .pipe-col-title {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-  }
-
-  .pipe-count {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--text-muted);
-    background: var(--surface2);
-    padding: 2px 7px;
-    border-radius: 10px;
-  }
-
-  .pipe-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
-
-  .pipe-card {
-    background: var(--surface2);
-    border: 1px solid var(--border2);
-    border-radius: 6px;
-    padding: 12px;
-    cursor: default;
-    transition: border-color 0.15s;
-  }
-
-  .pipe-card:hover { border-color: var(--green-mid); }
-
-  .pipe-card-name {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 13px;
-    color: var(--text);
-    margin-bottom: 4px;
-  }
-
-  .pipe-card-meta {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--text-muted);
-  }
-
-  /* ── TASK QUEUE ── */
-  .task-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr auto auto;
-    gap: 10px;
-    margin-bottom: 20px;
-    align-items: end;
-  }
-
-  .form-group { display: flex; flex-direction: column; gap: 5px; }
-
-  .form-label {
-    font-family: var(--font-mono);
+    font-family: 'DM Mono', monospace;
     font-size: 9px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--text-muted);
+    background: var(--accent-dim);
+    color: var(--accent);
+    border: 1px solid rgba(0,212,160,0.2);
+    border-radius: 4px;
+    padding: 3px 8px;
+    margin-bottom: 1rem;
   }
+  .pkg-badge.gold { background: var(--gold-dim); color: var(--gold); border-color: rgba(245,166,35,0.2); }
 
-  .form-input, .form-select {
-    background: var(--surface2);
-    border: 1px solid var(--border2);
-    border-radius: 5px;
+  .pkg-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
     color: var(--text);
-    font-family: var(--font-body);
+    margin-bottom: 0.25rem;
+  }
+
+  .pkg-price {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+  .pkg-price span { font-size: 14px; font-weight: 400; color: var(--muted); }
+  .pkg-price.gold-price { color: var(--gold); }
+
+  .pkg-desc {
     font-size: 13px;
-    padding: 8px 12px;
-    outline: none;
-    transition: border-color 0.15s;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
   }
 
-  .form-input:focus, .form-select:focus { border-color: var(--green); }
-  .form-select option { background: var(--surface2); }
-
-  .btn {
-    padding: 8px 18px;
-    border-radius: 5px;
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    cursor: pointer;
-    border: none;
-    transition: all 0.15s;
-  }
-
-  .btn-primary { background: var(--green); color: #000; }
-  .btn-primary:hover { background: #00f09a; }
-  .btn-ghost { background: transparent; color: var(--text-dim); border: 1px solid var(--border2); }
-  .btn-ghost:hover { border-color: var(--text-dim); color: var(--text); }
-
-  /* ── PROMPT LIBRARY ── */
-  .prompt-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-
-  .prompt-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    transition: border-color 0.15s;
-  }
-
-  .prompt-card:hover { border-color: var(--border2); }
-
-  .prompt-card-header {
-    padding: 14px 16px;
-    border-bottom: 1px solid var(--border);
+  .pkg-features {
+    list-style: none;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .prompt-card-title {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .prompt-card-body {
-    padding: 14px 16px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--text-dim);
-    line-height: 1.7;
-    max-height: 100px;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .prompt-card-body::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 30px;
-    background: linear-gradient(transparent, var(--surface));
-  }
-
-  .prompt-card-footer {
-    padding: 10px 16px;
-    border-top: 1px solid var(--border);
-    display: flex;
+    flex-direction: column;
     gap: 8px;
   }
-
-  /* ── REVENUE BAR ── */
-  .rev-track {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    height: 8px;
-    overflow: hidden;
-    margin: 10px 0 6px;
-  }
-
-  .rev-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--green), #00f09a);
-    border-radius: 6px;
-    transition: width 0.8s ease;
-  }
-
-  .rev-labels {
+  .pkg-features li {
+    font-size: 13px;
+    color: rgba(232,234,240,0.8);
     display: flex;
-    justify-content: space-between;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--text-muted);
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.5;
   }
-
-  /* ── TEAM STATUS ── */
-  .team-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  .team-card {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 14px 16px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .team-card.locked {
-    opacity: 0.4;
-    border-style: dashed;
-  }
-
-  .team-avatar {
-    width: 38px;
-    height: 38px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-head);
-    font-weight: 800;
-    font-size: 16px;
-    flex-shrink: 0;
-  }
-
-  .team-info { flex: 1; }
-
-  .team-name {
-    font-family: var(--font-head);
+  .pkg-features li::before {
+    content: '›';
+    color: var(--accent);
     font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ADDONS */
+  .addon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .addon-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    transition: border-color 0.2s;
+  }
+  .addon-card:hover { border-color: var(--border-bright); }
+
+  .addon-name {
+    font-family: 'Syne', sans-serif;
     font-size: 14px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: 3px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
   }
-
-  .team-role {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--text-muted);
-    letter-spacing: 0.06em;
+  .addon-price {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 6px;
   }
+  .addon-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
 
-  /* ── DIVIDER ── */
+  /* DIVIDER */
   .divider {
     border: none;
     border-top: 1px solid var(--border);
-    margin: 24px 0;
+    margin: 2rem 0;
   }
 
-  /* ── MIGRATION NOTICE ── */
-  .migration-bar {
-    background: var(--amber-dim);
-    border: 1px solid var(--amber);
-    border-radius: 6px;
-    padding: 10px 16px;
-    margin-bottom: 24px;
+  /* WORKSHOP */
+  .workshop-hero {
+    background: linear-gradient(135deg, rgba(0,212,160,0.06) 0%, rgba(77,166,255,0.06) 100%);
+    border: 1px solid rgba(0,212,160,0.15);
+    border-radius: 14px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .workshop-hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,212,160,0.08) 0%, transparent 70%);
+  }
+
+  .wh-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  .wh-sub { font-size: 14px; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.6; }
+
+  .price-row {
     display: flex;
-    align-items: center;
-    gap: 12px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--amber);
-    letter-spacing: 0.04em;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .price-pill {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .price-pill .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .price-pill .val {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
   }
 
+  .workshop-topics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .topic-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 12px;
+    color: rgba(232,234,240,0.75);
+    line-height: 1.5;
+  }
+  .topic-item strong {
+    display: block;
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 3px;
+    font-weight: 500;
+  }
+
+  .flywheel-note {
+    background: rgba(245,166,35,0.06);
+    border: 1px solid rgba(245,166,35,0.15);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    font-size: 13px;
+    color: rgba(245,166,35,0.9);
+    line-height: 1.6;
+  }
+  .flywheel-note strong { color: var(--gold); }
+
+  /* TEAM / MISSION */
+  .mission-block {
+    background: linear-gradient(135deg, rgba(0,212,160,0.05) 0%, rgba(77,166,255,0.05) 100%);
+    border: 1px solid rgba(0,212,160,0.12);
+    border-radius: 14px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  .mission-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .mission-text {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .team-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .team-card:hover { border-color: var(--border-bright); }
+
+  .team-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  .av-green { background: rgba(0,212,160,0.12); color: var(--accent); border: 1px solid rgba(0,212,160,0.2); }
+  .av-blue  { background: rgba(77,166,255,0.12); color: var(--blue);   border: 1px solid rgba(77,166,255,0.2); }
+  .av-gold  { background: rgba(245,166,35,0.12); color: var(--gold);   border: 1px solid rgba(245,166,35,0.2); }
+
+  .team-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .team-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+  .team-desc {
+    font-size: 13px;
+    color: rgba(232,234,240,0.65);
+    line-height: 1.6;
+  }
+  .team-owns {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+  }
+  .team-owns-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .owns-tag {
+    display: inline-block;
+    font-size: 11px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3px 8px;
+    margin: 2px;
+    color: rgba(232,234,240,0.7);
+  }
+
+  /* HOW IT WORKS */
+  .flywheel {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 2rem;
+  }
+  .fw-step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    position: relative;
+  }
+  .fw-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 17px;
+    top: 38px;
+    width: 1px;
+    height: calc(100% - 10px);
+    background: linear-gradient(180deg, var(--accent), transparent);
+    opacity: 0.3;
+  }
+  .fw-num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--accent-dim);
+    border: 1px solid rgba(0,212,160,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .fw-content {
+    padding-bottom: 1.75rem;
+    flex: 1;
+  }
+  .fw-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .fw-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* STACK */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  .stack-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+  }
+  .stack-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .stack-role { font-size: 11px; color: var(--muted); }
+
+  /* H tags */
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+  h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<!-- TOPBAR -->
-<div class="topbar">
-  <div class="logo">
-    <div class="logo-mark"></div>
-    <div class="logo-text">Green Country <span>AI</span> Services</div>
-    <div class="prelaunch-badge">⬡ Pre-Launch</div>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="show('packages',this)">Packages</button>
+    <button class="tab-btn" onclick="show('workshop',this)">Workshop</button>
+    <button class="tab-btn" onclick="show('us',this)">The Team</button>
   </div>
-  <div class="topbar-right">
-    <div class="agent-pill"><span class="dot dot-green"></span>Athena — Online</div>
-    <div class="agent-pill"><span class="dot dot-amber"></span>Celeste — Pending</div>
-    <div class="clock" id="clock">--:--:--</div>
+
+  <!-- PACKAGES -->
+  <div id="packages" class="panel active">
+    <div class="section-label">Core Packages</div>
+    <div class="pkg-grid">
+      <div class="pkg-card">
+        <div class="pkg-badge">Starter</div>
+        <div class="pkg-name">Starter</div>
+        <div class="pkg-price">$497<span>/mo</span></div>
+        <div class="pkg-desc">AI voice agent + basic automation. Fully set up and managed. No tech knowledge required.</div>
+        <ul class="pkg-features">
+          <li>AI phone receptionist — answers, qualifies, books</li>
+          <li>Missed call text-back automation</li>
+          <li>GHL CRM setup and configuration</li>
+          <li>Done-for-you onboarding</li>
+          <li>Monthly check-in call</li>
+        </ul>
+      </div>
+      <div class="pkg-card featured">
+        <div class="pkg-badge gold">Pro — Most Popular</div>
+        <div class="pkg-name">Pro</div>
+        <div class="pkg-price gold-price">$797<span>/mo</span></div>
+        <div class="pkg-desc">Full AI employee stack. Voice + automation + follow-up intelligence. Everything in Starter plus:</div>
+        <ul class="pkg-features">
+          <li>Everything in Starter</li>
+          <li>Outbound follow-up sequences</li>
+          <li>Review request automation</li>
+          <li>Lead pipeline dashboard</li>
+          <li>Bi-weekly optimization calls</li>
+          <li>Priority support</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-label">Add-On Modules</div>
+    <div class="addon-grid">
+      <div class="addon-card">
+        <div class="addon-name">Proposal Generator</div>
+        <div class="addon-price">$500 setup + $150/mo</div>
+        <div class="addon-desc">Trades-focused. Client fills out job details — AI spits out a formatted proposal in minutes.</div>
+      </div>
+      <div class="addon-card">
+        <div class="addon-name">Renewal & Upsell Alerts</div>
+        <div class="addon-price">$400 setup + $150/mo</div>
+        <div class="addon-desc">Monitors your client base and flags when someone is ready to renew or upgrade. Drafts the outreach automatically.</div>
+      </div>
+      <div class="addon-card">
+        <div class="addon-name">Onboarding Automation</div>
+        <div class="addon-price">$300 setup + $100/mo</div>
+        <div class="addon-desc">Structured intake flow for new clients. Generates a project brief, timelines, and saves to a shared folder.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-label">Standalone Services</div>
+    <div class="addon-grid">
+      <div class="addon-card">
+        <div class="addon-name">Done-For-You AI Setup</div>
+        <div class="addon-price">$1,500 – $2,500 flat</div>
+        <div class="addon-desc">We audit your business, configure the right AI tools, and hand it off fully built. No monthly fee.</div>
+      </div>
+    </div>
   </div>
+
+  <!-- WORKSHOP -->
+  <div id="workshop" class="panel">
+    <div class="workshop-hero">
+      <div class="section-label">Live Training</div>
+      <div class="wh-title">AI for Contractors Workshop</div>
+      <div class="wh-sub">90-minute live Zoom session. Teach trades business owners how to use AI to answer calls, write estimates, follow up with leads, and win more jobs — without touching a single line of code.</div>
+      <div class="price-row">
+        <div class="price-pill">
+          <span class="label">Live seat</span>
+          <span class="val">$150–$200</span>
+        </div>
+        <div class="price-pill">
+          <span class="label">Replay access</span>
+          <span class="val">$99</span>
+        </div>
+        <div class="price-pill">
+          <span class="label">Private team session</span>
+          <span class="val">$500–$800</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">What's Covered</div>
+    <div class="workshop-topics">
+      <div class="topic-item">
+        <strong>AI Phone Receptionist</strong>
+        How to never miss a call again. Demo of a live voice agent booking an appointment.
+      </div>
+      <div class="topic-item">
+        <strong>Estimate Writing</strong>
+        AI-powered proposal tool built for trades. Job details in, formatted quote out.
+      </div>
+      <div class="topic-item">
+        <strong>Lead Follow-Up</strong>
+        Automated text sequences that recover dead leads without manual effort.
+      </div>
+      <div class="topic-item">
+        <strong>Customer Texts</strong>
+        Templates and automation for appointment reminders, reviews, and re-engagement.
+      </div>
+    </div>
+
+    <div class="flywheel-note">
+      <strong>Why this feeds GCAI:</strong> Contractors who attend and want it done for them become $497–$797/month clients. The workshop is a paid sales funnel. 10 seats at $175 average = $1,750 for one afternoon — and 2–3 of those close into monthly retainers.
+    </div>
+  </div>
+
+  <!-- TEAM / MISSION -->
+  <div id="us" class="panel">
+    <div class="mission-block">
+      <div class="mission-title">Our Mission</div>
+      <div class="mission-text">Give trades businesses in Tulsa — and eventually everywhere — the same AI infrastructure that big companies pay six figures to build. Done for them. No tech required. Real results.</div>
+    </div>
+
+    <div class="section-label">The Team</div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar av-green">J</div>
+        <div class="team-name">Jason</div>
+        <div class="team-role">Founder / Closer</div>
+        <div class="team-desc">Makes all decisions. Closes all deals. Runs the workshops. The only person who has both the trades credibility and the AI knowledge to sell this to contractors who've never heard of any of it.</div>
+        <div class="team-owns">
+          <div class="team-owns-label">Owns</div>
+          <span class="owns-tag">Sales</span>
+          <span class="owns-tag">Workshop delivery</span>
+          <span class="owns-tag">Strategy</span>
+          <span class="owns-tag">Final approvals</span>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar av-blue">Jo</div>
+        <div class="team-name">Johnny</div>
+        <div class="team-role">Operations / Builds</div>
+        <div class="team-desc">Owns client onboarding and all technical builds. Sets up the voice agents, configures GHL, and makes sure every client's system actually works before it goes live. Also manages workshop logistics.</div>
+        <div class="team-owns">
+          <div class="team-owns-label">Owns</div>
+          <span class="owns-tag">Client builds</span>
+          <span class="owns-tag">Onboarding</span>
+          <span class="owns-tag">Workshop ops</span>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar av-gold">C</div>
+        <div class="team-name">Celeste</div>
+        <div class="team-role">Pipeline / Retention</div>
+        <div class="team-desc">Runs the pipeline and owns client retention. Monitors the Renewal & Upsell module against all active clients — when the signal fires, she pulls the trigger on outreach and flags upsell opportunities to Jason.</div>
+        <div class="team-owns">
+          <div class="team-owns-label">Owns</div>
+          <span class="owns-tag">Pipeline tracking</span>
+          <span class="owns-tag">Client follow-up</span>
+          <span class="owns-tag">Upsell flags</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-label">How It All Works Together</div>
+    <div class="flywheel">
+      <div class="fw-step">
+        <div class="fw-num">1</div>
+        <div class="fw-content">
+          <div class="fw-title">Workshop → Lead</div>
+          <div class="fw-desc">Jason runs a live AI for Contractors session. 10 trades guys show up, pay $150–200/seat. They see a live demo of an AI answering a call and booking a job. 2–3 of them want it done for them.</div>
+        </div>
+      </div>
+      <div class="fw-step">
+        <div class="fw-num">2</div>
+        <div class="fw-content">
+          <div class="fw-title">Lead → Starter Client</div>
+          <div class="fw-desc">Jason closes them on the Starter package ($497/mo). Johnny handles the entire build — voice agent, GHL, automations. Client doesn't touch anything technical.</div>
+        </div>
+      </div>
+      <div class="fw-step">
+        <div class="fw-num">3</div>
+        <div class="fw-content">
+          <div class="fw-title">Starter → Pro Upsell</div>
+          <div class="fw-desc">After 60–90 days, the Renewal & Upsell module flags clients who are getting results and are ready for more. Celeste sends the outreach. Jason closes the upgrade to Pro ($797/mo).</div>
+        </div>
+      </div>
+      <div class="fw-step">
+        <div class="fw-num">4</div>
+        <div class="fw-content">
+          <div class="fw-title">Pro → Add-On Modules</div>
+          <div class="fw-desc">Pro clients see the module menu. If they write a lot of proposals, they add the Proposal Generator. If they're losing clients without knowing it, they add Renewal Alerts. Each module is incremental revenue with no new client acquisition cost.</div>
+        </div>
+      </div>
+      <div class="fw-step">
+        <div class="fw-num">5</div>
+        <div class="fw-content">
+          <div class="fw-title">Results → Referrals → More Workshops</div>
+          <div class="fw-desc">Happy clients refer other contractors. Jason brings them into the next workshop. The cycle repeats. Every workshop is a paid funnel.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-label">Tech Stack</div>
+    <div class="stack-grid">
+      <div class="stack-item"><div class="stack-name">Vapi</div><div class="stack-role">Voice AI engine</div></div>
+      <div class="stack-item"><div class="stack-name">ElevenLabs</div><div class="stack-role">Voice quality</div></div>
+      <div class="stack-item"><div class="stack-name">GHL</div><div class="stack-role">CRM + automation</div></div>
+      <div class="stack-item"><div class="stack-name">Claude API</div><div class="stack-role">AI intelligence</div></div>
+      <div class="stack-item"><div class="stack-name">Supabase</div><div class="stack-role">Database</div></div>
+      <div class="stack-item"><div class="stack-name">Vercel</div><div class="stack-role">Deployment</div></div>
+    </div>
+  </div>
+
 </div>
 
-<!-- LAYOUT -->
-<div class="layout">
-
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <div class="nav-section-label">Operations</div>
-    <div class="nav-item active" onclick="showTab('dashboard', this)"><span class="nav-icon">◈</span> Dashboard</div>
-    <div class="nav-item" onclick="showTab('pipeline', this)"><span class="nav-icon">◎</span> Pipeline</div>
-    <div class="nav-item" onclick="showTab('clients', this)"><span class="nav-icon">◻</span> Clients</div>
-    <div class="nav-section-label" style="margin-top:16px">Agents</div>
-    <div class="nav-item" onclick="showTab('tasks', this)"><span class="nav-icon">⬡</span> Task Queue</div>
-    <div class="nav-item" onclick="showTab('prompts', this)"><span class="nav-icon">≡</span> Prompt Library</div>
-    <div class="nav-section-label" style="margin-top:16px">Finance</div>
-    <div class="nav-item" onclick="showTab('financials', this)"><span class="nav-icon">$</span> Financials</div>
-    <div class="nav-section-label" style="margin-top:16px">Build</div>
-    <div class="nav-item" onclick="showTab('intake', this)"><span class="nav-icon">📋</span> Intake</div>
-    <div class="nav-item" onclick="showTab('modules', this)"><span class="nav-icon">⬣</span> Modules</div>
-    <div class="nav-item" onclick="showTab('preview', this)"><span class="nav-icon">◑</span> Preview</div>
-    <div class="nav-section-label" style="margin-top:16px">System</div>
-    <div class="nav-item" onclick="showTab('discord', this)"><span class="nav-icon">◉</span> Discord</div>
-    <div class="nav-item" onclick="showTab('settings', this)"><span class="nav-icon">⚙</span> Settings</div>
-
-    <div class="sidebar-bottom">
-      <div class="partner-block">
-        <div class="partner-label">Partner Access</div>
-        <div class="partner-slot"><span class="lock-icon">🔒</span> Johnny</div>
-        <div class="partner-slot"><span class="lock-icon">🔒</span> Celeste</div>
-        <div style="margin-top:8px; font-family:var(--font-mono); font-size:9px; color:var(--text-muted); letter-spacing:0.06em;">Unlocks on go-live</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MAIN -->
-  <div class="main">
-
-    <!-- ══ DASHBOARD ══ -->
-    <div class="tab-panel active" id="tab-dashboard">
-      <div class="migration-bar">
-        ⚠ &nbsp; LOCAL MODE — Data stored in browser. Supabase sync activates on go-live.
-      </div>
-
-      <div class="section-header">
-        <div class="section-title">Dashboard</div>
-        <div class="section-sub">// GCAI Operations — Pre-Launch Phase</div>
-      </div>
-
-      <div class="stat-grid">
-        <div class="stat-card green">
-          <div class="stat-label">Monthly Recurring Revenue</div>
-          <div class="stat-value" id="stat-mrr">$0</div>
-          <div class="stat-sub">Target: $5,000</div>
-        </div>
-        <div class="stat-card amber">
-          <div class="stat-label">Active Clients</div>
-          <div class="stat-value" id="stat-clients">0</div>
-          <div class="stat-sub">Target: 5</div>
-        </div>
-        <div class="stat-card blue">
-          <div class="stat-label">Pipeline Prospects</div>
-          <div class="stat-value" id="stat-prospects">0</div>
-          <div class="stat-sub">Active leads</div>
-        </div>
-        <div class="stat-card red">
-          <div class="stat-label">Open Tasks</div>
-          <div class="stat-value" id="stat-tasks">0</div>
-          <div class="stat-sub">Across all agents</div>
-        </div>
-      </div>
-
-      <div class="grid-2">
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-title">Revenue to $5K Goal</div>
-          </div>
-          <div class="panel-body">
-            <div class="rev-track"><div class="rev-fill" id="rev-fill" style="width:0%"></div></div>
-            <div class="rev-labels"><span id="rev-current">$0 MRR</span><span>$5,000 goal</span></div>
-          </div>
-        </div>
-
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-title">Team Status</div>
-          </div>
-          <div class="panel-body">
-            <div class="team-grid">
-              <div class="team-card">
-                <div class="team-avatar" style="background:#00d08422;color:var(--green)">J</div>
-                <div class="team-info">
-                  <div class="team-name">Jason</div>
-                  <div class="team-role">Owner / Operator</div>
-                </div>
-                <span class="badge badge-green">Active</span>
-              </div>
-              <div class="team-card">
-                <div class="team-avatar" style="background:#00d08422;color:var(--green)">A</div>
-                <div class="team-info">
-                  <div class="team-name">Athena</div>
-                  <div class="team-role">AI Agent — Build</div>
-                </div>
-                <span class="badge badge-green">Online</span>
-              </div>
-              <div class="team-card locked">
-                <div class="team-avatar" style="background:var(--surface2);color:var(--text-muted)">J</div>
-                <div class="team-info">
-                  <div class="team-name">Johnny</div>
-                  <div class="team-role">Owner / Operator</div>
-                </div>
-                <span class="badge badge-muted">Locked</span>
-              </div>
-              <div class="team-card locked">
-                <div class="team-avatar" style="background:var(--surface2);color:var(--text-muted)">C</div>
-                <div class="team-info">
-                  <div class="team-name">Celeste</div>
-                  <div class="team-role">AI Agent — Pending</div>
-                </div>
-                <span class="badge badge-muted">Locked</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">Build Checklist — Pre-Launch</div>
-        </div>
-        <div class="panel-body">
-          <table class="data-table">
-            <thead><tr>
-              <th>Task</th><th>Owner</th><th>Status</th><th>Notes</th>
-            </tr></thead>
-            <tbody>
-              <tr><td>Business name confirmed</td><td>Jason</td><td><span class="badge badge-green">Done</span></td><td>Green Country AI Services</td></tr>
-              <tr><td>Create Vapi.ai account</td><td>Jason</td><td><span class="badge badge-amber">In Progress</span></td><td>Free tier to start</td></tr>
-              <tr><td>Connect ElevenLabs to Vapi</td><td>Athena</td><td><span class="badge badge-muted">Pending</span></td><td>After Vapi setup</td></tr>
-              <tr><td>Build demo agent (HVAC inbound)</td><td>Athena</td><td><span class="badge badge-muted">Pending</span></td><td>TulsaAir demo script</td></tr>
-              <tr><td>GoHighLevel agency account</td><td>Jason</td><td><span class="badge badge-muted">Pending</span></td><td>$97/mo — white-label CRM</td></tr>
-              <tr><td>Domain registration</td><td>Jason</td><td><span class="badge badge-muted">Pending</span></td><td>greencountryai.com</td></tr>
-              <tr><td>LLC filing</td><td>Jason</td><td><span class="badge badge-muted">When ready</span></td><td>Oklahoma SOS ~$100</td></tr>
-              <tr><td>First paying client</td><td>Jason + Johnny</td><td><span class="badge badge-muted">Pending</span></td><td>Target: trades niche</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══ PIPELINE ══ -->
-    <div class="tab-panel" id="tab-pipeline">
-      <div class="section-header">
-        <div class="section-title">Sales Pipeline</div>
-        <div class="section-sub">// Prospects → Demo → Closed → Onboarding</div>
-      </div>
-
-      <div style="margin-bottom:18px; display:flex; gap:10px; align-items:center;">
-        <input class="form-input" id="prospect-name" placeholder="Business name" style="width:220px">
-        <input class="form-input" id="prospect-niche" placeholder="Niche (e.g. HVAC, Plumbing)" style="width:200px">
-        <button class="btn btn-primary" onclick="addProspect()">+ Add Prospect</button>
-      </div>
-
-      <div class="pipeline-cols">
-        <div class="pipe-col">
-          <div class="pipe-col-header">
-            <div class="pipe-col-title">Prospect</div>
-            <div class="pipe-count" id="count-prospect">0</div>
-          </div>
-          <div class="pipe-body" id="col-prospect">
-            <div class="empty-state"><div class="empty-icon">◎</div><div class="empty-label">No prospects yet</div></div>
-          </div>
-        </div>
-        <div class="pipe-col">
-          <div class="pipe-col-header">
-            <div class="pipe-col-title">Demo Booked</div>
-            <div class="pipe-count" id="count-demo">0</div>
-          </div>
-          <div class="pipe-body" id="col-demo">
-            <div class="empty-state"><div class="empty-icon">◎</div><div class="empty-label">No demos scheduled</div></div>
-          </div>
-        </div>
-        <div class="pipe-col">
-          <div class="pipe-col-header" style="border-top: 2px solid var(--green)">
-            <div class="pipe-col-title" style="color:var(--green)">Closed</div>
-            <div class="pipe-count" id="count-closed">0</div>
-          </div>
-          <div class="pipe-body" id="col-closed">
-            <div class="empty-state"><div class="empty-icon">◎</div><div class="empty-label">No closes yet</div></div>
-          </div>
-        </div>
-        <div class="pipe-col">
-          <div class="pipe-col-header">
-            <div class="pipe-col-title">Onboarding</div>
-            <div class="pipe-count" id="count-onboard">0</div>
-          </div>
-          <div class="pipe-body" id="col-onboard">
-            <div class="empty-state"><div class="empty-icon">◎</div><div class="empty-label">No active onboards</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══ CLIENTS ══ -->
-    <div class="tab-panel" id="tab-clients">
-      <div class="section-header">
-        <div class="section-title">Active Clients</div>
-        <div class="section-sub">// Managed accounts</div>
-      </div>
-
-      <div style="margin-bottom:18px; display:flex; gap:10px; align-items:end; flex-wrap:wrap;">
-        <div class="form-group"><div class="form-label">Business Name</div><input class="form-input" id="c-name" placeholder="TulsaAir HVAC" style="width:200px"></div>
-        <div class="form-group"><div class="form-label">Package</div>
-          <select class="form-select" id="c-pkg">
-            <option value="Starter">Starter — $750/mo</option>
-            <option value="Pro">Pro — $1,500/mo</option>
-          </select>
-        </div>
-        <div class="form-group"><div class="form-label">Niche</div><input class="form-input" id="c-niche" placeholder="HVAC" style="width:140px"></div>
-        <button class="btn btn-primary" onclick="addClient()" style="align-self:end">+ Add Client</button>
-      </div>
-
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">Client Roster</div>
-          <span id="client-mrr-label" style="font-family:var(--font-mono);font-size:11px;color:var(--green)">MRR: $0</span>
-        </div>
-        <table class="data-table">
-          <thead><tr>
-            <th>Business</th><th>Niche</th><th>Package</th><th>MRR</th><th>Go-Live</th><th>Status</th><th></th>
-          </tr></thead>
-          <tbody id="client-tbody">
-            <tr><td colspan="7"><div class="empty-state"><div class="empty-icon">◻</div><div class="empty-label">No clients yet</div></div></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- ══ TASKS ══ -->
-    <div class="tab-panel" id="tab-tasks">
-      <div class="section-header">
-        <div class="section-title">Task Queue</div>
-        <div class="section-sub">// Athena + Jason — Celeste/Johnny unlock on go-live</div>
-      </div>
-
-      <div class="task-form">
-        <div class="form-group"><div class="form-label">Task Description</div><input class="form-input" id="t-desc" placeholder="e.g. Build HVAC demo script"></div>
-        <div class="form-group"><div class="form-label">Assigned To</div>
-          <select class="form-select" id="t-owner">
-            <option>Jason</option>
-            <option>Athena</option>
-          </select>
-        </div>
-        <div class="form-group"><div class="form-label">Priority</div>
-          <select class="form-select" id="t-priority">
-            <option>High</option>
-            <option>Normal</option>
-            <option>Low</option>
-          </select>
-        </div>
-        <button class="btn btn-primary" onclick="addTask()" style="align-self:end">+ Add</button>
-      </div>
-
-      <div class="panel">
-        <div class="panel-header"><div class="panel-title">Active Tasks</div></div>
-        <table class="data-table">
-          <thead><tr>
-            <th>Task</th><th>Assigned</th><th>Priority</th><th>Status</th><th>Added</th><th></th>
-          </tr></thead>
-          <tbody id="task-tbody">
-            <tr><td colspan="6"><div class="empty-state"><div class="empty-icon">⬡</div><div class="empty-label">No tasks in queue</div></div></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- ══ PROMPTS ══ -->
-    <div class="tab-panel" id="tab-prompts">
-      <div class="section-header">
-        <div class="section-title">Prompt Library</div>
-        <div class="section-sub">// Agent scripts — all niches</div>
-      </div>
-
-      <div style="margin-bottom:20px; display:flex; gap:10px;">
-        <button class="btn btn-primary" onclick="addPrompt()">+ New Prompt</button>
-        <button class="btn btn-ghost">Import from Athena</button>
-      </div>
-
-      <div class="prompt-grid" id="prompt-grid">
-        <!-- Seed prompt -->
-        <div class="prompt-card">
-          <div class="prompt-card-header">
-            <div class="prompt-card-title">HVAC Inbound Receptionist</div>
-            <span class="badge badge-amber">Draft</span>
-          </div>
-          <div class="prompt-card-body">
-            You are an AI receptionist for [COMPANY_NAME], a professional HVAC service company. Your job is to answer incoming calls, collect the caller's name and address, understand their issue, and schedule a technician visit using the available calendar...
-          </div>
-          <div class="prompt-card-footer">
-            <span class="badge badge-muted">HVAC</span>
-            <span class="badge badge-muted">Inbound</span>
-            <span class="badge badge-blue">v0.1</span>
-          </div>
-        </div>
-
-        <div class="prompt-card" style="border-style:dashed;opacity:0.5;">
-          <div class="prompt-card-header">
-            <div class="prompt-card-title">Apartment Maintenance Line</div>
-            <span class="badge badge-muted">Pending</span>
-          </div>
-          <div class="prompt-card-body" style="color:var(--text-muted)">
-            Athena building this — awaiting research completion on apartment complex workflows and tenant communication requirements...
-          </div>
-          <div class="prompt-card-footer">
-            <span class="badge badge-muted">Apartments</span>
-            <span class="badge badge-muted">Inbound</span>
-          </div>
-        </div>
-
-        <div class="prompt-card" style="border-style:dashed;opacity:0.5;">
-          <div class="prompt-card-header">
-            <div class="prompt-card-title">Plumbing Emergency Line</div>
-            <span class="badge badge-muted">Pending</span>
-          </div>
-          <div class="prompt-card-body" style="color:var(--text-muted)">
-            Pending build. Based on HVAC template with emergency triage logic added...
-          </div>
-          <div class="prompt-card-footer">
-            <span class="badge badge-muted">Plumbing</span>
-            <span class="badge badge-muted">Inbound</span>
-          </div>
-        </div>
-
-        <div class="prompt-card" style="border-style:dashed;opacity:0.5;">
-          <div class="prompt-card-header">
-            <div class="prompt-card-title">Outbound Follow-Up Caller</div>
-            <span class="badge badge-muted">Pending</span>
-          </div>
-          <div class="prompt-card-body" style="color:var(--text-muted)">
-            Pending build. Pro package feature — follow up on missed estimates, confirm upcoming jobs, request reviews...
-          </div>
-          <div class="prompt-card-footer">
-            <span class="badge badge-muted">All Niches</span>
-            <span class="badge badge-muted">Outbound</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══ FINANCIALS ══ -->
-    <div class="tab-panel" id="tab-financials">
-      <div class="section-header">
-        <div class="section-title">Financials</div>
-        <div class="section-sub">// Revenue · Costs · Margin</div>
-      </div>
-
-      <div class="stat-grid">
-        <div class="stat-card green">
-          <div class="stat-label">Gross Revenue (MRR)</div>
-          <div class="stat-value" id="fin-mrr">$0</div>
-          <div class="stat-sub">Active clients</div>
-        </div>
-        <div class="stat-card red">
-          <div class="stat-label">Monthly OpEx</div>
-          <div class="stat-value">~$300</div>
-          <div class="stat-sub">Vapi + ElevenLabs + GHL</div>
-        </div>
-        <div class="stat-card blue">
-          <div class="stat-label">Gross Margin</div>
-          <div class="stat-value" id="fin-margin">$0</div>
-          <div class="stat-sub">Revenue minus OpEx</div>
-        </div>
-        <div class="stat-card amber">
-          <div class="stat-label">Setup Fees (One-time)</div>
-          <div class="stat-value" id="fin-setup">$0</div>
-          <div class="stat-sub">Collected to date</div>
-        </div>
-      </div>
-
-      <div class="panel">
-        <div class="panel-header"><div class="panel-title">Monthly Cost Breakdown</div></div>
-        <table class="data-table">
-          <thead><tr><th>Service</th><th>Plan</th><th>Monthly Cost</th><th>Notes</th></tr></thead>
-          <tbody>
-            <tr><td>Vapi.ai</td><td>Pay-as-you-go</td><td style="color:var(--amber)">~$50–200</td><td>Scales with call volume</td></tr>
-            <tr><td>ElevenLabs</td><td>Creator</td><td style="color:var(--amber)">~$22–99</td><td>Voice generation</td></tr>
-            <tr><td>GoHighLevel</td><td>Agency</td><td style="color:var(--amber)">$97</td><td>White-labeled to clients</td></tr>
-            <tr><td>Claude API</td><td>Usage-based</td><td style="color:var(--amber)">~$20–50</td><td>Agent brain</td></tr>
-            <tr><td>Vercel + Domain</td><td>Free + $12/yr</td><td style="color:var(--green)">~$2</td><td>Hub hosting</td></tr>
-            <tr><td>Supabase</td><td>Free tier</td><td style="color:var(--green)">$0</td><td>Until 500MB</td></tr>
-            <tr style="font-weight:600"><td>Total</td><td></td><td style="color:var(--text)">~$200–400/mo</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- ══ DISCORD ══ -->
-    <div class="tab-panel" id="tab-discord">
-      <div class="section-header">
-        <div class="section-title">Discord</div>
-        <div class="section-sub">// Green Country AI Services Server — Johnny's build</div>
-      </div>
-
-      <div class="migration-bar" id="discord-status-bar">
-        🔒 &nbsp; DORMANT — Paste webhook URL in Settings to activate Discord alerts.
-      </div>
-
-      <div class="grid-2" style="margin-bottom:18px">
-        <div class="panel">
-          <div class="panel-header"><div class="panel-title">Webhook Alerts</div><span class="badge badge-muted" id="webhook-badge">Inactive</span></div>
-          <div class="panel-body">
-            <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);line-height:1.8;margin-bottom:16px">
-              When active, the hub fires a Discord message automatically on these events:
-            </p>
-            <table class="data-table">
-              <thead><tr><th>Event</th><th>Channel</th><th>Status</th></tr></thead>
-              <tbody>
-                <tr><td>New client added</td><td>#client-updates</td><td><span class="badge badge-muted" id="wh-s1">Waiting</span></td></tr>
-                <tr><td>Prospect moved in pipeline</td><td>#pipeline-alerts</td><td><span class="badge badge-muted" id="wh-s2">Waiting</span></td></tr>
-                <tr><td>Task marked complete</td><td>#athena-log</td><td><span class="badge badge-muted" id="wh-s3">Waiting</span></td></tr>
-                <tr><td>Task assigned to Athena</td><td>#athena-log</td><td><span class="badge badge-muted" id="wh-s4">Waiting</span></td></tr>
-                <tr><td>Task assigned to Celeste</td><td>#celeste-log</td><td><span class="badge badge-muted" id="wh-s5">Waiting</span></td></tr>
-              </tbody>
-            </table>
-            <button class="btn btn-primary" style="margin-top:14px" onclick="testWebhook()">Send Test Message</button>
-          </div>
-        </div>
-
-        <div class="panel">
-          <div class="panel-header"><div class="panel-title">Bot Status</div></div>
-          <div class="panel-body">
-            <div style="display:flex;flex-direction:column;gap:12px">
-
-              <div class="team-card" style="opacity:0.5;border-style:dashed">
-                <div class="team-avatar" style="background:var(--blue-dim);color:var(--blue);font-size:18px">A</div>
-                <div class="team-info">
-                  <div class="team-name">Athena</div>
-                  <div class="team-role" style="margin-bottom:4px">AI Agent Bot</div>
-                  <div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted)">Commands: !status !task !report</div>
-                </div>
-                <span class="badge badge-muted">No Token</span>
-              </div>
-
-              <div class="team-card" style="opacity:0.5;border-style:dashed">
-                <div class="team-avatar" style="background:var(--green-dim);color:var(--green);font-size:18px">C</div>
-                <div class="team-info">
-                  <div class="team-name">Celeste</div>
-                  <div class="team-role" style="margin-bottom:4px">AI Agent Bot</div>
-                  <div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted)">Commands: !status !task !report</div>
-                </div>
-                <span class="badge badge-muted">No Token</span>
-              </div>
-
-            </div>
-            <div style="margin-top:16px;padding:12px;background:var(--surface2);border-radius:6px;border:1px solid var(--border2)">
-              <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);line-height:1.8">
-                Bot tokens added in Settings when ready.<br>
-                Using Johnny's Discord server on go-live.<br>
-                Bot invite links generated per token.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel">
-        <div class="panel-header"><div class="panel-title">Activity Feed</div><span style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted)">Last 20 events sent to Discord</span></div>
-        <div class="panel-body" id="discord-feed">
-          <div class="empty-state"><div class="empty-icon">◉</div><div class="empty-label">No activity yet — webhook inactive</div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══ SETTINGS ══ -->
-    <div class="tab-panel" id="tab-settings">
-      <div class="section-header">
-        <div class="section-title">Settings</div>
-        <div class="section-sub">// Stack config · Integrations · Access control</div>
-      </div>
-
-      <div class="grid-2" style="margin-bottom:18px">
-
-        <div class="panel">
-          <div class="panel-header"><div class="panel-title">Discord Integration</div></div>
-          <div class="panel-body" style="display:flex;flex-direction:column;gap:14px">
-            <div class="form-group">
-              <div class="form-label">Webhook URL (from Johnny's server)</div>
-              <input class="form-input" id="discord-webhook-input" placeholder="https://discord.com/api/webhooks/..." style="width:100%;font-size:12px">
-              <div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted);margin-top:4px">Paste Johnny's webhook URL here to activate all Discord alerts</div>
-            </div>
-            <div class="form-group">
-              <div class="form-label">Athena Bot Token</div>
-              <input class="form-input" id="athena-token-input" placeholder="Discord bot token — add when ready" style="width:100%;font-size:12px" type="password">
-            </div>
-            <div class="form-group">
-              <div class="form-label">Celeste Bot Token</div>
-              <input class="form-input" id="celeste-token-input" placeholder="Discord bot token — add when ready" style="width:100%;font-size:12px" type="password">
-            </div>
-            <button class="btn btn-primary" style="align-self:flex-start" onclick="saveDiscordSettings()">Save & Activate</button>
-          </div>
-        </div>
-
-        <div class="panel">
-          <div class="panel-header"><div class="panel-title">Stack Config</div></div>
-          <div class="panel-body" style="display:flex;flex-direction:column;gap:14px">
-            <div class="form-group">
-              <div class="form-label">Vapi.ai API Key</div>
-              <input class="form-input" placeholder="Paste when account is created" style="width:100%;font-size:12px" type="password">
-            </div>
-            <div class="form-group">
-              <div class="form-label">Supabase URL</div>
-              <input class="form-input" id="supabase-url-input" placeholder="https://xxxx.supabase.co — activates on go-live" style="width:100%;font-size:12px">
-            </div>
-            <div class="form-group">
-              <div class="form-label">Supabase Anon Key</div>
-              <input class="form-input" placeholder="Supabase public key" style="width:100%;font-size:12px" type="password">
-            </div>
-            <div class="form-group">
-              <div class="form-label">GoHighLevel API Key</div>
-              <input class="form-input" placeholder="GHL Agency key" style="width:100%;font-size:12px" type="password">
-            </div>
-            <button class="btn btn-ghost" style="align-self:flex-start">Save Keys</button>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="panel">
-        <div class="panel-header"><div class="panel-title">Partner Access Control</div></div>
-        <div class="panel-body">
-          <table class="data-table">
-            <thead><tr><th>Member</th><th>Role</th><th>Type</th><th>Access</th><th>Status</th></tr></thead>
-            <tbody>
-              <tr>
-                <td style="font-weight:600">Jason</td>
-                <td>Owner / Operator</td>
-                <td><span class="badge badge-muted">Human</span></td>
-                <td><span class="badge badge-green">Full</span></td>
-                <td><span class="badge badge-green">Active</span></td>
-              </tr>
-              <tr>
-                <td style="font-weight:600">Athena</td>
-                <td>AI Agent — Build & Research</td>
-                <td><span class="badge badge-blue">Agent</span></td>
-                <td><span class="badge badge-amber">Tasks + Prompts</span></td>
-                <td><span class="badge badge-green">Active</span></td>
-              </tr>
-              <tr style="opacity:0.45">
-                <td style="font-weight:600">Johnny</td>
-                <td>Owner / Operator</td>
-                <td><span class="badge badge-muted">Human</span></td>
-                <td><span class="badge badge-muted">Full — Pending</span></td>
-                <td><span class="badge badge-muted">Go-Live</span></td>
-              </tr>
-              <tr style="opacity:0.45">
-                <td style="font-weight:600">Celeste</td>
-                <td>AI Agent — Operations</td>
-                <td><span class="badge badge-blue">Agent</span></td>
-                <td><span class="badge badge-muted">TBD</span></td>
-                <td><span class="badge badge-muted">Go-Live</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="panel" style="margin-top:18px">
-        <div class="panel-header"><div class="panel-title">Data & Migration</div></div>
-        <div class="panel-body" style="display:flex;gap:12px;flex-wrap:wrap">
-          <button class="btn btn-ghost" onclick="exportData()">Export All Data (JSON)</button>
-          <button class="btn btn-ghost" onclick="clearData()" style="color:var(--red);border-color:var(--red-dim)">Clear All Local Data</button>
-        </div>
-        <div style="padding:0 18px 16px;font-family:var(--font-mono);font-size:10px;color:var(--text-muted);line-height:1.8">
-          Export your data before migrating to Supabase on go-live.<br>
-          The import tool will be available in the cloud version.
-        </div>
-      </div>
-    </div>
-
-    <!-- ══ INTAKE ══ -->
-    <div class="tab-panel" id="tab-intake">
-      <div class="section-header">
-        <div class="section-title">Client Intake</div>
-        <div class="section-sub">// New client onboarding — generates Athena deployment prompt</div>
-      </div>
-
-      <div class="migration-bar" style="background:var(--blue-dim);border-color:var(--blue);color:var(--blue)">
-        ℹ &nbsp; Fill out this form for each new client. Hit Submit to generate the Athena prompt — copy and paste it straight to her.
-      </div>
-
-      <!-- STEP TRACKER -->
-      <div style="display:flex;gap:0;margin-bottom:24px;border:1px solid var(--border);border-radius:8px;overflow:hidden">
-        <div class="intake-step active" id="is-1" style="flex:1;padding:10px;text-align:center;background:var(--green-dim);border-right:1px solid var(--border);cursor:pointer;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;color:var(--green)" onclick="goIntake(1)">1 · BUSINESS</div>
-        <div class="intake-step" id="is-2" style="flex:1;padding:10px;text-align:center;border-right:1px solid var(--border);cursor:pointer;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;color:var(--text-muted)" onclick="goIntake(2)">2 · SERVICES</div>
-        <div class="intake-step" id="is-3" style="flex:1;padding:10px;text-align:center;border-right:1px solid var(--border);cursor:pointer;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;color:var(--text-muted)" onclick="goIntake(3)">3 · CALLS</div>
-        <div class="intake-step" id="is-4" style="flex:1;padding:10px;text-align:center;border-right:1px solid var(--border);cursor:pointer;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;color:var(--text-muted)" onclick="goIntake(4)">4 · VOICE</div>
-        <div class="intake-step" id="is-5" style="flex:1;padding:10px;text-align:center;cursor:pointer;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;color:var(--text-muted)" onclick="goIntake(5)">5 · SUBMIT</div>
-      </div>
-
-      <!-- INTAKE STEP 1 -->
-      <div class="intake-panel active" id="ip-1">
-        <div class="panel">
-          <div class="panel-header"><div class="panel-title">Business Information</div></div>
-          <div class="panel-body" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-            <div class="form-group"><div class="form-label">Business Name *</div><input class="form-input" id="i-biz-name" placeholder="TulsaAir HVAC"></div>
-            <div class="form-group"><div class="form-label">Owner Name *</div><input class="form-input" id="i-owner-name" placeholder="Mike Johnson"></div>
-            <div class="form-group"><div class="form-label">Business Phone *</div><input class="form-input" id="i-biz-phone" placeholder="(918) 555-0100"></div>
-            <div class="form-group"><div class="form-label">Owner Cell (Escalation) *</div><input class="form-input" id="i-owner-cell" placeholder="(918) 555-0101"></div>
-            <div class="form-group"><div class="form-label">Email</div><input class="form-input" id="i-email" placeholder="info@business.com"></div>
-            <div class="form-group"><div class="form-label">Service Area *</div><input class="form-input" id="i-area" placeholder="Tulsa, Broken Arrow, Owasso"></div>
-            <div class="form-group" style="grid-column:1/-1">
-              <div class="form-label">Business Type *</div>
-              <select class="form-select" id="i-niche">
-                <option value="">Select niche...</option>
-                <option value="HVAC">❄️ HVAC</option>
-                <option value="Plumbing">🔧 Plumbing</option>
-                <option value="Roofing">🏠 Roofing</option>
-                <option value="Spray Foam Insulation">🧪 Spray Foam Insulation</option>
-                <option value="Electrical">⚡ Electrical</option>
-                <option value="Pest Control">🐛 Pest Control</option>
-                <option value="Landscaping">🌿 Landscaping</option>
-                <option value="Apartment Complex">🏢 Apartment Complex</option>
-                <option value="Other">⚙️ Other</option>
-              </select>
-            </div>
-            <div class="form-group" id="i-other-niche-row" style="grid-column:1/-1;display:none">
-              <div class="form-label">Describe Business Type</div>
-              <input class="form-input" id="i-other-niche" placeholder="e.g. Auto shop, dental office...">
-            </div>
-          </div>
-        </div>
-        <div style="display:flex;justify-content:flex-end;margin-top:16px">
-          <button class="btn btn-primary" onclick="goIntake(2)">Next → Services</button>
-        </div>
-      </div>
-
-      <!-- INTAKE STEP 2 -->
-      <div class="intake-panel" id="ip-2" style="display:none">
-        <div class="panel">
-          <div class="panel-header"><div class="panel-title">Services & Pricing</div></div>
-          <div class="panel-body" style="display:flex;flex-direction:column;gap:14px">
-            <div class="form-group">
-              <div class="form-label">Services Offered *</div>
-              <textarea class="form-input" id="i-services" style="min-height:100px" placeholder="List services one per line:&#10;Open cell spray foam&#10;Closed cell spray foam&#10;Attic insulation&#10;Crawl space encapsulation"></textarea>
-            </div>
-            <div class="form-group">
-              <div class="form-label">Pricing Approach</div>
-              <select class="form-select" id="i-pricing">
-                <option value="Quote only — no prices shared over the phone">Quote only — no prices over the phone</option>
-                <option value="Share general price ranges">Share general price ranges</option>
-                <option value="Can quote firm prices for standard jobs">Firm pricing — quote specific jobs</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <div class="form-label">Top 5 Questions Customers Ask</div>
-              <textarea class="form-input" id="i-faq" style="min-height:100px" placeholder="e.g.&#10;How much per square foot?&#10;Do you offer free estimates?&#10;How long does it take?&#10;What's the difference between open and closed cell?&#10;Do you service my area?"></textarea>
-            </div>
-          </div>
-        </div>
-        <div style="display:flex;justify-content:space-between;margin-top:16px">
-          <button class="btn btn-ghost" onclick="goIntake(1)">← Back</button>
-          <button class="btn btn-primary" onclick="goIntake(3)">Next → Call Handling</button>
-        </div>
-      </div>
-
-      <!-- INTAKE STEP 3 -->
-      <div class="intake-panel" id="ip-3" style="display:none">
-        <div class="panel">
-          <div class="panel-header"><div class="panel-title">Call Handling</div></div>
-          <div class="panel-body" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-            <div class="form-group"><div class="form-label">Weekday Hours *</div><input class="form-input" id="i-hours-wk" placeholder="Mon–Fri 7am–6pm"></div>
-            <div class="form-group"><div class="form-label">Weekend Hours</div><input class="form-input" id="i-hours-we" placeholder="Sat 8am–2pm, Sun Closed"></div>
-            <div class="form-group" style="grid-column:1/-1">
-              <div class="form-label">After-Hours Protocol</div>
-              <select class="form-select" id="i-afterhours">
-                <option value="Take message, call back next business day">Take message, call back next day</option>
-                <option value="Emergency calls transferred, non-urgent takes message">Emergency transfer, rest takes message</option>
-                <option value="Always transfer all calls to owner cell">Always transfer to owner cell</option>
-              </select>
-            </div>
-            <div class="form-group" style="grid-column:1/-1">
-              <div class="form-label">What Counts as an Emergency?</div>
-              <textarea class="form-input" id="i-emergency" placeholder="e.g. No heat in winter, active water leak, AC out in summer heat, gas smell..."></textarea>
-            </div>
-            <div class="form-group" style="grid-column:1/-1">
-              <div class="form-label">Scheduling System</div>
-              <select class="form-select" id="i-scheduling">
-                <option value="GoHighLevel (GCAI sets up)">GoHighLevel — we set it up</option>
-                <option value="Google Calendar">Google Calendar</option>
-                <option value="Take messages only — no live scheduling">Take messages only</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div style="display:flex;justify-content:space-between;margin-top:16px">
-          <button class="btn btn-ghost" onclick="goIntake(2)">← Back</button>
-          <button class="btn btn-primary" onclick="goIntake(4)">Next → Voice</button>
-        </div>
-      </div>
-
-      <!-- INTAKE STEP 4 -->
-      <div class="intake-panel" id="ip-4" style="display:none">
-        <div class="panel">
-          <div class="panel-header"><div class="panel-title">Agent Voice & Personality</div></div>
-          <div class="panel-body" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-            <div class="form-group"><div class="form-label">Agent Name *</div><input class="form-input" id="i-agent-name" placeholder="Aria, Alex, Jordan, Sam..."></div>
-            <div class="form-group">
-              <div class="form-label">Voice</div>
-              <select class="form-select" id="i-voice">
-                <option value="Female">Female</option>
-                <option value="Male">Male</option>
-                <option value="Neutral">Neutral</option>
-              </select>
-            </div>
-            <div class="form-group" style="grid-column:1/-1">
-              <div class="form-label">Tone *</div>
-              <select class="form-select" id="i-tone">
-                <option value="Professional & Warm">Professional & Warm — friendly, business-appropriate</option>
-                <option value="Direct & Efficient">Direct & Efficient — fast, no small talk</option>
-                <option value="Friendly & Casual">Friendly & Casual — laid-back, local feel</option>
-                <option value="Formal">Formal — polished, corporate</option>
-              </select>
-            </div>
-            <div class="form-group" style="grid-column:1/-1">
-              <div class="form-label">Package</div>
-              <select class="form-select" id="i-package">
-                <option value="Starter ($750/mo + $500 setup)">Starter — $750/mo + $500 setup</option>
-                <option value="Pro ($1,500/mo + $1,000 setup)">Pro — $1,500/mo + $1,000 setup</option>
-              </select>
-            </div>
-            <div class="form-group" style="grid-column:1/-1">
-              <div class="form-label">Additional Notes</div>
-              <textarea class="form-input" id="i-notes" placeholder="Special instructions, things NOT to say, important policies..."></textarea>
-            </div>
-          </div>
-        </div>
-        <div style="display:flex;justify-content:space-between;margin-top:16px">
-          <button class="btn btn-ghost" onclick="goIntake(3)">← Back</button>
-          <button class="btn btn-primary" onclick="goIntake(5)">Preview & Submit →</button>
-        </div>
-      </div>
-
-      <!-- INTAKE STEP 5 — OUTPUT -->
-      <div class="intake-panel" id="ip-5" style="display:none">
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-title">Athena Deployment Prompt</div>
-            <button class="panel-action" onclick="copyIntakePrompt()">Copy to Clipboard</button>
-          </div>
-          <div class="panel-body">
-            <div id="intake-output" style="background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:16px;font-family:var(--font-mono);font-size:11px;color:var(--text-dim);line-height:1.8;white-space:pre-wrap;max-height:400px;overflow-y:auto"></div>
-          </div>
-        </div>
-        <div style="display:flex;justify-content:space-between;margin-top:16px">
-          <button class="btn btn-ghost" onclick="goIntake(4)">← Back</button>
-          <button class="btn btn-primary" onclick="resetIntake()">New Client</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══ MODULES ══ -->
-    <div class="tab-panel" id="tab-modules">
-      <div class="section-header">
-        <div class="section-title">Prompt Modules</div>
-        <div class="section-sub">// Niche library — Athena pulls from here on every build</div>
-      </div>
-
-      <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap" id="module-tabs">
-        <button class="btn btn-primary" onclick="showModule('trades')" id="mt-trades">Trades General</button>
-        <button class="btn btn-ghost" onclick="showModule('foam')" id="mt-foam">Spray Foam</button>
-        <button class="btn btn-ghost" onclick="showModule('apartments')" id="mt-apartments">Apartments</button>
-        <button class="btn btn-ghost" onclick="showModule('core')" id="mt-core">Core Base</button>
-      </div>
-
-      <div class="panel" id="module-content"></div>
-    </div>
-
-    <!-- ══ PREVIEW ══ -->
-    <div class="tab-panel" id="tab-preview">
-      <div class="section-header">
-        <div class="section-title">Product Preview</div>
-        <div class="section-sub">// Internal view — what the client website looks like</div>
-      </div>
-
-      <div style="display:flex;gap:8px;margin-bottom:16px;align-items:center;flex-wrap:wrap">
-        <span style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);letter-spacing:0.1em">NICHE:</span>
-        <button class="btn btn-primary" id="pv-hvac" onclick="setPreview('hvac')">HVAC</button>
-        <button class="btn btn-ghost" id="pv-foam" onclick="setPreview('foam')">Spray Foam</button>
-        <button class="btn btn-ghost" id="pv-apt" onclick="setPreview('apt')">Apartments</button>
-        <button class="btn btn-ghost" id="pv-plumbing" onclick="setPreview('plumbing')">Plumbing</button>
-      </div>
-
-      <!-- PREVIEW FRAME -->
-      <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden">
-        <!-- MOCK BROWSER BAR -->
-        <div style="background:var(--surface2);padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
-          <div style="display:flex;gap:6px">
-            <div style="width:10px;height:10px;border-radius:50%;background:#ff5f57"></div>
-            <div style="width:10px;height:10px;border-radius:50%;background:#febc2e"></div>
-            <div style="width:10px;height:10px;border-radius:50%;background:#28c840"></div>
-          </div>
-          <div style="flex:1;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:4px 12px;font-family:var(--font-mono);font-size:10px;color:var(--text-muted)" id="preview-url">greencountryai.com/hvac-demo</div>
-        </div>
-
-        <!-- PREVIEW CONTENT -->
-        <div id="preview-frame" style="background:#f8f9fa;overflow-y:auto;max-height:600px"></div>
-      </div>
-    </div>
-
-  </div><!-- /main -->
-</div><!-- /layout -->
-
 <script>
-// ═══════════════════════════════════════════════════════════════
-// DATA LAYER — swap get/set methods to Supabase calls on go-live
-// All app logic reads/writes ONLY through this object.
-// Migration: replace localStorage calls with Supabase REST API.
-// ═══════════════════════════════════════════════════════════════
-const DataLayer = {
-  get(key) {
-    try { return JSON.parse(localStorage.getItem('gcai_' + key)) || []; }
-    catch { return []; }
-  },
-  set(key, val) {
-    localStorage.setItem('gcai_' + key, JSON.stringify(val));
-  }
-};
-
-// ── STATE ──
-let clients   = DataLayer.get('clients');
-let tasks     = DataLayer.get('tasks');
-let prospects = DataLayer.get('prospects');
-
-// ── CLOCK ──
-setInterval(() => {
-  const now = new Date();
-  document.getElementById('clock').textContent =
-    now.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
-}, 1000);
-
-// ── NAV ──
-function showTab(name, el) {
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('tab-' + name).classList.add('active');
-  el.classList.add('active');
-  refreshStats();
+function show(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
 }
-
-// ── STATS ──
-function refreshStats() {
-  const mrr = clients.reduce((s, c) => s + (c.pkg === 'Pro' ? 1500 : 750), 0);
-  const openTasks = tasks.filter(t => t.status !== 'Done').length;
-  document.getElementById('stat-mrr').textContent = '$' + mrr.toLocaleString();
-  document.getElementById('stat-clients').textContent = clients.length;
-  document.getElementById('stat-prospects').textContent = prospects.length;
-  document.getElementById('stat-tasks').textContent = openTasks;
-  const pct = Math.min((mrr / 5000) * 100, 100);
-  document.getElementById('rev-fill').style.width = pct + '%';
-  document.getElementById('rev-current').textContent = '$' + mrr.toLocaleString() + ' MRR';
-  document.getElementById('fin-mrr').textContent = '$' + mrr.toLocaleString();
-  document.getElementById('fin-margin').textContent = '$' + Math.max(0, mrr - 300).toLocaleString();
-  const setupFees = clients.reduce((s, c) => s + (c.pkg === 'Pro' ? 1000 : 500), 0);
-  document.getElementById('fin-setup').textContent = '$' + setupFees.toLocaleString();
-  if (document.getElementById('client-mrr-label'))
-    document.getElementById('client-mrr-label').textContent = 'MRR: $' + mrr.toLocaleString();
-}
-
-// ── CLIENTS ──
-function addClient() {
-  const name  = document.getElementById('c-name').value.trim();
-  const pkg   = document.getElementById('c-pkg').value;
-  const niche = document.getElementById('c-niche').value.trim();
-  if (!name) return;
-  const client = { id: Date.now(), name, pkg, niche, date: new Date().toLocaleDateString(), status: 'Active' };
-  clients.push(client);
-  DataLayer.set('clients', clients);
-  document.getElementById('c-name').value = '';
-  document.getElementById('c-niche').value = '';
-  discordAlert(`📋 New client onboarded: **${client.name}** (${client.pkg} — $${client.pkg==='Pro'?'1,500':'750'}/mo)`, 'client');
-  renderClients();
-  refreshStats();
-}
-
-function renderClients() {
-  const tbody = document.getElementById('client-tbody');
-  if (!clients.length) {
-    tbody.innerHTML = `<tr><td colspan="7"><div class="empty-state"><div class="empty-icon">◻</div><div class="empty-label">No clients yet</div></div></td></tr>`;
-    return;
-  }
-  tbody.innerHTML = clients.map(c => `
-    <tr>
-      <td style="font-weight:600">${c.name}</td>
-      <td><span class="badge badge-muted">${c.niche || '—'}</span></td>
-      <td>${c.pkg}</td>
-      <td style="color:var(--green);font-family:var(--font-mono)">$${c.pkg==='Pro'?'1,500':'750'}/mo</td>
-      <td style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim)">${c.date}</td>
-      <td><span class="badge badge-green">Active</span></td>
-      <td><button class="btn btn-ghost" style="padding:4px 10px;font-size:11px" onclick="removeClient(${c.id})">Remove</button></td>
-    </tr>`).join('');
-}
-
-function removeClient(id) {
-  clients = clients.filter(c => c.id !== id);
-  DataLayer.set('clients', clients);
-  renderClients();
-  refreshStats();
-}
-
-// ── TASKS ──
-function addTask() {
-  const desc  = document.getElementById('t-desc').value.trim();
-  const owner = document.getElementById('t-owner').value;
-  const pri   = document.getElementById('t-priority').value;
-  if (!desc) return;
-  const task = { id: Date.now(), desc, owner, priority: pri, status: 'Open', date: new Date().toLocaleDateString() };
-  tasks.push(task);
-  DataLayer.set('tasks', tasks);
-  document.getElementById('t-desc').value = '';
-  discordAlert(`⬡ New task assigned to **${task.owner}**: ${task.desc} [${task.priority}]`, 'task');
-  renderTasks();
-  refreshStats();
-}
-
-function completeTask(id) {
-  const t = tasks.find(t => t.id === id);
-  if (t) {
-    t.status = t.status === 'Done' ? 'Open' : 'Done';
-    if (t.status === 'Done') discordAlert(`✅ Task completed by **${t.owner}**: ${t.desc}`, 'task');
-  }
-  DataLayer.set('tasks', tasks);
-  renderTasks();
-  refreshStats();
-}
-
-function removeTask(id) {
-  tasks = tasks.filter(t => t.id !== id);
-  DataLayer.set('tasks', tasks);
-  renderTasks();
-  refreshStats();
-}
-
-function renderTasks() {
-  const tbody = document.getElementById('task-tbody');
-  if (!tasks.length) {
-    tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><div class="empty-icon">⬡</div><div class="empty-label">No tasks in queue</div></div></td></tr>`;
-    return;
-  }
-  const priColor = { High: 'badge-red', Normal: 'badge-amber', Low: 'badge-muted' };
-  tbody.innerHTML = tasks.map(t => `
-    <tr style="${t.status==='Done'?'opacity:0.4':''}">
-      <td style="font-weight:${t.status==='Done'?'400':'600'};text-decoration:${t.status==='Done'?'line-through':'none'}">${t.desc}</td>
-      <td><span class="badge ${t.owner==='Athena'?'badge-blue':'badge-muted'}">${t.owner}</span></td>
-      <td><span class="badge ${priColor[t.priority]}">${t.priority}</span></td>
-      <td><span class="badge ${t.status==='Done'?'badge-green':'badge-amber'}">${t.status}</span></td>
-      <td style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted)">${t.date}</td>
-      <td style="display:flex;gap:6px">
-        <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px" onclick="completeTask(${t.id})">${t.status==='Done'?'Reopen':'Done'}</button>
-        <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px" onclick="removeTask(${t.id})">✕</button>
-      </td>
-    </tr>`).join('');
-}
-
-// ── PIPELINE ──
-const stageMap = { prospect: 'Prospect', demo: 'Demo Booked', closed: 'Closed', onboard: 'Onboarding' };
-const stageNext = { prospect: 'demo', demo: 'closed', closed: 'onboard', onboard: null };
-
-function addProspect() {
-  const name  = document.getElementById('prospect-name').value.trim();
-  const niche = document.getElementById('prospect-niche').value.trim();
-  if (!name) return;
-  const p = { id: Date.now(), name, niche, stage: 'prospect', date: new Date().toLocaleDateString() };
-  prospects.push(p);
-  DataLayer.set('prospects', prospects);
-  document.getElementById('prospect-name').value = '';
-  document.getElementById('prospect-niche').value = '';
-  renderPipeline();
-  refreshStats();
-}
-
-function moveProspect(id) {
-  const p = prospects.find(p => p.id === id);
-  if (!p || !stageNext[p.stage]) return;
-  const oldStage = stageMap[p.stage];
-  p.stage = stageNext[p.stage];
-  discordAlert(`◎ Pipeline move: **${p.name}** → ${stageMap[p.stage]}`, 'pipeline');
-  DataLayer.set('prospects', prospects);
-  renderPipeline();
-  refreshStats();
-}
-
-function removeProspect(id) {
-  prospects = prospects.filter(p => p.id !== id);
-  DataLayer.set('prospects', prospects);
-  renderPipeline();
-  refreshStats();
-}
-
-function renderPipeline() {
-  ['prospect','demo','closed','onboard'].forEach(stage => {
-    const col = document.getElementById('col-' + stage);
-    const items = prospects.filter(p => p.stage === stage);
-    document.getElementById('count-' + stage).textContent = items.length;
-    if (!items.length) {
-      col.innerHTML = `<div class="empty-state"><div class="empty-icon">◎</div><div class="empty-label">Empty</div></div>`;
-      return;
-    }
-    col.innerHTML = items.map(p => `
-      <div class="pipe-card">
-        <div class="pipe-card-name">${p.name}</div>
-        <div class="pipe-card-meta">${p.niche || 'No niche'} · ${p.date}</div>
-        <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">
-          ${stageNext[stage] ? `<button class="btn btn-primary" style="padding:4px 10px;font-size:11px" onclick="moveProspect(${p.id})">→ ${stageMap[stageNext[stage]]}</button>` : ''}
-          <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px" onclick="removeProspect(${p.id})">Remove</button>
-        </div>
-      </div>`).join('');
-  });
-}
-
-function addPrompt() {
-  alert('Prompt builder coming soon — Athena will populate this library.');
-}
-
-// ── DISCORD ──
-function getWebhook() {
-  return localStorage.getItem('gcai_discord_webhook') || '';
-}
-
-async function discordAlert(message, type) {
-  const url = getWebhook();
-  if (!url || !url.startsWith('https://discord.com/api/webhooks/')) return;
-  const colors = { client: 0x00d084, pipeline: 0xf5a623, task: 0x4fc3f7, system: 0xffffff };
-  const payload = {
-    embeds: [{
-      title: '🟢 Green Country AI Services',
-      description: message,
-      color: colors[type] || colors.system,
-      footer: { text: 'GCAI Hub · ' + new Date().toLocaleString() }
-    }]
-  };
-  try {
-    await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-    logDiscordActivity(message, type);
-  } catch(e) { console.warn('Discord webhook failed:', e); }
-}
-
-function logDiscordActivity(message, type) {
-  let feed = DataLayer.get('discord_feed');
-  feed.unshift({ message, type, time: new Date().toLocaleString() });
-  if (feed.length > 20) feed = feed.slice(0, 20);
-  DataLayer.set('discord_feed', feed);
-  renderDiscordFeed();
-}
-
-function renderDiscordFeed() {
-  const feed = DataLayer.get('discord_feed');
-  const el = document.getElementById('discord-feed');
-  if (!el) return;
-  if (!feed.length) {
-    el.innerHTML = `<div class="empty-state"><div class="empty-icon">◉</div><div class="empty-label">No activity yet — webhook inactive</div></div>`;
-    return;
-  }
-  const typeColor = { client: 'badge-green', pipeline: 'badge-amber', task: 'badge-blue', system: 'badge-muted' };
-  el.innerHTML = feed.map(f => `
-    <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)">
-      <span class="badge ${typeColor[f.type]||'badge-muted'}" style="flex-shrink:0;margin-top:2px">${f.type}</span>
-      <div style="flex:1;font-size:13px">${f.message}</div>
-      <div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted);flex-shrink:0">${f.time}</div>
-    </div>`).join('');
-}
-
-function updateWebhookStatus() {
-  const url = getWebhook();
-  const active = url && url.startsWith('https://discord.com/api/webhooks/');
-  const badge = document.getElementById('webhook-badge');
-  const bar   = document.getElementById('discord-status-bar');
-  const statuses = ['wh-s1','wh-s2','wh-s3','wh-s4','wh-s5'];
-  if (badge) {
-    badge.className = active ? 'badge badge-green' : 'badge badge-muted';
-    badge.textContent = active ? 'Active' : 'Inactive';
-  }
-  if (bar) {
-    bar.style.background = active ? 'var(--green-dim)' : 'var(--amber-dim)';
-    bar.style.borderColor = active ? 'var(--green)' : 'var(--amber)';
-    bar.style.color = active ? 'var(--green)' : 'var(--amber)';
-    bar.innerHTML = active ? '✅ &nbsp; ACTIVE — Discord alerts firing on all hub events.' : '🔒 &nbsp; DORMANT — Paste webhook URL in Settings to activate Discord alerts.';
-  }
-  statuses.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.className = active ? 'badge badge-green' : 'badge badge-muted';
-      el.textContent = active ? 'Active' : 'Waiting';
-    }
-  });
-  const inp = document.getElementById('discord-webhook-input');
-  if (inp && url) inp.value = url;
-}
-
-function saveDiscordSettings() {
-  const url = document.getElementById('discord-webhook-input').value.trim();
-  if (url && !url.startsWith('https://discord.com/api/webhooks/')) {
-    alert('Invalid webhook URL. Must start with https://discord.com/api/webhooks/');
-    return;
-  }
-  localStorage.setItem('gcai_discord_webhook', url);
-  updateWebhookStatus();
-  if (url) discordAlert('✅ Green Country AI Hub connected to Discord.', 'system');
-  alert(url ? 'Discord activated! A test message was sent.' : 'Discord webhook cleared.');
-}
-
-async function testWebhook() {
-  const url = getWebhook();
-  if (!url) { alert('No webhook URL saved. Go to Settings > Discord Integration.'); return; }
-  await discordAlert('🧪 Test message from GCAI Hub — Discord integration is working.', 'system');
-  alert('Test message sent to Discord!');
-}
-
-// ── SETTINGS ──
-function exportData() {
-  const data = {
-    clients: DataLayer.get('clients'),
-    tasks: DataLayer.get('tasks'),
-    prospects: DataLayer.get('prospects'),
-    discord_feed: DataLayer.get('discord_feed'),
-    exported: new Date().toISOString()
-  };
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'gcai_data_export_' + new Date().toISOString().split('T')[0] + '.json';
-  a.click();
-}
-
-function clearData() {
-  if (!confirm('Delete ALL local data? This cannot be undone.')) return;
-  ['clients','tasks','prospects','discord_feed'].forEach(k => DataLayer.set(k, []));
-  clients = []; tasks = []; prospects = [];
-  renderClients(); renderTasks(); renderPipeline(); refreshStats(); renderDiscordFeed();
-  alert('All data cleared.');
-}
-
-// ── INTAKE ──
-let currentIntake = 1;
-
-document.getElementById('i-niche') && document.getElementById('i-niche').addEventListener('change', function() {
-  const other = document.getElementById('i-other-niche-row');
-  if (other) other.style.display = this.value === 'Other' ? 'block' : 'none';
-});
-
-function goIntake(n) {
-  if (n === 5) generateIntakePrompt();
-  for (let i = 1; i <= 5; i++) {
-    const panel = document.getElementById(`ip-${i}`);
-    const step  = document.getElementById(`is-${i}`);
-    if (panel) panel.style.display = i === n ? 'block' : 'none';
-    if (step) {
-      step.style.background = i === n ? 'var(--green-dim)' : 'transparent';
-      step.style.color = i === n ? 'var(--green)' : 'var(--text-muted)';
-    }
-  }
-  currentIntake = n;
-}
-
-function generateIntakePrompt() {
-  const g = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
-  const niche = g('i-niche') === 'Other' ? g('i-other-niche') : g('i-niche');
-  const agentName = g('i-agent-name') || 'Alex';
-  const bizName   = g('i-biz-name')   || '[Business Name]';
-
-  const prompt = `ATHENA — NEW CLIENT AGENT BUILD
-${'='.repeat(44)}
-Client:   ${bizName}
-Owner:    ${g('i-owner-name')}
-Niche:    ${niche}
-Package:  ${g('i-package')}
-Date:     ${new Date().toLocaleDateString()}
-
-CONTACT INFO
-${'─'.repeat(30)}
-Business Phone:  ${g('i-biz-phone')}
-Owner Cell:      ${g('i-owner-cell')}
-Email:           ${g('i-email') || 'Not provided'}
-Service Area:    ${g('i-area')}
-
-SERVICES OFFERED
-${'─'.repeat(30)}
-${g('i-services') || 'Not specified'}
-
-PRICING: ${g('i-pricing')}
-
-COMMON QUESTIONS
-${'─'.repeat(30)}
-${g('i-faq') || 'Not specified'}
-
-CALL HANDLING
-${'─'.repeat(30)}
-Weekday Hours:    ${g('i-hours-wk')}
-Weekend Hours:    ${g('i-hours-we') || 'Closed'}
-After-Hours:      ${g('i-afterhours')}
-Emergency Def:    ${g('i-emergency') || 'Use judgment'}
-Scheduling:       ${g('i-scheduling')}
-
-AGENT CONFIG
-${'─'.repeat(30)}
-Agent Name:  ${agentName}
-Voice:       ${g('i-voice')}
-Tone:        ${g('i-tone')}
-Greeting:    Thank you for calling ${bizName}, this is ${agentName} — how can I help you today?
-Notes:       ${g('i-notes') || 'None'}
-
-YOUR TASKS
-${'─'.repeat(30)}
-1. Load the ${niche} niche module from the GCAI module library
-2. Apply client skin above — replace all placeholders
-3. Build complete system prompt
-4. Set up agent in Vapi.ai
-5. Connect ElevenLabs ${g('i-voice').toLowerCase()} voice, ${g('i-tone')} tone
-6. Emergency transfer: ${g('i-owner-cell')}
-7. Scheduling: ${g('i-scheduling')}
-8. Run 3 test calls: normal inbound, emergency, after-hours
-9. Log client in hub Clients tab
-10. Report to Jason when live
-
-TARGET: Agent live within 48 hours.`;
-
-  const out = document.getElementById('intake-output');
-  if (out) out.textContent = prompt;
-}
-
-function copyIntakePrompt() {
-  const text = document.getElementById('intake-output').textContent;
-  navigator.clipboard.writeText(text).then(() => {
-    alert('Prompt copied to clipboard — paste it into Athena.');
-  });
-}
-
-function resetIntake() {
-  document.querySelectorAll('#tab-intake input, #tab-intake textarea, #tab-intake select').forEach(el => el.value = '');
-  goIntake(1);
-}
-
-// ── MODULES ──
-const moduleData = {
-  core: {
-    title: 'Core Agent Base',
-    badge: 'Universal',
-    color: 'badge-blue',
-    content: `You are [AGENT_NAME], the AI receptionist for [BUSINESS_NAME]. You answer every call professionally, helpfully, and efficiently.
-
-CORE RULES:
-- Introduce yourself by name on every call
-- Speak in a [TONE] tone
-- Never make up information — say "Let me have someone call you back on that"
-- Never discuss competitor businesses
-- Always collect: Name, Phone, Address before ending any call
-- Service area: [SERVICE_AREA] — outside this area, politely decline
-- Hours: [WEEKDAY_HOURS] / [WEEKEND_HOURS]
-- Emergency number: [OWNER_CELL]
-
-CALL STRUCTURE:
-1. Greet: "[GREETING]"
-2. Listen to their need
-3. Handle using knowledge base
-4. Collect required info
-5. Book / take message / transfer if emergency
-6. Confirm next steps
-7. Close: "Thanks for calling [BUSINESS_NAME] — we'll take great care of you!"
-
-AFTER HOURS: [AFTERHOURS_PROTOCOL]
-SCHEDULING: [SCHEDULING_INSTRUCTIONS]`
-  },
-  trades: {
-    title: 'Trades General Module',
-    badge: 'HVAC · Plumbing · Roofing · Electrical',
-    color: 'badge-amber',
-    content: `INDUSTRY KNOWLEDGE — TRADES:
-
-CALL TYPES:
-
-1. SERVICE REQUEST / REPAIR
-   Ask: What's the issue? How long? Getting worse?
-   Collect: Name, address, phone, best time
-   Book: Schedule service visit
-   Say: "We'll have a tech out to take a look — you'll get a confirmation shortly."
-
-2. ESTIMATE / QUOTE REQUEST  
-   Ask: What's the project? Approximate size? Timeline?
-   Collect: Name, address, phone, email
-   Book: Estimate visit
-   Say: "We'll send someone out for a free, no-obligation quote."
-
-3. EMERGENCY
-   Trigger words: flooding, no heat, no AC, gas smell, sparks, sewage, no power
-   Action: "I'm flagging this as urgent right now. Let me get your address."
-   Escalate: [OWNER_CELL]
-   Fallback: "I've sent an urgent message — expect a call within 15 minutes. If it's a safety emergency, call 911."
-
-4. PRICING QUESTION
-   Response: [PRICING_APPROACH]
-   Always add: "Best way to get an accurate number is a free site visit — no obligation."
-
-DO NOT:
-- Diagnose problems remotely
-- Promise specific arrival times without confirmed availability
-- Quote prices unless authorized
-
-SERVICES: [SERVICES_LIST]
-FAQ: [FAQ_LIST]`
-  },
-  foam: {
-    title: 'Spray Foam Insulation Module',
-    badge: 'Specialty — Spray Foam',
-    color: 'badge-green',
-    content: `INDUSTRY KNOWLEDGE — SPRAY FOAM INSULATION:
-
-WHAT YOU KNOW:
-- Open cell: lighter, R-3.7/inch, interior walls/sound, more affordable
-- Closed cell: denser, R-6.5/inch, vapor barrier, exterior/crawlspace/commercial
-- R-value: insulation effectiveness. Attic target R-38, walls R-13-21, crawl space R-10-20
-- Board feet: how foam is measured (1 sq ft at 1 inch thick)
-- Cure time: seconds on contact, vacate 24-72 hours for off-gassing
-- Job sizes: small attic $800-2K / average home $3-8K / commercial $15-50K+
-
-CALL TYPES:
-
-1. QUOTE REQUEST (most common)
-   Ask: Project type? Square footage? New or existing? Open or closed cell? Timeline?
-   Collect: Name, address, phone, email, sq ft, project type
-   Say: "Our team will come out, measure, and give you a written quote — no charge."
-
-2. OPEN vs CLOSED CELL QUESTION
-   Say: "Open cell is great for interior walls and attics — sound control, budget-friendly. Closed cell is denser, higher R-value, works as a vapor barrier — best for crawl spaces, exterior walls, and commercial. Our team will walk you through which fits your project when they come out."
-
-3. COMMERCIAL JOB (HIGH PRIORITY)
-   These are high-value — treat with urgency
-   Ask: Building type, total sq ft, timeline, contact info
-   Say: "This sounds like a great fit — let me make sure our project manager reaches out to you directly."
-   Alert owner immediately.
-
-4. BUILDER / CONTRACTOR (REPEAT BUSINESS — HIGH PRIORITY)
-   Ask: Company, project types, volume, timeline
-   Say: "We work with several builders in the area — let me have our owner call you directly."
-   Alert owner immediately.
-
-5. OFF-GASSING / HEALTH QUESTION
-   Say: "After application, the area needs ventilation for 24-72 hours. We'll give you specific instructions for your project. Most families are back home the next day."
-   Never give medical advice — direct to owner for detailed questions.
-
-6. EMERGENCY (rare)
-   Chemical smell from recent job, structural concern, reaction
-   Transfer immediately to [OWNER_CELL]
-   If safety concern: also advise Poison Control 1-800-222-1222
-
-DO NOT:
-- Quote per sq ft prices over the phone — every job is different
-- Diagnose existing insulation without site visit
-- Make health claims beyond standard industry info
-
-SERVICES: [SERVICES_LIST]
-PRICING: [PRICING_APPROACH]
-FAQ: [FAQ_LIST]`
-  },
-  apartments: {
-    title: 'Apartment Complex Module',
-    badge: 'Multi-Family · Property Management',
-    color: 'badge-blue',
-    content: `INDUSTRY KNOWLEDGE — APARTMENT COMPLEX:
-
-CALLER TYPES:
-
-1. PROSPECTIVE TENANT
-   Ask: Bedrooms? Move-in date? Any specific needs?
-   Collect: Name, phone, email, move-in date, unit preference
-   Book: Apartment tour
-   Say: "I'd love to set you up for a tour — does [DATE/TIME] work?"
-
-2. CURRENT RESIDENT — MAINTENANCE REQUEST
-   Ask: Unit number, name on lease, describe issue
-   URGENT (same day): No heat/AC, water leak, electrical, no hot water, security
-   STANDARD (1-3 days): Appliance, minor plumbing, pest, general repair
-   Urgent: "I'm flagging this — someone will contact you within [X] hours."
-   Standard: "I've logged your request — maintenance will be in touch within 1-3 business days."
-   Collect: Unit number, name, phone, issue description, access availability
-
-3. RESIDENT — GENERAL QUESTION
-   Handle: Lease dates, rent payment, amenities, parking, packages
-   If can't answer: "Let me have our office team follow up — best number to reach you?"
-
-4. NOISE / NEIGHBOR COMPLAINT
-   Stay neutral, take seriously
-   Collect: Name, unit, description, offending unit if known
-   Say: "I've documented your concern — our team will follow up. For immediate safety, contact local authorities."
-
-5. VENDOR / DELIVERY
-   Collect: Company name, purpose, who they're meeting
-   Say: "I'll let the office know — someone will be right with you."
-
-6. EMERGENCY
-   Fire, flood, gas leak, break-in, medical:
-   "Please call 911 immediately. I'm also notifying our emergency line right now."
-   Emergency line: [OWNER_CELL]
-
-PROPERTY INFO: [SERVICES_LIST]
-FAQ: [FAQ_LIST]`
-  }
-};
-
-function showModule(key) {
-  const data = moduleData[key];
-  if (!data) return;
-  Object.keys(moduleData).forEach(k => {
-    const btn = document.getElementById(`mt-${k}`);
-    if (btn) { btn.className = k === key ? 'btn btn-primary' : 'btn btn-ghost'; }
-  });
-  document.getElementById('module-content').innerHTML = `
-    <div class="panel-header">
-      <div class="panel-title">${data.title}</div>
-      <span class="badge ${data.color}">${data.badge}</span>
-    </div>
-    <div class="panel-body">
-      <pre style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);line-height:1.8;white-space:pre-wrap;background:var(--bg);padding:16px;border-radius:6px;border:1px solid var(--border2);max-height:420px;overflow-y:auto">${data.content}</pre>
-      <button class="btn btn-ghost" style="margin-top:12px;font-size:11px" onclick="navigator.clipboard.writeText(moduleData['${key}'].content).then(()=>alert('Module copied!'))">Copy Module</button>
-    </div>`;
-}
-
-// ── PREVIEW ──
-const previewData = {
-  hvac: {
-    name: 'TulsaAir HVAC',
-    tagline: 'Tulsa\'s Most Trusted Heating & Cooling',
-    agent: 'Aria',
-    color: '#0066cc',
-    accent: '#e8f0ff',
-    icon: '❄️',
-    services: ['AC Repair & Installation', 'Heating Systems', 'Duct Cleaning', 'Preventive Maintenance', '24/7 Emergency Service'],
-    url: 'tulsaairhvac.com',
-    stat1: ['12 min', 'Avg Response Time'], stat2: ['24/7', 'Always Available'], stat3: ['100%', 'Calls Answered'],
-  },
-  foam: {
-    name: 'Green Country Foam',
-    tagline: 'Professional Spray Foam Insulation — Tulsa & Surrounding Areas',
-    agent: 'Jake',
-    color: '#1a7a4a',
-    accent: '#e8f4ee',
-    icon: '🧪',
-    services: ['Open Cell Spray Foam', 'Closed Cell Spray Foam', 'Attic Insulation', 'Crawl Space Encapsulation', 'Commercial Projects'],
-    url: 'greencountryfoam.com',
-    stat1: ['Free', 'Estimates'], stat2: ['24/7', 'Always Available'], stat3: ['100%', 'Calls Answered'],
-  },
-  apt: {
-    name: 'Riverside Apartments',
-    tagline: 'Your Home. Our Priority.',
-    agent: 'Morgan',
-    color: '#7b2d8b',
-    accent: '#f5ecf8',
-    icon: '🏢',
-    services: ['Maintenance Requests', 'Leasing Inquiries', 'Tour Scheduling', 'Resident Support', 'After-Hours Emergencies'],
-    url: 'riversideapts.com',
-    stat1: ['<5 min', 'Response Time'], stat2: ['24/7', 'Always Available'], stat3: ['100%', 'Calls Answered'],
-  },
-  plumbing: {
-    name: 'ProFlow Plumbing',
-    tagline: 'Fast, Reliable Plumbing Service — Tulsa\'s #1 Choice',
-    agent: 'Sam',
-    color: '#c05a00',
-    accent: '#fff3e8',
-    icon: '🔧',
-    services: ['Emergency Leak Repair', 'Drain Cleaning', 'Water Heater Service', 'Fixture Installation', 'Sewer Line Repair'],
-    url: 'proflowplumbing.com',
-    stat1: ['60 min', 'Emergency Response'], stat2: ['24/7', 'Always Available'], stat3: ['100%', 'Calls Answered'],
-  }
-};
-
-function setPreview(key) {
-  const d = previewData[key];
-  if (!d) return;
-  ['hvac','foam','apt','plumbing'].forEach(k => {
-    const btn = document.getElementById(`pv-${k}`);
-    if (btn) btn.className = k === key ? 'btn btn-primary' : 'btn btn-ghost';
-  });
-  document.getElementById('preview-url').textContent = d.url;
-  document.getElementById('preview-frame').innerHTML = `
-    <div style="font-family:'Segoe UI',sans-serif;color:#1a1a1a">
-      <!-- NAV -->
-      <div style="background:${d.color};padding:14px 32px;display:flex;justify-content:space-between;align-items:center">
-        <div style="color:white;font-weight:800;font-size:18px;letter-spacing:0.02em">${d.icon} ${d.name}</div>
-        <div style="display:flex;gap:24px;color:rgba(255,255,255,0.85);font-size:13px">
-          <span style="cursor:pointer">Services</span>
-          <span style="cursor:pointer">About</span>
-          <span style="cursor:pointer">Contact</span>
-        </div>
-      </div>
-
-      <!-- HERO -->
-      <div style="background:linear-gradient(135deg,${d.color} 0%,${d.color}cc 100%);padding:60px 32px;text-align:center;position:relative">
-        <div style="color:white;font-size:32px;font-weight:800;margin-bottom:12px;line-height:1.2">${d.tagline}</div>
-        <div style="color:rgba(255,255,255,0.8);font-size:16px;margin-bottom:28px">Our AI receptionist <strong style="color:white">${d.agent}</strong> answers every call instantly — 24/7, no voicemail, no missed jobs.</div>
-        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-          <div style="background:white;color:${d.color};font-weight:700;padding:14px 28px;border-radius:6px;cursor:pointer;font-size:15px">📞 Call Now</div>
-          <div style="background:transparent;color:white;font-weight:700;padding:14px 28px;border-radius:6px;cursor:pointer;font-size:15px;border:2px solid rgba(255,255,255,0.6)">Get Free Estimate</div>
-        </div>
-      </div>
-
-      <!-- STATS -->
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);background:${d.color}22;border-bottom:3px solid ${d.color}">
-        ${[d.stat1,d.stat2,d.stat3].map(([val,label],i) => `
-          <div style="padding:20px;text-align:center;${i<2?`border-right:1px solid ${d.color}33`:''}">
-            <div style="font-size:28px;font-weight:800;color:${d.color}">${val}</div>
-            <div style="font-size:12px;color:#666;font-weight:600;letter-spacing:0.05em;text-transform:uppercase">${label}</div>
-          </div>`).join('')}
-      </div>
-
-      <!-- SERVICES -->
-      <div style="padding:48px 32px;background:#fff">
-        <div style="text-align:center;margin-bottom:32px">
-          <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:${d.color};font-weight:700;margin-bottom:8px">What We Do</div>
-          <div style="font-size:26px;font-weight:800;color:#1a1a1a">Our Services</div>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
-          ${d.services.map(s => `
-            <div style="background:${d.accent};border:1px solid ${d.color}33;border-radius:8px;padding:18px;border-left:3px solid ${d.color}">
-              <div style="color:${d.color};font-size:18px;margin-bottom:6px">✓</div>
-              <div style="font-weight:700;font-size:14px;color:#1a1a1a">${s}</div>
-            </div>`).join('')}
-        </div>
-      </div>
-
-      <!-- AI RECEPTIONIST CALL OUT -->
-      <div style="background:#1a1a1a;padding:40px 32px;text-align:center">
-        <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:${d.color};font-weight:700;margin-bottom:10px">Powered by Green Country AI</div>
-        <div style="font-size:22px;font-weight:800;color:white;margin-bottom:10px">Meet ${d.agent} — Your 24/7 AI Receptionist</div>
-        <div style="color:#999;font-size:14px;max-width:480px;margin:0 auto 24px">Never miss a call again. ${d.agent} answers instantly, books appointments, handles FAQs, and escalates emergencies — around the clock.</div>
-        <div style="display:inline-block;background:${d.color};color:white;font-weight:700;padding:12px 28px;border-radius:6px;cursor:pointer;font-size:15px">📞 Talk to ${d.agent} Now</div>
-      </div>
-
-      <!-- FOOTER -->
-      <div style="background:#111;padding:20px 32px;display:flex;justify-content:space-between;align-items:center">
-        <div style="color:#555;font-size:12px">© 2026 ${d.name} · AI Receptionist by Green Country AI Services</div>
-        <div style="color:#555;font-size:12px">Tulsa, Oklahoma</div>
-      </div>
-    </div>`;
-}
-
-// ── INIT MODULES + PREVIEW ──
-showModule('trades');
-setPreview('hvac');
-(function() {
-  const faviconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5" fill="#00d084"/><text x="50" y="68" font-family="Arial Black,sans-serif" font-weight="900" font-size="44" fill="#000" text-anchor="middle">AI</text></svg>`;
-  const faviconBlob = new Blob([faviconSvg], {type:'image/svg+xml'});
-  const faviconUrl  = URL.createObjectURL(faviconBlob);
-  document.getElementById('favicon-link').href = faviconUrl;
-
-  const manifest = {
-    name: "Green Country AI Services",
-    short_name: "GCAI Hub",
-    description: "Green Country AI Services — Operations Hub",
-    start_url: "./",
-    display: "standalone",
-    background_color: "#0a0e0f",
-    theme_color: "#00d084",
-    orientation: "landscape",
-    icons: [{ src: faviconUrl, sizes: "any", type: "image/svg+xml", purpose: "any maskable" }]
-  };
-  const manifestBlob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
-  document.getElementById('manifest-link').href = URL.createObjectURL(manifestBlob);
-
-  if ('serviceWorker' in navigator) {
-    const swCode = `const CACHE='gcai-v1';self.addEventListener('install',e=>{self.skipWaiting()});self.addEventListener('activate',e=>{self.clients.claim()});self.addEventListener('fetch',e=>{e.respondWith(fetch(e.request).catch(()=>caches.match(e.request)))});`;
-    const swUrl = URL.createObjectURL(new Blob([swCode], {type:'application/javascript'}));
-    navigator.serviceWorker.register(swUrl).catch(()=>{});
-  }
-
-  window.addEventListener('beforeinstallprompt', e => {
-    e.preventDefault();
-    const btn = document.createElement('button');
-    btn.className = 'btn btn-ghost';
-    btn.style.cssText = 'padding:4px 12px;font-size:11px;font-family:var(--font-mono);letter-spacing:0.06em';
-    btn.textContent = '⬇ Install App';
-    btn.onclick = () => { e.prompt(); btn.remove(); };
-    document.querySelector('.topbar-right').prepend(btn);
-  });
-})();
-
-// ── INIT ──
-renderClients();
-renderTasks();
-renderPipeline();
-refreshStats();
-updateWebhookStatus();
-renderDiscordFeed();
 </script>
 </body>
 </html>
