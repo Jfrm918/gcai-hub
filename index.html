@@ -735,6 +735,10 @@
     <div class="nav-item" onclick="showTab('prompts', this)"><span class="nav-icon">≡</span> Prompt Library</div>
     <div class="nav-section-label" style="margin-top:16px">Finance</div>
     <div class="nav-item" onclick="showTab('financials', this)"><span class="nav-icon">$</span> Financials</div>
+    <div class="nav-section-label" style="margin-top:16px">Build</div>
+    <div class="nav-item" onclick="showTab('intake', this)"><span class="nav-icon">📋</span> Intake</div>
+    <div class="nav-item" onclick="showTab('modules', this)"><span class="nav-icon">⬣</span> Modules</div>
+    <div class="nav-item" onclick="showTab('preview', this)"><span class="nav-icon">◑</span> Preview</div>
     <div class="nav-section-label" style="margin-top:16px">System</div>
     <div class="nav-item" onclick="showTab('discord', this)"><span class="nav-icon">◉</span> Discord</div>
     <div class="nav-item" onclick="showTab('settings', this)"><span class="nav-icon">⚙</span> Settings</div>
@@ -1293,6 +1297,236 @@
       </div>
     </div>
 
+    <!-- ══ INTAKE ══ -->
+    <div class="tab-panel" id="tab-intake">
+      <div class="section-header">
+        <div class="section-title">Client Intake</div>
+        <div class="section-sub">// New client onboarding — generates Athena deployment prompt</div>
+      </div>
+
+      <div class="migration-bar" style="background:var(--blue-dim);border-color:var(--blue);color:var(--blue)">
+        ℹ &nbsp; Fill out this form for each new client. Hit Submit to generate the Athena prompt — copy and paste it straight to her.
+      </div>
+
+      <!-- STEP TRACKER -->
+      <div style="display:flex;gap:0;margin-bottom:24px;border:1px solid var(--border);border-radius:8px;overflow:hidden">
+        <div class="intake-step active" id="is-1" style="flex:1;padding:10px;text-align:center;background:var(--green-dim);border-right:1px solid var(--border);cursor:pointer;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;color:var(--green)" onclick="goIntake(1)">1 · BUSINESS</div>
+        <div class="intake-step" id="is-2" style="flex:1;padding:10px;text-align:center;border-right:1px solid var(--border);cursor:pointer;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;color:var(--text-muted)" onclick="goIntake(2)">2 · SERVICES</div>
+        <div class="intake-step" id="is-3" style="flex:1;padding:10px;text-align:center;border-right:1px solid var(--border);cursor:pointer;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;color:var(--text-muted)" onclick="goIntake(3)">3 · CALLS</div>
+        <div class="intake-step" id="is-4" style="flex:1;padding:10px;text-align:center;border-right:1px solid var(--border);cursor:pointer;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;color:var(--text-muted)" onclick="goIntake(4)">4 · VOICE</div>
+        <div class="intake-step" id="is-5" style="flex:1;padding:10px;text-align:center;cursor:pointer;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;color:var(--text-muted)" onclick="goIntake(5)">5 · SUBMIT</div>
+      </div>
+
+      <!-- INTAKE STEP 1 -->
+      <div class="intake-panel active" id="ip-1">
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Business Information</div></div>
+          <div class="panel-body" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <div class="form-group"><div class="form-label">Business Name *</div><input class="form-input" id="i-biz-name" placeholder="TulsaAir HVAC"></div>
+            <div class="form-group"><div class="form-label">Owner Name *</div><input class="form-input" id="i-owner-name" placeholder="Mike Johnson"></div>
+            <div class="form-group"><div class="form-label">Business Phone *</div><input class="form-input" id="i-biz-phone" placeholder="(918) 555-0100"></div>
+            <div class="form-group"><div class="form-label">Owner Cell (Escalation) *</div><input class="form-input" id="i-owner-cell" placeholder="(918) 555-0101"></div>
+            <div class="form-group"><div class="form-label">Email</div><input class="form-input" id="i-email" placeholder="info@business.com"></div>
+            <div class="form-group"><div class="form-label">Service Area *</div><input class="form-input" id="i-area" placeholder="Tulsa, Broken Arrow, Owasso"></div>
+            <div class="form-group" style="grid-column:1/-1">
+              <div class="form-label">Business Type *</div>
+              <select class="form-select" id="i-niche">
+                <option value="">Select niche...</option>
+                <option value="HVAC">❄️ HVAC</option>
+                <option value="Plumbing">🔧 Plumbing</option>
+                <option value="Roofing">🏠 Roofing</option>
+                <option value="Spray Foam Insulation">🧪 Spray Foam Insulation</option>
+                <option value="Electrical">⚡ Electrical</option>
+                <option value="Pest Control">🐛 Pest Control</option>
+                <option value="Landscaping">🌿 Landscaping</option>
+                <option value="Apartment Complex">🏢 Apartment Complex</option>
+                <option value="Other">⚙️ Other</option>
+              </select>
+            </div>
+            <div class="form-group" id="i-other-niche-row" style="grid-column:1/-1;display:none">
+              <div class="form-label">Describe Business Type</div>
+              <input class="form-input" id="i-other-niche" placeholder="e.g. Auto shop, dental office...">
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:16px">
+          <button class="btn btn-primary" onclick="goIntake(2)">Next → Services</button>
+        </div>
+      </div>
+
+      <!-- INTAKE STEP 2 -->
+      <div class="intake-panel" id="ip-2" style="display:none">
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Services & Pricing</div></div>
+          <div class="panel-body" style="display:flex;flex-direction:column;gap:14px">
+            <div class="form-group">
+              <div class="form-label">Services Offered *</div>
+              <textarea class="form-input" id="i-services" style="min-height:100px" placeholder="List services one per line:&#10;Open cell spray foam&#10;Closed cell spray foam&#10;Attic insulation&#10;Crawl space encapsulation"></textarea>
+            </div>
+            <div class="form-group">
+              <div class="form-label">Pricing Approach</div>
+              <select class="form-select" id="i-pricing">
+                <option value="Quote only — no prices shared over the phone">Quote only — no prices over the phone</option>
+                <option value="Share general price ranges">Share general price ranges</option>
+                <option value="Can quote firm prices for standard jobs">Firm pricing — quote specific jobs</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <div class="form-label">Top 5 Questions Customers Ask</div>
+              <textarea class="form-input" id="i-faq" style="min-height:100px" placeholder="e.g.&#10;How much per square foot?&#10;Do you offer free estimates?&#10;How long does it take?&#10;What's the difference between open and closed cell?&#10;Do you service my area?"></textarea>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:16px">
+          <button class="btn btn-ghost" onclick="goIntake(1)">← Back</button>
+          <button class="btn btn-primary" onclick="goIntake(3)">Next → Call Handling</button>
+        </div>
+      </div>
+
+      <!-- INTAKE STEP 3 -->
+      <div class="intake-panel" id="ip-3" style="display:none">
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Call Handling</div></div>
+          <div class="panel-body" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <div class="form-group"><div class="form-label">Weekday Hours *</div><input class="form-input" id="i-hours-wk" placeholder="Mon–Fri 7am–6pm"></div>
+            <div class="form-group"><div class="form-label">Weekend Hours</div><input class="form-input" id="i-hours-we" placeholder="Sat 8am–2pm, Sun Closed"></div>
+            <div class="form-group" style="grid-column:1/-1">
+              <div class="form-label">After-Hours Protocol</div>
+              <select class="form-select" id="i-afterhours">
+                <option value="Take message, call back next business day">Take message, call back next day</option>
+                <option value="Emergency calls transferred, non-urgent takes message">Emergency transfer, rest takes message</option>
+                <option value="Always transfer all calls to owner cell">Always transfer to owner cell</option>
+              </select>
+            </div>
+            <div class="form-group" style="grid-column:1/-1">
+              <div class="form-label">What Counts as an Emergency?</div>
+              <textarea class="form-input" id="i-emergency" placeholder="e.g. No heat in winter, active water leak, AC out in summer heat, gas smell..."></textarea>
+            </div>
+            <div class="form-group" style="grid-column:1/-1">
+              <div class="form-label">Scheduling System</div>
+              <select class="form-select" id="i-scheduling">
+                <option value="GoHighLevel (GCAI sets up)">GoHighLevel — we set it up</option>
+                <option value="Google Calendar">Google Calendar</option>
+                <option value="Take messages only — no live scheduling">Take messages only</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:16px">
+          <button class="btn btn-ghost" onclick="goIntake(2)">← Back</button>
+          <button class="btn btn-primary" onclick="goIntake(4)">Next → Voice</button>
+        </div>
+      </div>
+
+      <!-- INTAKE STEP 4 -->
+      <div class="intake-panel" id="ip-4" style="display:none">
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Agent Voice & Personality</div></div>
+          <div class="panel-body" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <div class="form-group"><div class="form-label">Agent Name *</div><input class="form-input" id="i-agent-name" placeholder="Aria, Alex, Jordan, Sam..."></div>
+            <div class="form-group">
+              <div class="form-label">Voice</div>
+              <select class="form-select" id="i-voice">
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+                <option value="Neutral">Neutral</option>
+              </select>
+            </div>
+            <div class="form-group" style="grid-column:1/-1">
+              <div class="form-label">Tone *</div>
+              <select class="form-select" id="i-tone">
+                <option value="Professional & Warm">Professional & Warm — friendly, business-appropriate</option>
+                <option value="Direct & Efficient">Direct & Efficient — fast, no small talk</option>
+                <option value="Friendly & Casual">Friendly & Casual — laid-back, local feel</option>
+                <option value="Formal">Formal — polished, corporate</option>
+              </select>
+            </div>
+            <div class="form-group" style="grid-column:1/-1">
+              <div class="form-label">Package</div>
+              <select class="form-select" id="i-package">
+                <option value="Starter ($750/mo + $500 setup)">Starter — $750/mo + $500 setup</option>
+                <option value="Pro ($1,500/mo + $1,000 setup)">Pro — $1,500/mo + $1,000 setup</option>
+              </select>
+            </div>
+            <div class="form-group" style="grid-column:1/-1">
+              <div class="form-label">Additional Notes</div>
+              <textarea class="form-input" id="i-notes" placeholder="Special instructions, things NOT to say, important policies..."></textarea>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:16px">
+          <button class="btn btn-ghost" onclick="goIntake(3)">← Back</button>
+          <button class="btn btn-primary" onclick="goIntake(5)">Preview & Submit →</button>
+        </div>
+      </div>
+
+      <!-- INTAKE STEP 5 — OUTPUT -->
+      <div class="intake-panel" id="ip-5" style="display:none">
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Athena Deployment Prompt</div>
+            <button class="panel-action" onclick="copyIntakePrompt()">Copy to Clipboard</button>
+          </div>
+          <div class="panel-body">
+            <div id="intake-output" style="background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:16px;font-family:var(--font-mono);font-size:11px;color:var(--text-dim);line-height:1.8;white-space:pre-wrap;max-height:400px;overflow-y:auto"></div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:16px">
+          <button class="btn btn-ghost" onclick="goIntake(4)">← Back</button>
+          <button class="btn btn-primary" onclick="resetIntake()">New Client</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ MODULES ══ -->
+    <div class="tab-panel" id="tab-modules">
+      <div class="section-header">
+        <div class="section-title">Prompt Modules</div>
+        <div class="section-sub">// Niche library — Athena pulls from here on every build</div>
+      </div>
+
+      <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap" id="module-tabs">
+        <button class="btn btn-primary" onclick="showModule('trades')" id="mt-trades">Trades General</button>
+        <button class="btn btn-ghost" onclick="showModule('foam')" id="mt-foam">Spray Foam</button>
+        <button class="btn btn-ghost" onclick="showModule('apartments')" id="mt-apartments">Apartments</button>
+        <button class="btn btn-ghost" onclick="showModule('core')" id="mt-core">Core Base</button>
+      </div>
+
+      <div class="panel" id="module-content"></div>
+    </div>
+
+    <!-- ══ PREVIEW ══ -->
+    <div class="tab-panel" id="tab-preview">
+      <div class="section-header">
+        <div class="section-title">Product Preview</div>
+        <div class="section-sub">// Internal view — what the client website looks like</div>
+      </div>
+
+      <div style="display:flex;gap:8px;margin-bottom:16px;align-items:center;flex-wrap:wrap">
+        <span style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);letter-spacing:0.1em">NICHE:</span>
+        <button class="btn btn-primary" id="pv-hvac" onclick="setPreview('hvac')">HVAC</button>
+        <button class="btn btn-ghost" id="pv-foam" onclick="setPreview('foam')">Spray Foam</button>
+        <button class="btn btn-ghost" id="pv-apt" onclick="setPreview('apt')">Apartments</button>
+        <button class="btn btn-ghost" id="pv-plumbing" onclick="setPreview('plumbing')">Plumbing</button>
+      </div>
+
+      <!-- PREVIEW FRAME -->
+      <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden">
+        <!-- MOCK BROWSER BAR -->
+        <div style="background:var(--surface2);padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)">
+          <div style="display:flex;gap:6px">
+            <div style="width:10px;height:10px;border-radius:50%;background:#ff5f57"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#febc2e"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#28c840"></div>
+          </div>
+          <div style="flex:1;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:4px 12px;font-family:var(--font-mono);font-size:10px;color:var(--text-muted)" id="preview-url">greencountryai.com/hvac-demo</div>
+        </div>
+
+        <!-- PREVIEW CONTENT -->
+        <div id="preview-frame" style="background:#f8f9fa;overflow-y:auto;max-height:600px"></div>
+      </div>
+    </div>
+
   </div><!-- /main -->
 </div><!-- /layout -->
 
@@ -1403,7 +1637,6 @@ function addTask() {
   tasks.push(task);
   DataLayer.set('tasks', tasks);
   document.getElementById('t-desc').value = '';
-
   discordAlert(`⬡ New task assigned to **${task.owner}**: ${task.desc} [${task.priority}]`, 'task');
   renderTasks();
   refreshStats();
@@ -1626,7 +1859,411 @@ function clearData() {
   alert('All data cleared.');
 }
 
-// ── PWA SETUP ──
+// ── INTAKE ──
+let currentIntake = 1;
+
+document.getElementById('i-niche') && document.getElementById('i-niche').addEventListener('change', function() {
+  const other = document.getElementById('i-other-niche-row');
+  if (other) other.style.display = this.value === 'Other' ? 'block' : 'none';
+});
+
+function goIntake(n) {
+  if (n === 5) generateIntakePrompt();
+  for (let i = 1; i <= 5; i++) {
+    const panel = document.getElementById(`ip-${i}`);
+    const step  = document.getElementById(`is-${i}`);
+    if (panel) panel.style.display = i === n ? 'block' : 'none';
+    if (step) {
+      step.style.background = i === n ? 'var(--green-dim)' : 'transparent';
+      step.style.color = i === n ? 'var(--green)' : 'var(--text-muted)';
+    }
+  }
+  currentIntake = n;
+}
+
+function generateIntakePrompt() {
+  const g = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+  const niche = g('i-niche') === 'Other' ? g('i-other-niche') : g('i-niche');
+  const agentName = g('i-agent-name') || 'Alex';
+  const bizName   = g('i-biz-name')   || '[Business Name]';
+
+  const prompt = `ATHENA — NEW CLIENT AGENT BUILD
+${'='.repeat(44)}
+Client:   ${bizName}
+Owner:    ${g('i-owner-name')}
+Niche:    ${niche}
+Package:  ${g('i-package')}
+Date:     ${new Date().toLocaleDateString()}
+
+CONTACT INFO
+${'─'.repeat(30)}
+Business Phone:  ${g('i-biz-phone')}
+Owner Cell:      ${g('i-owner-cell')}
+Email:           ${g('i-email') || 'Not provided'}
+Service Area:    ${g('i-area')}
+
+SERVICES OFFERED
+${'─'.repeat(30)}
+${g('i-services') || 'Not specified'}
+
+PRICING: ${g('i-pricing')}
+
+COMMON QUESTIONS
+${'─'.repeat(30)}
+${g('i-faq') || 'Not specified'}
+
+CALL HANDLING
+${'─'.repeat(30)}
+Weekday Hours:    ${g('i-hours-wk')}
+Weekend Hours:    ${g('i-hours-we') || 'Closed'}
+After-Hours:      ${g('i-afterhours')}
+Emergency Def:    ${g('i-emergency') || 'Use judgment'}
+Scheduling:       ${g('i-scheduling')}
+
+AGENT CONFIG
+${'─'.repeat(30)}
+Agent Name:  ${agentName}
+Voice:       ${g('i-voice')}
+Tone:        ${g('i-tone')}
+Greeting:    Thank you for calling ${bizName}, this is ${agentName} — how can I help you today?
+Notes:       ${g('i-notes') || 'None'}
+
+YOUR TASKS
+${'─'.repeat(30)}
+1. Load the ${niche} niche module from the GCAI module library
+2. Apply client skin above — replace all placeholders
+3. Build complete system prompt
+4. Set up agent in Vapi.ai
+5. Connect ElevenLabs ${g('i-voice').toLowerCase()} voice, ${g('i-tone')} tone
+6. Emergency transfer: ${g('i-owner-cell')}
+7. Scheduling: ${g('i-scheduling')}
+8. Run 3 test calls: normal inbound, emergency, after-hours
+9. Log client in hub Clients tab
+10. Report to Jason when live
+
+TARGET: Agent live within 48 hours.`;
+
+  const out = document.getElementById('intake-output');
+  if (out) out.textContent = prompt;
+}
+
+function copyIntakePrompt() {
+  const text = document.getElementById('intake-output').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Prompt copied to clipboard — paste it into Athena.');
+  });
+}
+
+function resetIntake() {
+  document.querySelectorAll('#tab-intake input, #tab-intake textarea, #tab-intake select').forEach(el => el.value = '');
+  goIntake(1);
+}
+
+// ── MODULES ──
+const moduleData = {
+  core: {
+    title: 'Core Agent Base',
+    badge: 'Universal',
+    color: 'badge-blue',
+    content: `You are [AGENT_NAME], the AI receptionist for [BUSINESS_NAME]. You answer every call professionally, helpfully, and efficiently.
+
+CORE RULES:
+- Introduce yourself by name on every call
+- Speak in a [TONE] tone
+- Never make up information — say "Let me have someone call you back on that"
+- Never discuss competitor businesses
+- Always collect: Name, Phone, Address before ending any call
+- Service area: [SERVICE_AREA] — outside this area, politely decline
+- Hours: [WEEKDAY_HOURS] / [WEEKEND_HOURS]
+- Emergency number: [OWNER_CELL]
+
+CALL STRUCTURE:
+1. Greet: "[GREETING]"
+2. Listen to their need
+3. Handle using knowledge base
+4. Collect required info
+5. Book / take message / transfer if emergency
+6. Confirm next steps
+7. Close: "Thanks for calling [BUSINESS_NAME] — we'll take great care of you!"
+
+AFTER HOURS: [AFTERHOURS_PROTOCOL]
+SCHEDULING: [SCHEDULING_INSTRUCTIONS]`
+  },
+  trades: {
+    title: 'Trades General Module',
+    badge: 'HVAC · Plumbing · Roofing · Electrical',
+    color: 'badge-amber',
+    content: `INDUSTRY KNOWLEDGE — TRADES:
+
+CALL TYPES:
+
+1. SERVICE REQUEST / REPAIR
+   Ask: What's the issue? How long? Getting worse?
+   Collect: Name, address, phone, best time
+   Book: Schedule service visit
+   Say: "We'll have a tech out to take a look — you'll get a confirmation shortly."
+
+2. ESTIMATE / QUOTE REQUEST  
+   Ask: What's the project? Approximate size? Timeline?
+   Collect: Name, address, phone, email
+   Book: Estimate visit
+   Say: "We'll send someone out for a free, no-obligation quote."
+
+3. EMERGENCY
+   Trigger words: flooding, no heat, no AC, gas smell, sparks, sewage, no power
+   Action: "I'm flagging this as urgent right now. Let me get your address."
+   Escalate: [OWNER_CELL]
+   Fallback: "I've sent an urgent message — expect a call within 15 minutes. If it's a safety emergency, call 911."
+
+4. PRICING QUESTION
+   Response: [PRICING_APPROACH]
+   Always add: "Best way to get an accurate number is a free site visit — no obligation."
+
+DO NOT:
+- Diagnose problems remotely
+- Promise specific arrival times without confirmed availability
+- Quote prices unless authorized
+
+SERVICES: [SERVICES_LIST]
+FAQ: [FAQ_LIST]`
+  },
+  foam: {
+    title: 'Spray Foam Insulation Module',
+    badge: 'Specialty — Spray Foam',
+    color: 'badge-green',
+    content: `INDUSTRY KNOWLEDGE — SPRAY FOAM INSULATION:
+
+WHAT YOU KNOW:
+- Open cell: lighter, R-3.7/inch, interior walls/sound, more affordable
+- Closed cell: denser, R-6.5/inch, vapor barrier, exterior/crawlspace/commercial
+- R-value: insulation effectiveness. Attic target R-38, walls R-13-21, crawl space R-10-20
+- Board feet: how foam is measured (1 sq ft at 1 inch thick)
+- Cure time: seconds on contact, vacate 24-72 hours for off-gassing
+- Job sizes: small attic $800-2K / average home $3-8K / commercial $15-50K+
+
+CALL TYPES:
+
+1. QUOTE REQUEST (most common)
+   Ask: Project type? Square footage? New or existing? Open or closed cell? Timeline?
+   Collect: Name, address, phone, email, sq ft, project type
+   Say: "Our team will come out, measure, and give you a written quote — no charge."
+
+2. OPEN vs CLOSED CELL QUESTION
+   Say: "Open cell is great for interior walls and attics — sound control, budget-friendly. Closed cell is denser, higher R-value, works as a vapor barrier — best for crawl spaces, exterior walls, and commercial. Our team will walk you through which fits your project when they come out."
+
+3. COMMERCIAL JOB (HIGH PRIORITY)
+   These are high-value — treat with urgency
+   Ask: Building type, total sq ft, timeline, contact info
+   Say: "This sounds like a great fit — let me make sure our project manager reaches out to you directly."
+   Alert owner immediately.
+
+4. BUILDER / CONTRACTOR (REPEAT BUSINESS — HIGH PRIORITY)
+   Ask: Company, project types, volume, timeline
+   Say: "We work with several builders in the area — let me have our owner call you directly."
+   Alert owner immediately.
+
+5. OFF-GASSING / HEALTH QUESTION
+   Say: "After application, the area needs ventilation for 24-72 hours. We'll give you specific instructions for your project. Most families are back home the next day."
+   Never give medical advice — direct to owner for detailed questions.
+
+6. EMERGENCY (rare)
+   Chemical smell from recent job, structural concern, reaction
+   Transfer immediately to [OWNER_CELL]
+   If safety concern: also advise Poison Control 1-800-222-1222
+
+DO NOT:
+- Quote per sq ft prices over the phone — every job is different
+- Diagnose existing insulation without site visit
+- Make health claims beyond standard industry info
+
+SERVICES: [SERVICES_LIST]
+PRICING: [PRICING_APPROACH]
+FAQ: [FAQ_LIST]`
+  },
+  apartments: {
+    title: 'Apartment Complex Module',
+    badge: 'Multi-Family · Property Management',
+    color: 'badge-blue',
+    content: `INDUSTRY KNOWLEDGE — APARTMENT COMPLEX:
+
+CALLER TYPES:
+
+1. PROSPECTIVE TENANT
+   Ask: Bedrooms? Move-in date? Any specific needs?
+   Collect: Name, phone, email, move-in date, unit preference
+   Book: Apartment tour
+   Say: "I'd love to set you up for a tour — does [DATE/TIME] work?"
+
+2. CURRENT RESIDENT — MAINTENANCE REQUEST
+   Ask: Unit number, name on lease, describe issue
+   URGENT (same day): No heat/AC, water leak, electrical, no hot water, security
+   STANDARD (1-3 days): Appliance, minor plumbing, pest, general repair
+   Urgent: "I'm flagging this — someone will contact you within [X] hours."
+   Standard: "I've logged your request — maintenance will be in touch within 1-3 business days."
+   Collect: Unit number, name, phone, issue description, access availability
+
+3. RESIDENT — GENERAL QUESTION
+   Handle: Lease dates, rent payment, amenities, parking, packages
+   If can't answer: "Let me have our office team follow up — best number to reach you?"
+
+4. NOISE / NEIGHBOR COMPLAINT
+   Stay neutral, take seriously
+   Collect: Name, unit, description, offending unit if known
+   Say: "I've documented your concern — our team will follow up. For immediate safety, contact local authorities."
+
+5. VENDOR / DELIVERY
+   Collect: Company name, purpose, who they're meeting
+   Say: "I'll let the office know — someone will be right with you."
+
+6. EMERGENCY
+   Fire, flood, gas leak, break-in, medical:
+   "Please call 911 immediately. I'm also notifying our emergency line right now."
+   Emergency line: [OWNER_CELL]
+
+PROPERTY INFO: [SERVICES_LIST]
+FAQ: [FAQ_LIST]`
+  }
+};
+
+function showModule(key) {
+  const data = moduleData[key];
+  if (!data) return;
+  Object.keys(moduleData).forEach(k => {
+    const btn = document.getElementById(`mt-${k}`);
+    if (btn) { btn.className = k === key ? 'btn btn-primary' : 'btn btn-ghost'; }
+  });
+  document.getElementById('module-content').innerHTML = `
+    <div class="panel-header">
+      <div class="panel-title">${data.title}</div>
+      <span class="badge ${data.color}">${data.badge}</span>
+    </div>
+    <div class="panel-body">
+      <pre style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);line-height:1.8;white-space:pre-wrap;background:var(--bg);padding:16px;border-radius:6px;border:1px solid var(--border2);max-height:420px;overflow-y:auto">${data.content}</pre>
+      <button class="btn btn-ghost" style="margin-top:12px;font-size:11px" onclick="navigator.clipboard.writeText(moduleData['${key}'].content).then(()=>alert('Module copied!'))">Copy Module</button>
+    </div>`;
+}
+
+// ── PREVIEW ──
+const previewData = {
+  hvac: {
+    name: 'TulsaAir HVAC',
+    tagline: 'Tulsa\'s Most Trusted Heating & Cooling',
+    agent: 'Aria',
+    color: '#0066cc',
+    accent: '#e8f0ff',
+    icon: '❄️',
+    services: ['AC Repair & Installation', 'Heating Systems', 'Duct Cleaning', 'Preventive Maintenance', '24/7 Emergency Service'],
+    url: 'tulsaairhvac.com',
+    stat1: ['12 min', 'Avg Response Time'], stat2: ['24/7', 'Always Available'], stat3: ['100%', 'Calls Answered'],
+  },
+  foam: {
+    name: 'Green Country Foam',
+    tagline: 'Professional Spray Foam Insulation — Tulsa & Surrounding Areas',
+    agent: 'Jake',
+    color: '#1a7a4a',
+    accent: '#e8f4ee',
+    icon: '🧪',
+    services: ['Open Cell Spray Foam', 'Closed Cell Spray Foam', 'Attic Insulation', 'Crawl Space Encapsulation', 'Commercial Projects'],
+    url: 'greencountryfoam.com',
+    stat1: ['Free', 'Estimates'], stat2: ['24/7', 'Always Available'], stat3: ['100%', 'Calls Answered'],
+  },
+  apt: {
+    name: 'Riverside Apartments',
+    tagline: 'Your Home. Our Priority.',
+    agent: 'Morgan',
+    color: '#7b2d8b',
+    accent: '#f5ecf8',
+    icon: '🏢',
+    services: ['Maintenance Requests', 'Leasing Inquiries', 'Tour Scheduling', 'Resident Support', 'After-Hours Emergencies'],
+    url: 'riversideapts.com',
+    stat1: ['<5 min', 'Response Time'], stat2: ['24/7', 'Always Available'], stat3: ['100%', 'Calls Answered'],
+  },
+  plumbing: {
+    name: 'ProFlow Plumbing',
+    tagline: 'Fast, Reliable Plumbing Service — Tulsa\'s #1 Choice',
+    agent: 'Sam',
+    color: '#c05a00',
+    accent: '#fff3e8',
+    icon: '🔧',
+    services: ['Emergency Leak Repair', 'Drain Cleaning', 'Water Heater Service', 'Fixture Installation', 'Sewer Line Repair'],
+    url: 'proflowplumbing.com',
+    stat1: ['60 min', 'Emergency Response'], stat2: ['24/7', 'Always Available'], stat3: ['100%', 'Calls Answered'],
+  }
+};
+
+function setPreview(key) {
+  const d = previewData[key];
+  if (!d) return;
+  ['hvac','foam','apt','plumbing'].forEach(k => {
+    const btn = document.getElementById(`pv-${k}`);
+    if (btn) btn.className = k === key ? 'btn btn-primary' : 'btn btn-ghost';
+  });
+  document.getElementById('preview-url').textContent = d.url;
+  document.getElementById('preview-frame').innerHTML = `
+    <div style="font-family:'Segoe UI',sans-serif;color:#1a1a1a">
+      <!-- NAV -->
+      <div style="background:${d.color};padding:14px 32px;display:flex;justify-content:space-between;align-items:center">
+        <div style="color:white;font-weight:800;font-size:18px;letter-spacing:0.02em">${d.icon} ${d.name}</div>
+        <div style="display:flex;gap:24px;color:rgba(255,255,255,0.85);font-size:13px">
+          <span style="cursor:pointer">Services</span>
+          <span style="cursor:pointer">About</span>
+          <span style="cursor:pointer">Contact</span>
+        </div>
+      </div>
+
+      <!-- HERO -->
+      <div style="background:linear-gradient(135deg,${d.color} 0%,${d.color}cc 100%);padding:60px 32px;text-align:center;position:relative">
+        <div style="color:white;font-size:32px;font-weight:800;margin-bottom:12px;line-height:1.2">${d.tagline}</div>
+        <div style="color:rgba(255,255,255,0.8);font-size:16px;margin-bottom:28px">Our AI receptionist <strong style="color:white">${d.agent}</strong> answers every call instantly — 24/7, no voicemail, no missed jobs.</div>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+          <div style="background:white;color:${d.color};font-weight:700;padding:14px 28px;border-radius:6px;cursor:pointer;font-size:15px">📞 Call Now</div>
+          <div style="background:transparent;color:white;font-weight:700;padding:14px 28px;border-radius:6px;cursor:pointer;font-size:15px;border:2px solid rgba(255,255,255,0.6)">Get Free Estimate</div>
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);background:${d.color}22;border-bottom:3px solid ${d.color}">
+        ${[d.stat1,d.stat2,d.stat3].map(([val,label],i) => `
+          <div style="padding:20px;text-align:center;${i<2?`border-right:1px solid ${d.color}33`:''}">
+            <div style="font-size:28px;font-weight:800;color:${d.color}">${val}</div>
+            <div style="font-size:12px;color:#666;font-weight:600;letter-spacing:0.05em;text-transform:uppercase">${label}</div>
+          </div>`).join('')}
+      </div>
+
+      <!-- SERVICES -->
+      <div style="padding:48px 32px;background:#fff">
+        <div style="text-align:center;margin-bottom:32px">
+          <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:${d.color};font-weight:700;margin-bottom:8px">What We Do</div>
+          <div style="font-size:26px;font-weight:800;color:#1a1a1a">Our Services</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+          ${d.services.map(s => `
+            <div style="background:${d.accent};border:1px solid ${d.color}33;border-radius:8px;padding:18px;border-left:3px solid ${d.color}">
+              <div style="color:${d.color};font-size:18px;margin-bottom:6px">✓</div>
+              <div style="font-weight:700;font-size:14px;color:#1a1a1a">${s}</div>
+            </div>`).join('')}
+        </div>
+      </div>
+
+      <!-- AI RECEPTIONIST CALL OUT -->
+      <div style="background:#1a1a1a;padding:40px 32px;text-align:center">
+        <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:${d.color};font-weight:700;margin-bottom:10px">Powered by Green Country AI</div>
+        <div style="font-size:22px;font-weight:800;color:white;margin-bottom:10px">Meet ${d.agent} — Your 24/7 AI Receptionist</div>
+        <div style="color:#999;font-size:14px;max-width:480px;margin:0 auto 24px">Never miss a call again. ${d.agent} answers instantly, books appointments, handles FAQs, and escalates emergencies — around the clock.</div>
+        <div style="display:inline-block;background:${d.color};color:white;font-weight:700;padding:12px 28px;border-radius:6px;cursor:pointer;font-size:15px">📞 Talk to ${d.agent} Now</div>
+      </div>
+
+      <!-- FOOTER -->
+      <div style="background:#111;padding:20px 32px;display:flex;justify-content:space-between;align-items:center">
+        <div style="color:#555;font-size:12px">© 2026 ${d.name} · AI Receptionist by Green Country AI Services</div>
+        <div style="color:#555;font-size:12px">Tulsa, Oklahoma</div>
+      </div>
+    </div>`;
+}
+
+// ── INIT MODULES + PREVIEW ──
+showModule('trades');
+setPreview('hvac');
 (function() {
   const faviconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5" fill="#00d084"/><text x="50" y="68" font-family="Arial Black,sans-serif" font-weight="900" font-size="44" fill="#000" text-anchor="middle">AI</text></svg>`;
   const faviconBlob = new Blob([faviconSvg], {type:'image/svg+xml'});
