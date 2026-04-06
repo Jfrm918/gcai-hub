@@ -61,178 +61,111 @@
     flex-shrink: 0;
   }
 
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+  .logo { display: flex; align-items: center; gap: 10px; }
 
   .logo-mark {
-    width: 28px;
-    height: 28px;
+    width: 28px; height: 28px;
     background: var(--green);
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
 
   .logo-text {
     font-family: var(--font-head);
-    font-weight: 800;
-    font-size: 17px;
-    letter-spacing: 0.05em;
-    color: var(--text);
+    font-weight: 800; font-size: 17px;
+    letter-spacing: 0.05em; color: var(--text);
     text-transform: uppercase;
   }
-
   .logo-text span { color: var(--green); }
 
   .prelaunch-badge {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    color: var(--amber);
-    background: var(--amber-dim);
-    border: 1px solid var(--amber);
-    border-radius: 3px;
-    padding: 2px 8px;
-    text-transform: uppercase;
+    font-family: var(--font-mono); font-size: 9px;
+    font-weight: 500; letter-spacing: 0.15em;
+    color: var(--amber); background: var(--amber-dim);
+    border: 1px solid var(--amber); border-radius: 3px;
+    padding: 2px 8px; text-transform: uppercase;
     animation: pulse-badge 2s ease-in-out infinite;
   }
 
-  @keyframes pulse-badge {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
-  }
+  @keyframes pulse-badge { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
 
-  .topbar-right {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
+  .topbar-right { display: flex; align-items: center; gap: 20px; }
 
   .agent-pill {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 5px 12px;
-    background: var(--surface2);
-    border: 1px solid var(--border2);
-    border-radius: 20px;
-    font-family: var(--font-mono);
-    font-size: 11px;
+    display: flex; align-items: center; gap: 8px;
+    padding: 5px 12px; background: var(--surface2);
+    border: 1px solid var(--border2); border-radius: 20px;
+    font-family: var(--font-mono); font-size: 11px;
   }
 
-  .agent-pill .dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-  }
-
+  .agent-pill .dot { width: 7px; height: 7px; border-radius: 50%; }
   .dot-green { background: var(--green); box-shadow: 0 0 6px var(--green); animation: blink 2s ease infinite; }
   .dot-amber { background: var(--amber); opacity: 0.5; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
-  .clock {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--text-dim);
-  }
+  .clock { font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); }
 
   /* ── LAYOUT ── */
-  .layout {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-  }
+  .layout { display: flex; flex: 1; overflow: hidden; }
 
   /* ── SIDEBAR ── */
   .sidebar {
-    width: 200px;
-    background: var(--surface);
+    width: 200px; background: var(--surface);
     border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    padding: 20px 0;
-    flex-shrink: 0;
+    display: flex; flex-direction: column;
+    padding: 20px 0; flex-shrink: 0;
+    overflow-y: auto;
   }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
 
   .nav-section-label {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.18em;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    padding: 0 20px 8px;
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.18em; color: var(--text-muted);
+    text-transform: uppercase; padding: 0 20px 8px;
   }
 
   .nav-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-family: var(--font-head);
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--text-dim);
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 20px; cursor: pointer;
+    font-family: var(--font-head); font-weight: 600;
+    font-size: 14px; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--text-dim);
     border-left: 3px solid transparent;
-    transition: all 0.15s;
-    user-select: none;
+    transition: all 0.15s; user-select: none;
   }
-
   .nav-item:hover { color: var(--text); background: var(--surface2); }
   .nav-item.active { color: var(--green); border-left-color: var(--green); background: var(--green-dim); }
-
   .nav-icon { font-size: 15px; width: 18px; text-align: center; }
 
   .sidebar-bottom {
-    margin-top: auto;
-    padding: 16px 20px;
+    margin-top: auto; padding: 16px 20px;
     border-top: 1px solid var(--border);
   }
 
   .partner-block {
-    background: var(--surface2);
-    border: 1px dashed var(--border2);
-    border-radius: 6px;
-    padding: 12px;
+    background: var(--surface2); border: 1px dashed var(--border2);
+    border-radius: 6px; padding: 12px;
   }
 
   .partner-label {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    margin-bottom: 8px;
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.12em; color: var(--text-muted);
+    text-transform: uppercase; margin-bottom: 8px;
   }
 
   .partner-slot {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 0;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--text-muted);
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 0; font-family: var(--font-mono);
+    font-size: 11px; color: var(--text-muted);
   }
-
   .lock-icon { font-size: 12px; opacity: 0.5; }
 
   /* ── MAIN ── */
   .main {
-    flex: 1;
-    overflow-y: auto;
-    padding: 28px;
-    background: var(--bg);
+    flex: 1; overflow-y: auto; padding: 28px; background: var(--bg);
   }
-
   .main::-webkit-scrollbar { width: 6px; }
   .main::-webkit-scrollbar-track { background: transparent; }
   .main::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
@@ -242,166 +175,64 @@
   @keyframes fadein { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
 
   /* ── SECTION HEADER ── */
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    margin-bottom: 24px;
-  }
-
+  .section-header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 24px; }
   .section-title {
-    font-family: var(--font-head);
-    font-weight: 800;
-    font-size: 26px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--text);
+    font-family: var(--font-head); font-weight: 800;
+    font-size: 26px; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--text);
   }
-
-  .section-sub {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--text-muted);
-    letter-spacing: 0.08em;
-  }
+  .section-sub { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); letter-spacing: 0.08em; }
 
   /* ── STAT GRID ── */
-  .stat-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    margin-bottom: 28px;
-  }
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
 
   .stat-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 18px 20px;
-    position: relative;
-    overflow: hidden;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 18px 20px;
+    position: relative; overflow: hidden;
   }
-
-  .stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-  }
-
+  .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
   .stat-card.green::before { background: var(--green); }
   .stat-card.amber::before { background: var(--amber); }
-  .stat-card.blue::before { background: var(--blue); }
-  .stat-card.red::before { background: var(--red); }
+  .stat-card.blue::before  { background: var(--blue); }
+  .stat-card.red::before   { background: var(--red); }
 
   .stat-label {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    margin-bottom: 10px;
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.12em; color: var(--text-muted);
+    text-transform: uppercase; margin-bottom: 10px;
   }
-
-  .stat-value {
-    font-family: var(--font-head);
-    font-weight: 800;
-    font-size: 32px;
-    letter-spacing: 0.02em;
-    line-height: 1;
-  }
-
+  .stat-value { font-family: var(--font-head); font-weight: 800; font-size: 32px; letter-spacing: 0.02em; line-height: 1; }
   .stat-card.green .stat-value { color: var(--green); }
   .stat-card.amber .stat-value { color: var(--amber); }
-  .stat-card.blue .stat-value { color: var(--blue); }
-  .stat-card.red .stat-value { color: var(--text); }
+  .stat-card.blue  .stat-value { color: var(--blue); }
+  .stat-card.red   .stat-value { color: var(--text); }
+  .stat-sub { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); margin-top: 6px; }
 
-  .stat-sub {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--text-muted);
-    margin-top: 6px;
-  }
-
-  /* ── GRID 2-COL ── */
+  /* ── GRIDS ── */
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin-bottom: 18px; }
 
   /* ── PANEL ── */
-  .panel {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
   .panel-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px; border-bottom: 1px solid var(--border);
   }
-
-  .panel-title {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-  }
-
-  .panel-action {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--green);
-    cursor: pointer;
-    background: none;
-    border: none;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
+  .panel-title { font-family: var(--font-head); font-weight: 700; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
+  .panel-action { font-family: var(--font-mono); font-size: 10px; color: var(--green); cursor: pointer; background: none; border: none; letter-spacing: 0.08em; text-transform: uppercase; }
   .panel-action:hover { text-decoration: underline; }
-
   .panel-body { padding: 18px; }
 
   /* ── TABLE ── */
   .data-table { width: 100%; border-collapse: collapse; }
-  .data-table th {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    text-align: left;
-    padding: 8px 12px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .data-table td {
-    padding: 11px 12px;
-    font-size: 13px;
-    border-bottom: 1px solid var(--border);
-    vertical-align: middle;
-  }
-
+  .data-table th { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  .data-table td { padding: 11px 12px; font-size: 13px; border-bottom: 1px solid var(--border); vertical-align: middle; }
   .data-table tr:last-child td { border-bottom: none; }
   .data-table tr:hover td { background: var(--surface2); }
 
   /* ── BADGES ── */
-  .badge {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 3px;
-  }
-
+  .badge { display: inline-block; font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; }
   .badge-green  { color: var(--green);  background: var(--green-dim);  border: 1px solid var(--green-mid); }
   .badge-amber  { color: var(--amber);  background: var(--amber-dim);  border: 1px solid #f5a62355; }
   .badge-red    { color: var(--red);    background: var(--red-dim);    border: 1px solid #ff475744; }
@@ -409,714 +240,219 @@
   .badge-muted  { color: var(--text-muted); background: var(--surface2); border: 1px solid var(--border2); }
 
   /* ── EMPTY STATE ── */
-  .empty-state {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--text-muted);
-  }
-
+  .empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); }
   .empty-icon { font-size: 28px; margin-bottom: 12px; opacity: 0.4; }
-  .empty-label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
+  .empty-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
 
   /* ── PIPELINE ── */
-  .pipeline-cols {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-  }
-
-  .pipe-col {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    min-height: 320px;
-  }
-
-  .pipe-col-header {
-    padding: 12px 14px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .pipe-col-title {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-  }
-
-  .pipe-count {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--text-muted);
-    background: var(--surface2);
-    padding: 2px 7px;
-    border-radius: 10px;
-  }
-
+  .pipeline-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .pipe-col { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; min-height: 320px; }
+  .pipe-col-header { padding: 12px 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .pipe-col-title { font-family: var(--font-head); font-weight: 700; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
+  .pipe-count { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); background: var(--surface2); padding: 2px 7px; border-radius: 10px; }
   .pipe-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
-
-  .pipe-card {
-    background: var(--surface2);
-    border: 1px solid var(--border2);
-    border-radius: 6px;
-    padding: 12px;
-    cursor: default;
-    transition: border-color 0.15s;
-  }
-
+  .pipe-card { background: var(--surface2); border: 1px solid var(--border2); border-radius: 6px; padding: 12px; cursor: default; transition: border-color 0.15s; }
   .pipe-card:hover { border-color: var(--green-mid); }
-
-  .pipe-card-name {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 13px;
-    color: var(--text);
-    margin-bottom: 4px;
-  }
-
-  .pipe-card-meta {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--text-muted);
-  }
+  .pipe-card-name { font-family: var(--font-body); font-weight: 600; font-size: 13px; color: var(--text); margin-bottom: 4px; }
+  .pipe-card-meta { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); }
 
   /* ── TASK QUEUE ── */
-  .task-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr auto auto;
-    gap: 10px;
-    margin-bottom: 20px;
-    align-items: end;
-  }
-
+  .task-form { display: grid; grid-template-columns: 1fr 1fr auto auto; gap: 10px; margin-bottom: 20px; align-items: end; }
   .form-group { display: flex; flex-direction: column; gap: 5px; }
-
-  .form-label {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
-  .form-input, .form-select {
-    background: var(--surface2);
-    border: 1px solid var(--border2);
-    border-radius: 5px;
-    color: var(--text);
-    font-family: var(--font-body);
-    font-size: 13px;
-    padding: 8px 12px;
-    outline: none;
-    transition: border-color 0.15s;
-  }
-
+  .form-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+  .form-input, .form-select { background: var(--surface2); border: 1px solid var(--border2); border-radius: 5px; color: var(--text); font-family: var(--font-body); font-size: 13px; padding: 8px 12px; outline: none; transition: border-color 0.15s; }
   .form-input:focus, .form-select:focus { border-color: var(--green); }
   .form-select option { background: var(--surface2); }
 
-  .btn {
-    padding: 8px 18px;
-    border-radius: 5px;
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    cursor: pointer;
-    border: none;
-    transition: all 0.15s;
-  }
-
+  .btn { padding: 8px 18px; border-radius: 5px; font-family: var(--font-head); font-weight: 700; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; border: none; transition: all 0.15s; }
   .btn-primary { background: var(--green); color: #000; }
   .btn-primary:hover { background: #00f09a; }
   .btn-ghost { background: transparent; color: var(--text-dim); border: 1px solid var(--border2); }
   .btn-ghost:hover { border-color: var(--text-dim); color: var(--text); }
 
   /* ── PROMPT LIBRARY ── */
-  .prompt-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-
-  .prompt-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    transition: border-color 0.15s;
-  }
-
+  .prompt-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .prompt-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: border-color 0.15s; }
   .prompt-card:hover { border-color: var(--border2); }
-
-  .prompt-card-header {
-    padding: 14px 16px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .prompt-card-title {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .prompt-card-body {
-    padding: 14px 16px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--text-dim);
-    line-height: 1.7;
-    max-height: 100px;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .prompt-card-body::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 30px;
-    background: linear-gradient(transparent, var(--surface));
-  }
-
-  .prompt-card-footer {
-    padding: 10px 16px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    gap: 8px;
-  }
+  .prompt-card-header { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .prompt-card-title { font-family: var(--font-head); font-weight: 700; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .prompt-card-body { padding: 14px 16px; font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); line-height: 1.7; max-height: 100px; overflow: hidden; position: relative; }
+  .prompt-card-body::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(transparent, var(--surface)); }
+  .prompt-card-footer { padding: 10px 16px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
 
   /* ── REVENUE BAR ── */
-  .rev-track {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    height: 8px;
-    overflow: hidden;
-    margin: 10px 0 6px;
-  }
-
-  .rev-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--green), #00f09a);
-    border-radius: 6px;
-    transition: width 0.8s ease;
-  }
-
-  .rev-labels {
-    display: flex;
-    justify-content: space-between;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--text-muted);
-  }
+  .rev-track { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; height: 8px; overflow: hidden; margin: 10px 0 6px; }
+  .rev-fill { height: 100%; background: linear-gradient(90deg, var(--green), #00f09a); border-radius: 6px; transition: width 0.8s ease; }
+  .rev-labels { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); }
 
   /* ── TEAM STATUS ── */
-  .team-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  .team-card {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 14px 16px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .team-card.locked {
-    opacity: 0.4;
-    border-style: dashed;
-  }
-
-  .team-avatar {
-    width: 38px;
-    height: 38px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-head);
-    font-weight: 800;
-    font-size: 16px;
-    flex-shrink: 0;
-  }
-
+  .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .team-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; }
+  .team-card.locked { opacity: 0.4; border-style: dashed; }
+  .team-avatar { width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-weight: 800; font-size: 16px; flex-shrink: 0; }
   .team-info { flex: 1; }
-
-  .team-name {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: 3px;
-  }
-
-  .team-role {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--text-muted);
-    letter-spacing: 0.06em;
-  }
+  .team-name { font-family: var(--font-head); font-weight: 700; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 3px; }
+  .team-role { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); letter-spacing: 0.06em; }
 
   /* ── DIVIDER ── */
-  .divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 24px 0;
-  }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
 
-  /* ══════════════════════════════════════════════
-     NEW TABS — Packages · Workshop · The Team
-     CSS scoped under .new-tab-content to avoid
-     conflicts with existing hub styles.
-  ══════════════════════════════════════════════ */
-
-  .new-tab-content {
-    font-family: 'Barlow', sans-serif;
-  }
-
-  /* SECTION LABEL (new tabs) */
-  .nt-section-label {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--green);
-    margin-bottom: 1rem;
-  }
-
-  /* GLASS CARD */
-  .nt-glass {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.5rem;
-    transition: border-color 0.2s, background 0.2s;
-  }
+  /* ═══════════════════════════════════════════
+     EXISTING NEW-TAB STYLES (packages/workshop/team)
+  ═══════════════════════════════════════════ */
+  .new-tab-content { font-family: 'Barlow', sans-serif; }
+  .nt-section-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; }
+  .nt-glass { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: border-color 0.2s, background 0.2s; }
   .nt-glass:hover { border-color: var(--border2); background: var(--surface2); }
 
-  /* PACKAGE GRID */
-  .pkg-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .pkg-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 1.75rem 1.5rem;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.2s, transform 0.2s;
-  }
+  .pkg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .pkg-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.75rem 1.5rem; position: relative; overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
   .pkg-card:hover { border-color: var(--border2); transform: translateY(-2px); }
   .pkg-card.featured { border-color: rgba(0,208,132,0.3); }
-  .pkg-card.featured::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--green), transparent);
-  }
-
-  .pkg-badge {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    background: var(--green-dim);
-    color: var(--green);
-    border: 1px solid rgba(0,208,132,0.2);
-    border-radius: 4px;
-    padding: 3px 8px;
-    margin-bottom: 1rem;
-  }
+  .pkg-card.featured::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--green), transparent); }
+  .pkg-badge { display: inline-block; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; background: var(--green-dim); color: var(--green); border: 1px solid rgba(0,208,132,0.2); border-radius: 4px; padding: 3px 8px; margin-bottom: 1rem; }
   .pkg-badge.gold { background: var(--amber-dim); color: var(--amber); border-color: rgba(245,166,35,0.2); }
-
-  .pkg-name {
-    font-family: 'Syne', 'Barlow Condensed', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 0.25rem;
-  }
-
-  .pkg-price {
-    font-family: 'Syne', 'Barlow Condensed', sans-serif;
-    font-size: 32px;
-    font-weight: 800;
-    color: var(--green);
-    line-height: 1;
-    margin-bottom: 0.25rem;
-  }
+  .pkg-name { font-family: 'Syne', 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+  .pkg-price { font-family: 'Syne', 'Barlow Condensed', sans-serif; font-size: 32px; font-weight: 800; color: var(--green); line-height: 1; margin-bottom: 0.25rem; }
   .pkg-price span { font-size: 14px; font-weight: 400; color: var(--text-dim); }
   .pkg-price.gold-price { color: var(--amber); }
+  .pkg-desc { font-size: 13px; color: var(--text-dim); margin-bottom: 1.25rem; line-height: 1.6; }
+  .pkg-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .pkg-features li { font-size: 13px; color: rgba(232,240,242,0.85); display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+  .pkg-features li::before { content: '›'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
 
-  .pkg-desc {
-    font-size: 13px;
-    color: var(--text-dim);
-    margin-bottom: 1.25rem;
-    line-height: 1.6;
-  }
-
-  .pkg-features {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .pkg-features li {
-    font-size: 13px;
-    color: rgba(232,240,242,0.85);
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    line-height: 1.5;
-  }
-  .pkg-features li::before {
-    content: '›';
-    color: var(--green);
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  /* ADDONS */
-  .addon-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .addon-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1.25rem;
-    transition: border-color 0.2s;
-  }
+  .addon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .addon-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; transition: border-color 0.2s; }
   .addon-card:hover { border-color: var(--border2); }
-
-  .addon-name {
-    font-family: 'Syne', 'Barlow Condensed', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 6px;
-  }
-  .addon-price {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--green);
-    margin-bottom: 6px;
-  }
+  .addon-name { font-family: 'Syne', 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .addon-price { font-family: var(--font-mono); font-size: 12px; color: var(--green); margin-bottom: 6px; }
   .addon-desc { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
 
-  /* WORKSHOP */
-  .workshop-hero {
-    background: linear-gradient(135deg, rgba(0,208,132,0.06) 0%, rgba(79,195,247,0.06) 100%);
-    border: 1px solid rgba(0,208,132,0.15);
-    border-radius: 14px;
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .workshop-hero::before {
-    content: '';
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 200px; height: 200px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,208,132,0.08) 0%, transparent 70%);
-  }
-
-  .wh-title {
-    font-family: 'Syne', 'Barlow Condensed', sans-serif;
-    font-size: 26px;
-    font-weight: 800;
-    color: var(--text);
-    margin-bottom: 0.5rem;
-  }
+  .workshop-hero { background: linear-gradient(135deg, rgba(0,208,132,0.06) 0%, rgba(79,195,247,0.06) 100%); border: 1px solid rgba(0,208,132,0.15); border-radius: 14px; padding: 2rem; margin-bottom: 1.5rem; position: relative; overflow: hidden; }
+  .workshop-hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(0,208,132,0.08) 0%, transparent 70%); }
+  .wh-title { font-family: 'Syne', 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 800; color: var(--text); margin-bottom: 0.5rem; }
   .wh-sub { font-size: 14px; color: var(--text-dim); margin-bottom: 1.5rem; line-height: 1.6; }
-
-  .price-row {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    margin-bottom: 1.5rem;
-  }
-  .price-pill {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .price-pill .label {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-  .price-pill .val {
-    font-family: 'Syne', 'Barlow Condensed', sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--green);
-  }
-
-  .workshop-topics {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-  }
-  .topic-item {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-    font-size: 12px;
-    color: var(--text-dim);
-    line-height: 1.5;
-  }
-  .topic-item strong {
-    display: block;
-    font-size: 13px;
-    color: var(--text);
-    margin-bottom: 3px;
-    font-weight: 500;
-  }
-
-  .flywheel-note {
-    background: var(--amber-dim);
-    border: 1px solid rgba(245,166,35,0.3);
-    border-radius: 8px;
-    padding: 1rem 1.25rem;
-    font-size: 13px;
-    color: var(--amber);
-    line-height: 1.6;
-  }
+  .price-row { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .price-pill { display: flex; flex-direction: column; gap: 2px; }
+  .price-pill .label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+  .price-pill .val { font-family: 'Syne', 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; color: var(--green); }
+  .workshop-topics { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem; }
+  .topic-item { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem 1rem; font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+  .topic-item strong { display: block; font-size: 13px; color: var(--text); margin-bottom: 3px; font-weight: 500; }
+  .flywheel-note { background: var(--amber-dim); border: 1px solid rgba(245,166,35,0.3); border-radius: 8px; padding: 1rem 1.25rem; font-size: 13px; color: var(--amber); line-height: 1.6; }
   .flywheel-note strong { color: var(--amber); }
 
-  /* TEAM / MISSION (scoped to .new-tab-content) */
-  .mission-block {
-    background: linear-gradient(135deg, rgba(0,208,132,0.05) 0%, rgba(79,195,247,0.05) 100%);
-    border: 1px solid rgba(0,208,132,0.12);
-    border-radius: 14px;
-    padding: 2rem;
-    margin-bottom: 2rem;
-  }
-  .mission-title {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--green);
-    margin-bottom: 0.75rem;
-  }
-  .mission-text {
-    font-family: 'Syne', 'Barlow Condensed', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text);
-    line-height: 1.5;
-  }
+  .mission-block { background: linear-gradient(135deg, rgba(0,208,132,0.05) 0%, rgba(79,195,247,0.05) 100%); border: 1px solid rgba(0,208,132,0.12); border-radius: 14px; padding: 2rem; margin-bottom: 2rem; }
+  .mission-title { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-bottom: 0.75rem; }
+  .mission-text { font-family: 'Syne', 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; color: var(--text); line-height: 1.5; }
 
-  /* NEW TEAM GRID (scoped with prefix) */
-  .nt-team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .nt-team-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.5rem;
-    transition: border-color 0.2s;
-  }
+  .nt-team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .nt-team-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: border-color 0.2s; }
   .nt-team-card:hover { border-color: var(--border2); }
-
-  .nt-team-avatar {
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Syne', 'Barlow Condensed', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
+  .nt-team-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Syne', 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 1rem; }
   .av-green { background: var(--green-dim); color: var(--green); border: 1px solid rgba(0,208,132,0.2); }
   .av-blue  { background: var(--blue-dim);  color: var(--blue);  border: 1px solid rgba(79,195,247,0.2); }
   .av-gold  { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(245,166,35,0.2); }
+  .nt-team-name { font-family: 'Syne', 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+  .nt-team-role { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.75rem; }
+  .nt-team-desc { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+  .nt-team-owns { margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border); }
+  .nt-team-owns-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+  .owns-tag { display: inline-block; font-size: 11px; background: var(--surface2); border: 1px solid var(--border2); border-radius: 4px; padding: 3px 8px; margin: 2px; color: var(--text-dim); }
 
-  .nt-team-name {
-    font-family: 'Syne', 'Barlow Condensed', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 3px;
-  }
-  .nt-team-role {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 0.75rem;
-  }
-  .nt-team-desc {
-    font-size: 13px;
-    color: var(--text-dim);
-    line-height: 1.6;
-  }
-  .nt-team-owns {
-    margin-top: 0.75rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--border);
-  }
-  .nt-team-owns-label {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 6px;
-  }
-  .owns-tag {
-    display: inline-block;
-    font-size: 11px;
-    background: var(--surface2);
-    border: 1px solid var(--border2);
-    border-radius: 4px;
-    padding: 3px 8px;
-    margin: 2px;
-    color: var(--text-dim);
-  }
+  .flywheel { display: flex; flex-direction: column; gap: 0; margin-bottom: 2rem; }
+  .fw-step { display: flex; gap: 1rem; align-items: flex-start; position: relative; }
+  .fw-step:not(:last-child)::after { content: ''; position: absolute; left: 17px; top: 38px; width: 1px; height: calc(100% - 10px); background: linear-gradient(180deg, var(--green), transparent); opacity: 0.3; }
+  .fw-num { width: 36px; height: 36px; border-radius: 50%; background: var(--green-dim); border: 1px solid rgba(0,208,132,0.25); display: flex; align-items: center; justify-content: center; font-family: 'Syne', 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; color: var(--green); flex-shrink: 0; margin-top: 2px; }
+  .fw-content { padding-bottom: 1.75rem; flex: 1; }
+  .fw-title { font-family: 'Syne', 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .fw-desc { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
 
-  /* FLYWHEEL STEPS */
-  .flywheel {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    margin-bottom: 2rem;
-  }
-  .fw-step {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-    position: relative;
-  }
-  .fw-step:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    left: 17px;
-    top: 38px;
-    width: 1px;
-    height: calc(100% - 10px);
-    background: linear-gradient(180deg, var(--green), transparent);
-    opacity: 0.3;
-  }
-  .fw-num {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    background: var(--green-dim);
-    border: 1px solid rgba(0,208,132,0.25);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Syne', 'Barlow Condensed', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--green);
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .fw-content {
-    padding-bottom: 1.75rem;
-    flex: 1;
-  }
-  .fw-title {
-    font-family: 'Syne', 'Barlow Condensed', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 4px;
-  }
-  .fw-desc {
-    font-size: 13px;
-    color: var(--text-dim);
-    line-height: 1.6;
-  }
-
-  /* STACK GRID */
-  .stack-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 0.75rem;
-    margin-bottom: 2rem;
-  }
-  .stack-item {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1rem;
-    text-align: center;
-  }
-  .stack-name {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--green);
-    margin-bottom: 4px;
-  }
+  .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem; margin-bottom: 2rem; }
+  .stack-item { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center; }
+  .stack-name { font-family: var(--font-mono); font-size: 12px; font-weight: 500; color: var(--green); margin-bottom: 4px; }
   .stack-role { font-size: 11px; color: var(--text-dim); }
 
   /* ── MIGRATION NOTICE ── */
-  .migration-bar {
-    background: var(--amber-dim);
-    border: 1px solid var(--amber);
-    border-radius: 6px;
-    padding: 10px 16px;
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--amber);
-    letter-spacing: 0.04em;
-  }
+  .migration-bar { background: var(--amber-dim); border: 1px solid var(--amber); border-radius: 6px; padding: 10px 16px; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 11px; color: var(--amber); letter-spacing: 0.04em; }
 
+  /* ═══════════════════════════════════════════
+     NEW PLAYBOOK STYLES
+  ═══════════════════════════════════════════ */
+
+  /* Callout box */
+  .pb-callout {
+    border-radius: 6px; padding: 14px 18px;
+    font-size: 13px; line-height: 1.7;
+    border-left: 3px solid; margin-bottom: 20px;
+  }
+  .pb-callout.green  { background: var(--green-dim);  border-color: var(--green);  color: var(--text); }
+  .pb-callout.amber  { background: var(--amber-dim);  border-color: var(--amber);  color: var(--text); }
+  .pb-callout.blue   { background: var(--blue-dim);   border-color: var(--blue);   color: var(--text); }
+  .pb-callout.red    { background: var(--red-dim);    border-color: var(--red);    color: var(--text); }
+  .pb-callout strong { color: #fff; }
+
+  /* Phone option cards */
+  .phone-option {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 18px; margin-bottom: 12px;
+    transition: border-color 0.2s;
+  }
+  .phone-option:hover { border-color: var(--border2); }
+  .phone-option.recommended { border-color: rgba(0,208,132,0.4); }
+  .po-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .po-num { width: 28px; height: 28px; border-radius: 50%; background: var(--green-dim); border: 1px solid var(--green-mid); color: var(--green); display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-size: 13px; font-weight: 800; flex-shrink: 0; }
+  .po-title { font-family: var(--font-head); font-size: 15px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text); }
+  .po-rec-tag { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; background: var(--green-dim); color: var(--green); border: 1px solid var(--green-mid); border-radius: 3px; padding: 2px 7px; text-transform: uppercase; margin-left: auto; }
+  .po-desc { font-size: 13px; color: var(--text-dim); line-height: 1.65; padding-left: 40px; margin-bottom: 10px; }
+  .po-tags { display: flex; gap: 6px; padding-left: 40px; flex-wrap: wrap; }
+
+  /* Timeline steps */
+  .pb-timeline { position: relative; padding-left: 18px; }
+  .pb-timeline::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 20px; width: 1px; background: linear-gradient(180deg, var(--green), transparent); opacity: 0.35; }
+  .pb-tl-item { position: relative; padding: 0 0 22px 22px; }
+  .pb-tl-item::before { content: ''; position: absolute; left: -4px; top: 6px; width: 9px; height: 9px; border-radius: 50%; background: var(--green); border: 2px solid var(--bg); }
+  .pb-tl-week { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; color: var(--green); text-transform: uppercase; margin-bottom: 3px; }
+  .pb-tl-title { font-family: var(--font-head); font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text); margin-bottom: 3px; }
+  .pb-tl-desc { font-size: 12px; color: var(--text-dim); line-height: 1.6; }
+
+  /* Profit table rows */
+  .profit-row { display: grid; grid-template-columns: 80px 110px 110px 80px 110px; gap: 0; padding: 11px 16px; border-bottom: 1px solid rgba(31,42,45,0.8); font-size: 13px; align-items: center; }
+  .profit-row:hover { background: var(--surface2); }
+  .profit-row.hdr { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; color: var(--text-muted); text-transform: uppercase; background: var(--surface2); padding: 10px 16px; }
+  .profit-row.milestone { background: rgba(0,208,132,0.05); border-left: 2px solid var(--green); }
+  .profit-row:last-child { border-bottom: none; }
+
+  /* Onboarding steps */
+  .ob-step { display: flex; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--border); }
+  .ob-step:last-child { border-bottom: none; }
+  .ob-num { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--green-mid); color: var(--green); display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .ob-title { font-family: var(--font-head); font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text); margin-bottom: 3px; }
+  .ob-desc { font-size: 12px; color: var(--text-dim); line-height: 1.6; }
+
+  /* Flow diagram */
+  .call-flow { display: flex; align-items: center; gap: 0; flex-wrap: wrap; margin: 14px 0; }
+  .cf-step { background: var(--surface2); border: 1px solid var(--border2); border-radius: 6px; padding: 10px 14px; font-size: 12px; color: var(--text); text-align: center; min-width: 105px; }
+  .cf-icon { font-size: 15px; margin-bottom: 3px; }
+  .cf-label { font-size: 10px; color: var(--text-muted); font-family: var(--font-mono); margin-top: 2px; }
+  .cf-arrow { color: var(--green); font-size: 18px; padding: 0 3px; flex-shrink: 0; }
+
+  /* Break/fix table */
+  .bfix-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 12px; align-items: start; }
+  .bfix-row:last-child { border-bottom: none; }
+  .bfix-row:hover { background: var(--surface2); }
+  .bfix-prob { color: var(--text-dim); }
+  .bfix-fix { color: var(--text); }
+
+  /* Cost breakdown */
+  .cost-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .cost-row:last-child { border-bottom: none; }
+  .cost-name { color: var(--text-dim); }
+  .cost-amt { color: var(--amber); font-family: var(--font-mono); font-size: 12px; }
+  .cost-amt.green { color: var(--green); }
+  .cost-total { display: flex; justify-content: space-between; padding-top: 14px; margin-top: 4px; border-top: 1px solid var(--border); }
+  .cost-total-label { font-family: var(--font-head); font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text); }
+  .cost-total-amt { font-family: var(--font-head); font-size: 20px; font-weight: 800; color: var(--amber); }
 </style>
 </head>
 <body>
@@ -1144,18 +480,29 @@
     <div class="nav-item active" onclick="showTab('dashboard', this)"><span class="nav-icon">◈</span> Dashboard</div>
     <div class="nav-item" onclick="showTab('pipeline', this)"><span class="nav-icon">◎</span> Pipeline</div>
     <div class="nav-item" onclick="showTab('clients', this)"><span class="nav-icon">◻</span> Clients</div>
+
     <div class="nav-section-label" style="margin-top:16px">Agents</div>
     <div class="nav-item" onclick="showTab('tasks', this)"><span class="nav-icon">⬡</span> Task Queue</div>
     <div class="nav-item" onclick="showTab('prompts', this)"><span class="nav-icon">≡</span> Prompt Library</div>
+
     <div class="nav-section-label" style="margin-top:16px">Finance</div>
     <div class="nav-item" onclick="showTab('financials', this)"><span class="nav-icon">$</span> Financials</div>
+
     <div class="nav-section-label" style="margin-top:16px">System</div>
     <div class="nav-item" onclick="showTab('discord', this)"><span class="nav-icon">◉</span> Discord</div>
     <div class="nav-item" onclick="showTab('settings', this)"><span class="nav-icon">⚙</span> Settings</div>
+
     <div class="nav-section-label" style="margin-top:16px">Company</div>
     <div class="nav-item" onclick="showTab('packages', this)"><span class="nav-icon">📦</span> Packages</div>
     <div class="nav-item" onclick="showTab('workshop', this)"><span class="nav-icon">🎓</span> Workshop</div>
     <div class="nav-item" onclick="showTab('us', this)"><span class="nav-icon">👥</span> The Team</div>
+
+    <div class="nav-section-label" style="margin-top:16px">Playbook</div>
+    <div class="nav-item" onclick="showTab('phone', this)"><span class="nav-icon">📞</span> Phone Setup</div>
+    <div class="nav-item" onclick="showTab('onboarding', this)"><span class="nav-icon">⊕</span> Onboarding</div>
+    <div class="nav-item" onclick="showTab('sales', this)"><span class="nav-icon">◆</span> Sales Strategy</div>
+    <div class="nav-item" onclick="showTab('howit', this)"><span class="nav-icon">⊙</span> How It Runs</div>
+    <div class="nav-item" onclick="showTab('infra', this)"><span class="nav-icon">▣</span> Infrastructure</div>
 
     <div class="sidebar-bottom">
       <div class="partner-block">
@@ -1223,34 +570,22 @@
             <div class="team-grid">
               <div class="team-card">
                 <div class="team-avatar" style="background:#00d08422;color:var(--green)">J</div>
-                <div class="team-info">
-                  <div class="team-name">Jason</div>
-                  <div class="team-role">Owner / Operator</div>
-                </div>
+                <div class="team-info"><div class="team-name">Jason</div><div class="team-role">Owner / Operator</div></div>
                 <span class="badge badge-green">Active</span>
               </div>
               <div class="team-card">
                 <div class="team-avatar" style="background:#00d08422;color:var(--green)">A</div>
-                <div class="team-info">
-                  <div class="team-name">Athena</div>
-                  <div class="team-role">AI Agent — Build</div>
-                </div>
+                <div class="team-info"><div class="team-name">Athena</div><div class="team-role">AI Agent — Build</div></div>
                 <span class="badge badge-green">Online</span>
               </div>
               <div class="team-card locked">
                 <div class="team-avatar" style="background:var(--surface2);color:var(--text-muted)">J</div>
-                <div class="team-info">
-                  <div class="team-name">Johnny</div>
-                  <div class="team-role">Owner / Operator</div>
-                </div>
+                <div class="team-info"><div class="team-name">Johnny</div><div class="team-role">Owner / Operator</div></div>
                 <span class="badge badge-muted">Locked</span>
               </div>
               <div class="team-card locked">
                 <div class="team-avatar" style="background:var(--surface2);color:var(--text-muted)">C</div>
-                <div class="team-info">
-                  <div class="team-name">Celeste</div>
-                  <div class="team-role">AI Agent — Pending</div>
-                </div>
+                <div class="team-info"><div class="team-name">Celeste</div><div class="team-role">AI Agent — Pending</div></div>
                 <span class="badge badge-muted">Locked</span>
               </div>
             </div>
@@ -1264,15 +599,14 @@
         </div>
         <div class="panel-body">
           <table class="data-table">
-            <thead><tr>
-              <th>Task</th><th>Owner</th><th>Status</th><th>Notes</th>
-            </tr></thead>
+            <thead><tr><th>Task</th><th>Owner</th><th>Status</th><th>Notes</th></tr></thead>
             <tbody>
               <tr><td>Business name confirmed</td><td>Jason</td><td><span class="badge badge-green">Done</span></td><td>Green Country AI Services</td></tr>
               <tr><td>Create Vapi.ai account</td><td>Jason</td><td><span class="badge badge-amber">In Progress</span></td><td>Free tier to start</td></tr>
               <tr><td>Connect ElevenLabs to Vapi</td><td>Athena</td><td><span class="badge badge-muted">Pending</span></td><td>After Vapi setup</td></tr>
               <tr><td>Build demo agent (HVAC inbound)</td><td>Athena</td><td><span class="badge badge-muted">Pending</span></td><td>TulsaAir demo script</td></tr>
               <tr><td>GoHighLevel agency account</td><td>Jason</td><td><span class="badge badge-muted">Pending</span></td><td>$97/mo — white-label CRM</td></tr>
+              <tr><td>Free trial — boss's spray foam co.</td><td>Jason</td><td><span class="badge badge-amber">Next Action</span></td><td>Ask this week — get his numbers</td></tr>
               <tr><td>Domain registration</td><td>Jason</td><td><span class="badge badge-muted">Pending</span></td><td>greencountryai.com</td></tr>
               <tr><td>LLC filing</td><td>Jason</td><td><span class="badge badge-muted">When ready</span></td><td>Oklahoma SOS ~$100</td></tr>
               <tr><td>First paying client</td><td>Jason + Johnny</td><td><span class="badge badge-muted">Pending</span></td><td>Target: trades niche</td></tr>
@@ -1297,40 +631,20 @@
 
       <div class="pipeline-cols">
         <div class="pipe-col">
-          <div class="pipe-col-header">
-            <div class="pipe-col-title">Prospect</div>
-            <div class="pipe-count" id="count-prospect">0</div>
-          </div>
-          <div class="pipe-body" id="col-prospect">
-            <div class="empty-state"><div class="empty-icon">◎</div><div class="empty-label">No prospects yet</div></div>
-          </div>
+          <div class="pipe-col-header"><div class="pipe-col-title">Prospect</div><div class="pipe-count" id="count-prospect">0</div></div>
+          <div class="pipe-body" id="col-prospect"><div class="empty-state"><div class="empty-icon">◎</div><div class="empty-label">No prospects yet</div></div></div>
         </div>
         <div class="pipe-col">
-          <div class="pipe-col-header">
-            <div class="pipe-col-title">Demo Booked</div>
-            <div class="pipe-count" id="count-demo">0</div>
-          </div>
-          <div class="pipe-body" id="col-demo">
-            <div class="empty-state"><div class="empty-icon">◎</div><div class="empty-label">No demos scheduled</div></div>
-          </div>
+          <div class="pipe-col-header"><div class="pipe-col-title">Demo Booked</div><div class="pipe-count" id="count-demo">0</div></div>
+          <div class="pipe-body" id="col-demo"><div class="empty-state"><div class="empty-icon">◎</div><div class="empty-label">No demos scheduled</div></div></div>
         </div>
         <div class="pipe-col">
-          <div class="pipe-col-header" style="border-top: 2px solid var(--green)">
-            <div class="pipe-col-title" style="color:var(--green)">Closed</div>
-            <div class="pipe-count" id="count-closed">0</div>
-          </div>
-          <div class="pipe-body" id="col-closed">
-            <div class="empty-state"><div class="empty-icon">◎</div><div class="empty-label">No closes yet</div></div>
-          </div>
+          <div class="pipe-col-header" style="border-top: 2px solid var(--green)"><div class="pipe-col-title" style="color:var(--green)">Closed</div><div class="pipe-count" id="count-closed">0</div></div>
+          <div class="pipe-body" id="col-closed"><div class="empty-state"><div class="empty-icon">◎</div><div class="empty-label">No closes yet</div></div></div>
         </div>
         <div class="pipe-col">
-          <div class="pipe-col-header">
-            <div class="pipe-col-title">Onboarding</div>
-            <div class="pipe-count" id="count-onboard">0</div>
-          </div>
-          <div class="pipe-body" id="col-onboard">
-            <div class="empty-state"><div class="empty-icon">◎</div><div class="empty-label">No active onboards</div></div>
-          </div>
+          <div class="pipe-col-header"><div class="pipe-col-title">Onboarding</div><div class="pipe-count" id="count-onboard">0</div></div>
+          <div class="pipe-body" id="col-onboard"><div class="empty-state"><div class="empty-icon">◎</div><div class="empty-label">No active onboards</div></div></div>
         </div>
       </div>
     </div>
@@ -1346,8 +660,8 @@
         <div class="form-group"><div class="form-label">Business Name</div><input class="form-input" id="c-name" placeholder="TulsaAir HVAC" style="width:200px"></div>
         <div class="form-group"><div class="form-label">Package</div>
           <select class="form-select" id="c-pkg">
-            <option value="Starter">Starter — $750/mo</option>
-            <option value="Pro">Pro — $1,500/mo</option>
+            <option value="Starter">Starter — $497/mo</option>
+            <option value="Pro">Pro — $797/mo</option>
           </select>
         </div>
         <div class="form-group"><div class="form-label">Niche</div><input class="form-input" id="c-niche" placeholder="HVAC" style="width:140px"></div>
@@ -1360,9 +674,7 @@
           <span id="client-mrr-label" style="font-family:var(--font-mono);font-size:11px;color:var(--green)">MRR: $0</span>
         </div>
         <table class="data-table">
-          <thead><tr>
-            <th>Business</th><th>Niche</th><th>Package</th><th>MRR</th><th>Go-Live</th><th>Status</th><th></th>
-          </tr></thead>
+          <thead><tr><th>Business</th><th>Niche</th><th>Package</th><th>MRR</th><th>Go-Live</th><th>Status</th><th></th></tr></thead>
           <tbody id="client-tbody">
             <tr><td colspan="7"><div class="empty-state"><div class="empty-icon">◻</div><div class="empty-label">No clients yet</div></div></td></tr>
           </tbody>
@@ -1380,17 +692,10 @@
       <div class="task-form">
         <div class="form-group"><div class="form-label">Task Description</div><input class="form-input" id="t-desc" placeholder="e.g. Build HVAC demo script"></div>
         <div class="form-group"><div class="form-label">Assigned To</div>
-          <select class="form-select" id="t-owner">
-            <option>Jason</option>
-            <option>Athena</option>
-          </select>
+          <select class="form-select" id="t-owner"><option>Jason</option><option>Athena</option></select>
         </div>
         <div class="form-group"><div class="form-label">Priority</div>
-          <select class="form-select" id="t-priority">
-            <option>High</option>
-            <option>Normal</option>
-            <option>Low</option>
-          </select>
+          <select class="form-select" id="t-priority"><option>High</option><option>Normal</option><option>Low</option></select>
         </div>
         <button class="btn btn-primary" onclick="addTask()" style="align-self:end">+ Add</button>
       </div>
@@ -1398,9 +703,7 @@
       <div class="panel">
         <div class="panel-header"><div class="panel-title">Active Tasks</div></div>
         <table class="data-table">
-          <thead><tr>
-            <th>Task</th><th>Assigned</th><th>Priority</th><th>Status</th><th>Added</th><th></th>
-          </tr></thead>
+          <thead><tr><th>Task</th><th>Assigned</th><th>Priority</th><th>Status</th><th>Added</th><th></th></tr></thead>
           <tbody id="task-tbody">
             <tr><td colspan="6"><div class="empty-state"><div class="empty-icon">⬡</div><div class="empty-label">No tasks in queue</div></div></td></tr>
           </tbody>
@@ -1421,62 +724,25 @@
       </div>
 
       <div class="prompt-grid" id="prompt-grid">
-        <!-- Seed prompt -->
         <div class="prompt-card">
-          <div class="prompt-card-header">
-            <div class="prompt-card-title">HVAC Inbound Receptionist</div>
-            <span class="badge badge-amber">Draft</span>
-          </div>
-          <div class="prompt-card-body">
-            You are an AI receptionist for [COMPANY_NAME], a professional HVAC service company. Your job is to answer incoming calls, collect the caller's name and address, understand their issue, and schedule a technician visit using the available calendar...
-          </div>
-          <div class="prompt-card-footer">
-            <span class="badge badge-muted">HVAC</span>
-            <span class="badge badge-muted">Inbound</span>
-            <span class="badge badge-blue">v0.1</span>
-          </div>
+          <div class="prompt-card-header"><div class="prompt-card-title">HVAC Inbound Receptionist</div><span class="badge badge-amber">Draft</span></div>
+          <div class="prompt-card-body">You are an AI receptionist for [COMPANY_NAME], a professional HVAC service company. Your job is to answer incoming calls, collect the caller's name and address, understand their issue, and schedule a technician visit using the available calendar...</div>
+          <div class="prompt-card-footer"><span class="badge badge-muted">HVAC</span><span class="badge badge-muted">Inbound</span><span class="badge badge-blue">v0.1</span></div>
         </div>
-
         <div class="prompt-card" style="border-style:dashed;opacity:0.5;">
-          <div class="prompt-card-header">
-            <div class="prompt-card-title">Apartment Maintenance Line</div>
-            <span class="badge badge-muted">Pending</span>
-          </div>
-          <div class="prompt-card-body" style="color:var(--text-muted)">
-            Athena building this — awaiting research completion on apartment complex workflows and tenant communication requirements...
-          </div>
-          <div class="prompt-card-footer">
-            <span class="badge badge-muted">Apartments</span>
-            <span class="badge badge-muted">Inbound</span>
-          </div>
+          <div class="prompt-card-header"><div class="prompt-card-title">Spray Foam Inbound</div><span class="badge badge-muted">Pending</span></div>
+          <div class="prompt-card-body" style="color:var(--text-muted)">Built for spray foam companies. Qualifies job type (open/closed cell), substrate, sq footage, urgency. Jason's direct knowledge baked in...</div>
+          <div class="prompt-card-footer"><span class="badge badge-muted">Spray Foam</span><span class="badge badge-muted">Inbound</span></div>
         </div>
-
         <div class="prompt-card" style="border-style:dashed;opacity:0.5;">
-          <div class="prompt-card-header">
-            <div class="prompt-card-title">Plumbing Emergency Line</div>
-            <span class="badge badge-muted">Pending</span>
-          </div>
-          <div class="prompt-card-body" style="color:var(--text-muted)">
-            Pending build. Based on HVAC template with emergency triage logic added...
-          </div>
-          <div class="prompt-card-footer">
-            <span class="badge badge-muted">Plumbing</span>
-            <span class="badge badge-muted">Inbound</span>
-          </div>
+          <div class="prompt-card-header"><div class="prompt-card-title">Plumbing Emergency Line</div><span class="badge badge-muted">Pending</span></div>
+          <div class="prompt-card-body" style="color:var(--text-muted)">Pending build. Based on HVAC template with emergency triage logic added...</div>
+          <div class="prompt-card-footer"><span class="badge badge-muted">Plumbing</span><span class="badge badge-muted">Inbound</span></div>
         </div>
-
         <div class="prompt-card" style="border-style:dashed;opacity:0.5;">
-          <div class="prompt-card-header">
-            <div class="prompt-card-title">Outbound Follow-Up Caller</div>
-            <span class="badge badge-muted">Pending</span>
-          </div>
-          <div class="prompt-card-body" style="color:var(--text-muted)">
-            Pending build. Pro package feature — follow up on missed estimates, confirm upcoming jobs, request reviews...
-          </div>
-          <div class="prompt-card-footer">
-            <span class="badge badge-muted">All Niches</span>
-            <span class="badge badge-muted">Outbound</span>
-          </div>
+          <div class="prompt-card-header"><div class="prompt-card-title">Outbound Follow-Up Caller</div><span class="badge badge-muted">Pending</span></div>
+          <div class="prompt-card-body" style="color:var(--text-muted)">Pro package feature — follow up on missed estimates, confirm upcoming jobs, request reviews...</div>
+          <div class="prompt-card-footer"><span class="badge badge-muted">All Niches</span><span class="badge badge-muted">Outbound</span></div>
         </div>
       </div>
     </div>
@@ -1485,7 +751,7 @@
     <div class="tab-panel" id="tab-financials">
       <div class="section-header">
         <div class="section-title">Financials</div>
-        <div class="section-sub">// Revenue · Costs · Margin</div>
+        <div class="section-sub">// Revenue · Costs · Margin · Projections</div>
       </div>
 
       <div class="stat-grid">
@@ -1496,8 +762,8 @@
         </div>
         <div class="stat-card red">
           <div class="stat-label">Monthly OpEx</div>
-          <div class="stat-value">~$300</div>
-          <div class="stat-sub">Vapi + ElevenLabs + GHL</div>
+          <div class="stat-value">~$310</div>
+          <div class="stat-sub">Full stack, live</div>
         </div>
         <div class="stat-card blue">
           <div class="stat-label">Gross Margin</div>
@@ -1511,20 +777,38 @@
         </div>
       </div>
 
-      <div class="panel">
-        <div class="panel-header"><div class="panel-title">Monthly Cost Breakdown</div></div>
-        <table class="data-table">
-          <thead><tr><th>Service</th><th>Plan</th><th>Monthly Cost</th><th>Notes</th></tr></thead>
-          <tbody>
-            <tr><td>Vapi.ai</td><td>Pay-as-you-go</td><td style="color:var(--amber)">~$50–200</td><td>Scales with call volume</td></tr>
-            <tr><td>ElevenLabs</td><td>Creator</td><td style="color:var(--amber)">~$22–99</td><td>Voice generation</td></tr>
-            <tr><td>GoHighLevel</td><td>Agency</td><td style="color:var(--amber)">$97</td><td>White-labeled to clients</td></tr>
-            <tr><td>Claude API</td><td>Usage-based</td><td style="color:var(--amber)">~$20–50</td><td>Agent brain</td></tr>
-            <tr><td>Vercel + Domain</td><td>Free + $12/yr</td><td style="color:var(--green)">~$2</td><td>Hub hosting</td></tr>
-            <tr><td>Supabase</td><td>Free tier</td><td style="color:var(--green)">$0</td><td>Until 500MB</td></tr>
-            <tr style="font-weight:600"><td>Total</td><td></td><td style="color:var(--text)">~$200–400/mo</td><td></td></tr>
-          </tbody>
-        </table>
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Monthly Cost Breakdown</div></div>
+          <div class="panel-body">
+            <div class="cost-row"><span class="cost-name">Vapi.ai (call volume)</span><span class="cost-amt">$50–100</span></div>
+            <div class="cost-row"><span class="cost-name">ElevenLabs Starter</span><span class="cost-amt">$22</span></div>
+            <div class="cost-row"><span class="cost-name">GoHighLevel Agency</span><span class="cost-amt">$97</span></div>
+            <div class="cost-row"><span class="cost-name">Claude API</span><span class="cost-amt">$20–40</span></div>
+            <div class="cost-row"><span class="cost-name">Vercel Pro</span><span class="cost-amt">$20</span></div>
+            <div class="cost-row"><span class="cost-name">Supabase Pro</span><span class="cost-amt">$25</span></div>
+            <div class="cost-row"><span class="cost-name">Domain</span><span class="cost-amt green">$1–2</span></div>
+            <div class="cost-total">
+              <span class="cost-total-label">Total</span>
+              <span class="cost-total-amt">~$235–310/mo</span>
+            </div>
+            <div style="margin-top:12px;font-family:var(--font-mono);font-size:10px;color:var(--text-muted)">Note: Desktop + Vercel free tier is fine until first paying client.</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Revenue vs Profit</div></div>
+          <div class="panel-body" style="padding:0">
+            <div class="profit-row hdr"><div>Clients</div><div>Revenue</div><div>Op Cost</div><div></div><div>Profit</div></div>
+            <div class="profit-row"><div style="color:var(--text-dim)">1</div><div>$497</div><div style="color:var(--text-muted)">$310</div><div></div><div style="color:var(--text-dim)">$187</div></div>
+            <div class="profit-row"><div style="color:var(--text-dim)">2</div><div>$994</div><div style="color:var(--text-muted)">$320</div><div></div><div style="color:var(--green)">$674</div></div>
+            <div class="profit-row milestone"><div style="color:var(--green)">3★</div><div style="color:var(--green)">$1,491</div><div style="color:var(--text-muted)">$310</div><div><span class="badge badge-green" style="font-size:8px">Milestone</span></div><div style="color:var(--green)">Covers all costs</div></div>
+            <div class="profit-row"><div style="color:var(--text-dim)">5</div><div>$2,485</div><div style="color:var(--text-muted)">$350</div><div></div><div style="color:var(--green)">$2,135</div></div>
+            <div class="profit-row"><div style="color:var(--text-dim)">8</div><div>$3,976</div><div style="color:var(--text-muted)">$375</div><div></div><div style="color:var(--green)">$3,601</div></div>
+            <div class="profit-row" style="border-bottom:none"><div style="color:var(--blue)">10</div><div style="color:var(--blue)">$4,970</div><div style="color:var(--text-muted)">$400</div><div></div><div style="color:var(--blue);font-weight:700">$4,570</div></div>
+          </div>
+          <div style="padding:10px 16px;font-family:var(--font-mono);font-size:9px;color:var(--text-muted)">★ 3 clients at $497 = all operating costs covered. Everything after is profit on top of foam income.</div>
+        </div>
       </div>
     </div>
 
@@ -1543,9 +827,7 @@
         <div class="panel">
           <div class="panel-header"><div class="panel-title">Webhook Alerts</div><span class="badge badge-muted" id="webhook-badge">Inactive</span></div>
           <div class="panel-body">
-            <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);line-height:1.8;margin-bottom:16px">
-              When active, the hub fires a Discord message automatically on these events:
-            </p>
+            <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);line-height:1.8;margin-bottom:16px">When active, the hub fires a Discord message automatically on these events:</p>
             <table class="data-table">
               <thead><tr><th>Event</th><th>Channel</th><th>Status</th></tr></thead>
               <tbody>
@@ -1564,33 +846,15 @@
           <div class="panel-header"><div class="panel-title">Bot Status</div></div>
           <div class="panel-body">
             <div style="display:flex;flex-direction:column;gap:12px">
-
               <div class="team-card" style="opacity:0.5;border-style:dashed">
                 <div class="team-avatar" style="background:var(--blue-dim);color:var(--blue);font-size:18px">A</div>
-                <div class="team-info">
-                  <div class="team-name">Athena</div>
-                  <div class="team-role" style="margin-bottom:4px">AI Agent Bot</div>
-                  <div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted)">Commands: !status !task !report</div>
-                </div>
+                <div class="team-info"><div class="team-name">Athena</div><div class="team-role" style="margin-bottom:4px">AI Agent Bot</div><div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted)">Commands: !status !task !report</div></div>
                 <span class="badge badge-muted">No Token</span>
               </div>
-
               <div class="team-card" style="opacity:0.5;border-style:dashed">
                 <div class="team-avatar" style="background:var(--green-dim);color:var(--green);font-size:18px">C</div>
-                <div class="team-info">
-                  <div class="team-name">Celeste</div>
-                  <div class="team-role" style="margin-bottom:4px">AI Agent Bot</div>
-                  <div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted)">Commands: !status !task !report</div>
-                </div>
+                <div class="team-info"><div class="team-name">Celeste</div><div class="team-role" style="margin-bottom:4px">AI Agent Bot</div><div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted)">Commands: !status !task !report</div></div>
                 <span class="badge badge-muted">No Token</span>
-              </div>
-
-            </div>
-            <div style="margin-top:16px;padding:12px;background:var(--surface2);border-radius:6px;border:1px solid var(--border2)">
-              <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);line-height:1.8">
-                Bot tokens added in Settings when ready.<br>
-                Using Johnny's Discord server on go-live.<br>
-                Bot invite links generated per token.
               </div>
             </div>
           </div>
@@ -1613,23 +877,12 @@
       </div>
 
       <div class="grid-2" style="margin-bottom:18px">
-
         <div class="panel">
           <div class="panel-header"><div class="panel-title">Discord Integration</div></div>
           <div class="panel-body" style="display:flex;flex-direction:column;gap:14px">
-            <div class="form-group">
-              <div class="form-label">Webhook URL (from Johnny's server)</div>
-              <input class="form-input" id="discord-webhook-input" placeholder="https://discord.com/api/webhooks/..." style="width:100%;font-size:12px">
-              <div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted);margin-top:4px">Paste Johnny's webhook URL here to activate all Discord alerts</div>
-            </div>
-            <div class="form-group">
-              <div class="form-label">Athena Bot Token</div>
-              <input class="form-input" id="athena-token-input" placeholder="Discord bot token — add when ready" style="width:100%;font-size:12px" type="password">
-            </div>
-            <div class="form-group">
-              <div class="form-label">Celeste Bot Token</div>
-              <input class="form-input" id="celeste-token-input" placeholder="Discord bot token — add when ready" style="width:100%;font-size:12px" type="password">
-            </div>
+            <div class="form-group"><div class="form-label">Webhook URL (from Johnny's server)</div><input class="form-input" id="discord-webhook-input" placeholder="https://discord.com/api/webhooks/..." style="width:100%;font-size:12px"><div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted);margin-top:4px">Paste Johnny's webhook URL here to activate all Discord alerts</div></div>
+            <div class="form-group"><div class="form-label">Athena Bot Token</div><input class="form-input" id="athena-token-input" placeholder="Discord bot token — add when ready" style="width:100%;font-size:12px" type="password"></div>
+            <div class="form-group"><div class="form-label">Celeste Bot Token</div><input class="form-input" id="celeste-token-input" placeholder="Discord bot token — add when ready" style="width:100%;font-size:12px" type="password"></div>
             <button class="btn btn-primary" style="align-self:flex-start" onclick="saveDiscordSettings()">Save & Activate</button>
           </div>
         </div>
@@ -1637,26 +890,13 @@
         <div class="panel">
           <div class="panel-header"><div class="panel-title">Stack Config</div></div>
           <div class="panel-body" style="display:flex;flex-direction:column;gap:14px">
-            <div class="form-group">
-              <div class="form-label">Vapi.ai API Key</div>
-              <input class="form-input" placeholder="Paste when account is created" style="width:100%;font-size:12px" type="password">
-            </div>
-            <div class="form-group">
-              <div class="form-label">Supabase URL</div>
-              <input class="form-input" id="supabase-url-input" placeholder="https://xxxx.supabase.co — activates on go-live" style="width:100%;font-size:12px">
-            </div>
-            <div class="form-group">
-              <div class="form-label">Supabase Anon Key</div>
-              <input class="form-input" placeholder="Supabase public key" style="width:100%;font-size:12px" type="password">
-            </div>
-            <div class="form-group">
-              <div class="form-label">GoHighLevel API Key</div>
-              <input class="form-input" placeholder="GHL Agency key" style="width:100%;font-size:12px" type="password">
-            </div>
+            <div class="form-group"><div class="form-label">Vapi.ai API Key</div><input class="form-input" placeholder="Paste when account is created" style="width:100%;font-size:12px" type="password"></div>
+            <div class="form-group"><div class="form-label">Supabase URL</div><input class="form-input" id="supabase-url-input" placeholder="https://xxxx.supabase.co — activates on go-live" style="width:100%;font-size:12px"></div>
+            <div class="form-group"><div class="form-label">Supabase Anon Key</div><input class="form-input" placeholder="Supabase public key" style="width:100%;font-size:12px" type="password"></div>
+            <div class="form-group"><div class="form-label">GoHighLevel API Key</div><input class="form-input" placeholder="GHL Agency key" style="width:100%;font-size:12px" type="password"></div>
             <button class="btn btn-ghost" style="align-self:flex-start">Save Keys</button>
           </div>
         </div>
-
       </div>
 
       <div class="panel">
@@ -1665,34 +905,10 @@
           <table class="data-table">
             <thead><tr><th>Member</th><th>Role</th><th>Type</th><th>Access</th><th>Status</th></tr></thead>
             <tbody>
-              <tr>
-                <td style="font-weight:600">Jason</td>
-                <td>Owner / Operator</td>
-                <td><span class="badge badge-muted">Human</span></td>
-                <td><span class="badge badge-green">Full</span></td>
-                <td><span class="badge badge-green">Active</span></td>
-              </tr>
-              <tr>
-                <td style="font-weight:600">Athena</td>
-                <td>AI Agent — Build & Research</td>
-                <td><span class="badge badge-blue">Agent</span></td>
-                <td><span class="badge badge-amber">Tasks + Prompts</span></td>
-                <td><span class="badge badge-green">Active</span></td>
-              </tr>
-              <tr style="opacity:0.45">
-                <td style="font-weight:600">Johnny</td>
-                <td>Owner / Operator</td>
-                <td><span class="badge badge-muted">Human</span></td>
-                <td><span class="badge badge-muted">Full — Pending</span></td>
-                <td><span class="badge badge-muted">Go-Live</span></td>
-              </tr>
-              <tr style="opacity:0.45">
-                <td style="font-weight:600">Celeste</td>
-                <td>AI Agent — Operations</td>
-                <td><span class="badge badge-blue">Agent</span></td>
-                <td><span class="badge badge-muted">TBD</span></td>
-                <td><span class="badge badge-muted">Go-Live</span></td>
-              </tr>
+              <tr><td style="font-weight:600">Jason</td><td>Owner / Operator</td><td><span class="badge badge-muted">Human</span></td><td><span class="badge badge-green">Full</span></td><td><span class="badge badge-green">Active</span></td></tr>
+              <tr><td style="font-weight:600">Athena</td><td>AI Agent — Build & Research</td><td><span class="badge badge-blue">Agent</span></td><td><span class="badge badge-amber">Tasks + Prompts</span></td><td><span class="badge badge-green">Active</span></td></tr>
+              <tr style="opacity:0.45"><td style="font-weight:600">Johnny</td><td>Owner / Operator</td><td><span class="badge badge-muted">Human</span></td><td><span class="badge badge-muted">Full — Pending</span></td><td><span class="badge badge-muted">Go-Live</span></td></tr>
+              <tr style="opacity:0.45"><td style="font-weight:600">Celeste</td><td>AI Agent — Operations</td><td><span class="badge badge-blue">Agent</span></td><td><span class="badge badge-muted">TBD</span></td><td><span class="badge badge-muted">Go-Live</span></td></tr>
             </tbody>
           </table>
         </div>
@@ -1704,10 +920,7 @@
           <button class="btn btn-ghost" onclick="exportData()">Export All Data (JSON)</button>
           <button class="btn btn-ghost" onclick="clearData()" style="color:var(--red);border-color:var(--red-dim)">Clear All Local Data</button>
         </div>
-        <div style="padding:0 18px 16px;font-family:var(--font-mono);font-size:10px;color:var(--text-muted);line-height:1.8">
-          Export your data before migrating to Supabase on go-live.<br>
-          The import tool will be available in the cloud version.
-        </div>
+        <div style="padding:0 18px 16px;font-family:var(--font-mono);font-size:10px;color:var(--text-muted);line-height:1.8">Export your data before migrating to Supabase on go-live.<br>The import tool will be available in the cloud version.</div>
       </div>
     </div>
 
@@ -1729,8 +942,10 @@
             <li>AI phone receptionist — answers, qualifies, books</li>
             <li>Missed call text-back automation</li>
             <li>GHL CRM setup and configuration</li>
+            <li>Choice of any phone setup option (see Phone Setup tab)</li>
             <li>Done-for-you onboarding</li>
-            <li>Monthly check-in call</li>
+            <li>Monthly performance report</li>
+            <li>Up to 500 mins/mo call handling</li>
           </ul>
         </div>
         <div class="pkg-card featured">
@@ -1740,11 +955,13 @@
           <div class="pkg-desc">Full AI employee stack. Voice + automation + follow-up intelligence. Everything in Starter plus:</div>
           <ul class="pkg-features">
             <li>Everything in Starter</li>
+            <li>Smart team routing — sales, tech, maintenance</li>
+            <li>After-hours emergency escalation</li>
             <li>Outbound follow-up sequences</li>
             <li>Review request automation</li>
-            <li>Lead pipeline dashboard</li>
+            <li>ElevenLabs premium voice</li>
             <li>Bi-weekly optimization calls</li>
-            <li>Priority support</li>
+            <li>Unlimited call minutes</li>
           </ul>
         </div>
       </div>
@@ -1759,7 +976,7 @@
           <div class="addon-desc">Trades-focused. Client fills out job details — AI spits out a formatted proposal in minutes.</div>
         </div>
         <div class="addon-card">
-          <div class="addon-name">Renewal &amp; Upsell Alerts</div>
+          <div class="addon-name">Renewal & Upsell Alerts</div>
           <div class="addon-price">$400 setup + $150/mo</div>
           <div class="addon-desc">Monitors your client base and flags when someone is ready to renew or upgrade. Drafts the outreach automatically.</div>
         </div>
@@ -1794,39 +1011,18 @@
         <div class="wh-title">AI for Contractors Workshop</div>
         <div class="wh-sub">90-minute live Zoom session. Teach trades business owners how to use AI to answer calls, write estimates, follow up with leads, and win more jobs — without touching a single line of code.</div>
         <div class="price-row">
-          <div class="price-pill">
-            <span class="label">Live seat</span>
-            <span class="val">$150–$200</span>
-          </div>
-          <div class="price-pill">
-            <span class="label">Replay access</span>
-            <span class="val">$99</span>
-          </div>
-          <div class="price-pill">
-            <span class="label">Private team session</span>
-            <span class="val">$500–$800</span>
-          </div>
+          <div class="price-pill"><span class="label">Live seat</span><span class="val">$150–$200</span></div>
+          <div class="price-pill"><span class="label">Replay access</span><span class="val">$99</span></div>
+          <div class="price-pill"><span class="label">Private team session</span><span class="val">$500–$800</span></div>
         </div>
       </div>
 
       <div class="nt-section-label">What's Covered</div>
       <div class="workshop-topics">
-        <div class="topic-item">
-          <strong>AI Phone Receptionist</strong>
-          How to never miss a call again. Demo of a live voice agent booking an appointment.
-        </div>
-        <div class="topic-item">
-          <strong>Estimate Writing</strong>
-          AI-powered proposal tool built for trades. Job details in, formatted quote out.
-        </div>
-        <div class="topic-item">
-          <strong>Lead Follow-Up</strong>
-          Automated text sequences that recover dead leads without manual effort.
-        </div>
-        <div class="topic-item">
-          <strong>Customer Texts</strong>
-          Templates and automation for appointment reminders, reviews, and re-engagement.
-        </div>
+        <div class="topic-item"><strong>AI Phone Receptionist</strong>How to never miss a call again. Demo of a live voice agent booking an appointment.</div>
+        <div class="topic-item"><strong>Estimate Writing</strong>AI-powered proposal tool built for trades. Job details in, formatted quote out.</div>
+        <div class="topic-item"><strong>Lead Follow-Up</strong>Automated text sequences that recover dead leads without manual effort.</div>
+        <div class="topic-item"><strong>Customer Texts</strong>Templates and automation for appointment reminders, reviews, and re-engagement.</div>
       </div>
 
       <div class="flywheel-note">
@@ -1851,39 +1047,23 @@
         <div class="nt-team-card">
           <div class="nt-team-avatar av-green">J</div>
           <div class="nt-team-name">Jason</div>
-          <div class="nt-team-role">Founder / Closer</div>
+          <div class="nt-team-role">Founder / Employee</div>
           <div class="nt-team-desc">Makes all decisions. Closes all deals. Runs the workshops. The only person who has both the trades credibility and the AI knowledge to sell this to contractors who've never heard of any of it.</div>
-          <div class="nt-team-owns">
-            <div class="nt-team-owns-label">Owns</div>
-            <span class="owns-tag">Sales</span>
-            <span class="owns-tag">Workshop delivery</span>
-            <span class="owns-tag">Strategy</span>
-            <span class="owns-tag">Final approvals</span>
-          </div>
+          <div class="nt-team-owns"><div class="nt-team-owns-label">Owns</div><span class="owns-tag">Sales</span><span class="owns-tag">Workshop delivery</span><span class="owns-tag">Strategy</span><span class="owns-tag">Final approvals</span></div>
         </div>
         <div class="nt-team-card">
           <div class="nt-team-avatar av-blue">Jo</div>
           <div class="nt-team-name">Johnny</div>
-          <div class="nt-team-role">Operations / Builds</div>
-          <div class="nt-team-desc">Owns client onboarding and all technical builds. Sets up the voice agents, configures GHL, and makes sure every client's system actually works before it goes live. Also manages workshop logistics.</div>
-          <div class="nt-team-owns">
-            <div class="nt-team-owns-label">Owns</div>
-            <span class="owns-tag">Client builds</span>
-            <span class="owns-tag">Onboarding</span>
-            <span class="owns-tag">Workshop ops</span>
-          </div>
+          <div class="nt-team-role">Founder / Employee</div>
+          <div class="nt-team-desc">Owns client onboarding and all technical builds. Sets up the voice agents, configures GHL, and makes sure every client's system actually works before it goes live.</div>
+          <div class="nt-team-owns"><div class="nt-team-owns-label">Owns</div><span class="owns-tag">Client builds</span><span class="owns-tag">Onboarding</span><span class="owns-tag">Workshop ops</span></div>
         </div>
         <div class="nt-team-card">
           <div class="nt-team-avatar av-gold">C</div>
           <div class="nt-team-name">Celeste</div>
           <div class="nt-team-role">Pipeline / Retention</div>
-          <div class="nt-team-desc">Runs the pipeline and owns client retention. Monitors the Renewal &amp; Upsell module against all active clients — when the signal fires, she pulls the trigger on outreach and flags upsell opportunities to Jason.</div>
-          <div class="nt-team-owns">
-            <div class="nt-team-owns-label">Owns</div>
-            <span class="owns-tag">Pipeline tracking</span>
-            <span class="owns-tag">Client follow-up</span>
-            <span class="owns-tag">Upsell flags</span>
-          </div>
+          <div class="nt-team-desc">Runs the pipeline and owns client retention. Monitors the Renewal & Upsell module — when the signal fires, she pulls the trigger on outreach and flags upsell opportunities to Jason.</div>
+          <div class="nt-team-owns"><div class="nt-team-owns-label">Owns</div><span class="owns-tag">Pipeline tracking</span><span class="owns-tag">Client follow-up</span><span class="owns-tag">Upsell flags</span></div>
         </div>
       </div>
 
@@ -1891,41 +1071,11 @@
 
       <div class="nt-section-label">How It All Works Together</div>
       <div class="flywheel">
-        <div class="fw-step">
-          <div class="fw-num">1</div>
-          <div class="fw-content">
-            <div class="fw-title">Workshop → Lead</div>
-            <div class="fw-desc">Jason runs a live AI for Contractors session. 10 trades guys show up, pay $150–200/seat. They see a live demo of an AI answering a call and booking a job. 2–3 of them want it done for them.</div>
-          </div>
-        </div>
-        <div class="fw-step">
-          <div class="fw-num">2</div>
-          <div class="fw-content">
-            <div class="fw-title">Lead → Starter Client</div>
-            <div class="fw-desc">Jason closes them on the Starter package ($497/mo). Johnny handles the entire build — voice agent, GHL, automations. Client doesn't touch anything technical.</div>
-          </div>
-        </div>
-        <div class="fw-step">
-          <div class="fw-num">3</div>
-          <div class="fw-content">
-            <div class="fw-title">Starter → Pro Upsell</div>
-            <div class="fw-desc">After 60–90 days, the Renewal &amp; Upsell module flags clients who are getting results and are ready for more. Celeste sends the outreach. Jason closes the upgrade to Pro ($797/mo).</div>
-          </div>
-        </div>
-        <div class="fw-step">
-          <div class="fw-num">4</div>
-          <div class="fw-content">
-            <div class="fw-title">Pro → Add-On Modules</div>
-            <div class="fw-desc">Pro clients see the module menu. If they write a lot of proposals, they add the Proposal Generator. If they're losing clients without knowing it, they add Renewal Alerts. Each module is incremental revenue with no new client acquisition cost.</div>
-          </div>
-        </div>
-        <div class="fw-step">
-          <div class="fw-num">5</div>
-          <div class="fw-content">
-            <div class="fw-title">Results → Referrals → More Workshops</div>
-            <div class="fw-desc">Happy clients refer other contractors. Jason brings them into the next workshop. The cycle repeats. Every workshop is a paid funnel.</div>
-          </div>
-        </div>
+        <div class="fw-step"><div class="fw-num">1</div><div class="fw-content"><div class="fw-title">Workshop → Lead</div><div class="fw-desc">Jason runs a live AI for Contractors session. 10 trades guys show up, pay $150–200/seat. They see a live demo of an AI answering a call and booking a job. 2–3 of them want it done for them.</div></div></div>
+        <div class="fw-step"><div class="fw-num">2</div><div class="fw-content"><div class="fw-title">Lead → Starter Client</div><div class="fw-desc">Jason closes them on the Starter package ($497/mo). Johnny handles the entire build — voice agent, GHL, automations. Client doesn't touch anything technical.</div></div></div>
+        <div class="fw-step"><div class="fw-num">3</div><div class="fw-content"><div class="fw-title">Starter → Pro Upsell</div><div class="fw-desc">After 60–90 days, the Renewal & Upsell module flags clients who are getting results and are ready for more. Celeste sends the outreach. Jason closes the upgrade to Pro ($797/mo).</div></div></div>
+        <div class="fw-step"><div class="fw-num">4</div><div class="fw-content"><div class="fw-title">Pro → Add-On Modules</div><div class="fw-desc">Pro clients see the module menu. Each module is incremental revenue with no new client acquisition cost.</div></div></div>
+        <div class="fw-step"><div class="fw-num">5</div><div class="fw-content"><div class="fw-title">Results → Referrals → More Workshops</div><div class="fw-desc">Happy clients refer other contractors. Jason brings them into the next workshop. The cycle repeats. Every workshop is a paid funnel.</div></div></div>
       </div>
 
       <hr class="divider">
@@ -1941,26 +1091,357 @@
       </div>
     </div>
 
+    <!-- ══════════════════════════════
+         PLAYBOOK TABS — NEW
+    ══════════════════════════════ -->
+
+    <!-- ══ PHONE SETUP ══ -->
+    <div class="tab-panel new-tab-content" id="tab-phone">
+      <div class="section-header">
+        <div class="section-title">Phone Setup</div>
+        <div class="section-sub">// 5 options — client picks what fits their business</div>
+      </div>
+
+      <div class="pb-callout green">
+        <strong>Your biggest differentiator:</strong> Competitors force clients into one system. You walk in and say "we work around your business, not the other way around." That alone closes deals others lose.
+      </div>
+
+      <div class="phone-option">
+        <div class="po-header">
+          <div class="po-num">1</div>
+          <div class="po-title">Conditional Call Forwarding</div>
+        </div>
+        <div class="po-desc">Their existing number stays exactly the same. Nothing changes about how they use their phone. When they don't answer in 3–4 rings, the call automatically forwards to Vapi. Customers never know anything changed.</div>
+        <div class="po-tags"><span class="badge badge-green">Zero disruption</span><span class="badge badge-blue">Keeps existing number</span><span class="badge badge-muted">Easiest setup</span></div>
+      </div>
+
+      <div class="phone-option">
+        <div class="po-header">
+          <div class="po-num">2</div>
+          <div class="po-title">Dedicated 918 Vapi Number</div>
+        </div>
+        <div class="po-desc">A clean dedicated Tulsa 918 area code number for all business calls. Put it on their website, truck wrap, Google Business Profile. Their personal cell stays private. All business calls go to the AI — only qualified leads get forwarded to them.</div>
+        <div class="po-tags"><span class="badge badge-blue">Professional</span><span class="badge badge-amber">Personal/business split</span><span class="badge badge-green">~$2/mo</span></div>
+      </div>
+
+      <div class="phone-option recommended">
+        <div class="po-header">
+          <div class="po-num">3</div>
+          <div class="po-title">After Hours Only</div>
+          <span class="po-rec-tag">Recommended for trial</span>
+        </div>
+        <div class="po-desc">Business hours — phone rings normally. After 5pm, weekends, job site — AI takes over automatically. Catches every call they were already missing anyway. Zero change to daytime workflow. Best for skeptical clients and the free trial.</div>
+        <div class="po-tags"><span class="badge badge-green">Best for free trial</span><span class="badge badge-blue">Easiest sell</span><span class="badge badge-muted">No daytime disruption</span></div>
+      </div>
+
+      <div class="phone-option">
+        <div class="po-header">
+          <div class="po-num">4</div>
+          <div class="po-title">Google Voice to Vapi</div>
+        </div>
+        <div class="po-desc">Set up a free Google Voice number, point it to Vapi, update their Google Business Profile. Most trade leads come from Google searches — this captures every single one. Their real number never touched. Free to set up.</div>
+        <div class="po-tags"><span class="badge badge-green">Free number</span><span class="badge badge-blue">Captures Google traffic</span><span class="badge badge-muted">Real number untouched</span></div>
+      </div>
+
+      <div class="phone-option">
+        <div class="po-header">
+          <div class="po-num">5</div>
+          <div class="po-title">Smart Team Routing</div>
+          <span style="margin-left:auto"><span class="badge badge-amber">Pro Tier</span></span>
+        </div>
+        <div class="po-desc">The AI doesn't just answer — it routes to the right person based on what the caller needs. New lead? Sales guy gets a text immediately. System broken? On-call tech gets paged. Maintenance contract? Coordinator notified. Built for companies with multiple team members.</div>
+        <div class="po-tags"><span class="badge badge-amber">Multi-person teams</span><span class="badge badge-blue">Sales / Tech / Maintenance</span><span class="badge badge-muted">After hours or 24/7</span></div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="nt-section-label">Smart Routing — Call Routing Logic</div>
+      <div class="panel">
+        <table class="data-table">
+          <thead><tr><th>Caller Says</th><th>AI Routes To</th><th>How They're Notified</th></tr></thead>
+          <tbody>
+            <tr><td>"I need a quote"</td><td><span class="badge badge-green">Salesman</span></td><td style="color:var(--text-dim)">Instant text with lead info + transcript</td></tr>
+            <tr><td>"My system is broken"</td><td><span class="badge badge-red">On-call Tech</span></td><td style="color:var(--text-dim)">Emergency page + optional call transfer</td></tr>
+            <tr><td>"I have a maintenance contract"</td><td><span class="badge badge-blue">Maintenance</span></td><td style="color:var(--text-dim)">Coordinator notified via text</td></tr>
+            <tr><td>"I need to speak to someone now"</td><td><span class="badge badge-amber">Escalation</span></td><td style="color:var(--text-dim)">Owner gets paged immediately</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pb-callout amber" style="margin-top:20px">
+        <strong>Script for a skeptical client:</strong> "Your number stays exactly the same. Nothing changes about how you use your phone. All we're doing is making sure when you can't answer, somebody does. Right now when you miss a call that lead is gone forever. This just catches it for you."
+      </div>
+    </div>
+
+    <!-- ══ ONBOARDING FLOW ══ -->
+    <div class="tab-panel new-tab-content" id="tab-onboarding">
+      <div class="section-header">
+        <div class="section-title">Onboarding</div>
+        <div class="section-sub">// From signed to live — step by step</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Onboarding Steps</div></div>
+          <div class="panel-body">
+            <div class="ob-step"><div class="ob-num">1</div><div><div class="ob-title">Discovery Call</div><div class="ob-desc">Get their numbers — missed calls/week, avg job value, team size, pain points. This becomes your build brief. Come back to Claude with those answers and the Vapi script gets written same day.</div></div></div>
+            <div class="ob-step"><div class="ob-num">2</div><div><div class="ob-title">Pick Phone Setup Option</div><div class="ob-desc">Walk them through all 5 options (see Phone Setup tab). Let them choose what fits. Most new clients pick Option 3 (after hours only) to start — lowest risk, easiest yes.</div></div></div>
+            <div class="ob-step"><div class="ob-num">3</div><div><div class="ob-title">Team Roster (if Option 5)</div><div class="ob-desc">If they pick smart routing, collect names, roles, and contact numbers for everyone the AI needs to know — sales, tech, maintenance. One person per role minimum.</div></div></div>
+            <div class="ob-step"><div class="ob-num">4</div><div><div class="ob-title">Build the Agent</div><div class="ob-desc">Claude writes the script tailored to their niche. You paste it into Vapi. ElevenLabs voice selected. GHL webhook connected. Takes one afternoon.</div></div></div>
+            <div class="ob-step"><div class="ob-num">5</div><div><div class="ob-title">Set Up Call Forwarding</div><div class="ob-desc">Based on their chosen option. Usually takes 5–15 minutes. Carrier settings or a short dial code. Walk them through it on the phone if needed.</div></div></div>
+            <div class="ob-step"><div class="ob-num">6</div><div><div class="ob-title">Test — 5 Calls Minimum</div><div class="ob-desc">Call the number yourself as different types of callers. Walk through every scenario. Tweak the script until it sounds completely natural. Don't go live until it passes.</div></div></div>
+            <div class="ob-step"><div class="ob-num">7</div><div><div class="ob-title">Go Live</div><div class="ob-desc">Flip the switch. Client gets a confirmation text. You both watch the first real calls come in. Check GHL to confirm leads are logging correctly.</div></div></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="panel" style="margin-bottom:18px">
+            <div class="panel-header"><div class="panel-title">Discovery Questions</div></div>
+            <div class="panel-body">
+              <div style="font-size:12px;color:var(--text-dim);line-height:2.2">
+                <div style="padding:4px 0;border-bottom:1px solid var(--border)">→ How many calls do you get per day?</div>
+                <div style="padding:4px 0;border-bottom:1px solid var(--border)">→ How many do you miss after hours or on job sites?</div>
+                <div style="padding:4px 0;border-bottom:1px solid var(--border)">→ What's your average job worth?</div>
+                <div style="padding:4px 0;border-bottom:1px solid var(--border)">→ Biggest pain — missed calls, no-shows, tire kickers?</div>
+                <div style="padding:4px 0;border-bottom:1px solid var(--border)">→ How many people are on your team?</div>
+                <div style="padding:4px 0;border-bottom:1px solid var(--border)">→ Do you have someone dedicated to sales?</div>
+                <div style="padding:4px 0;border-bottom:1px solid var(--border)">→ What do you want the AI to say when it answers?</div>
+                <div style="padding:4px 0">→ What questions should it ask every caller?</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header"><div class="panel-title">Setup Time Estimate</div></div>
+            <div class="panel-body">
+              <table class="data-table">
+                <thead><tr><th>Task</th><th>Time</th></tr></thead>
+                <tbody>
+                  <tr><td>Write Vapi script (Claude does this)</td><td style="color:var(--green);font-family:var(--font-mono)">30 min</td></tr>
+                  <tr><td>Set up Vapi agent</td><td style="color:var(--green);font-family:var(--font-mono)">20 min</td></tr>
+                  <tr><td>GHL webhook + workflow</td><td style="color:var(--green);font-family:var(--font-mono)">30 min</td></tr>
+                  <tr><td>Call forwarding setup</td><td style="color:var(--green);font-family:var(--font-mono)">10 min</td></tr>
+                  <tr><td>Testing + tweaks</td><td style="color:var(--green);font-family:var(--font-mono)">30 min</td></tr>
+                  <tr><td style="font-weight:600;color:var(--text)">Total</td><td style="color:var(--amber);font-family:var(--font-mono);font-weight:600">~2 hours</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SALES STRATEGY ══ -->
+    <div class="tab-panel new-tab-content" id="tab-sales">
+      <div class="section-header">
+        <div class="section-title">Sales Strategy</div>
+        <div class="section-sub">// How to get clients — no fluff, just the play</div>
+      </div>
+
+      <div class="pb-callout amber">
+        <strong>Don't sell AI. Sell recovered revenue.</strong> The math does the work — you just show them the money they're leaving on the ground every single week.
+      </div>
+
+      <div class="grid-2" style="margin-bottom:18px">
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">The One-Sentence Pitch</div></div>
+          <div class="panel-body">
+            <div style="font-family:var(--font-head);font-size:18px;font-weight:700;color:var(--green);line-height:1.5;letter-spacing:0.02em">"I set up an AI that answers your phones 24/7, qualifies the lead, and books the appointment. You stop missing calls. First month is basically free to prove it works."</div>
+            <div style="margin-top:14px;font-size:12px;color:var(--text-dim);line-height:1.6">No tech talk. No AI jargon. Trades trust plain language.</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Your Unfair Advantage</div></div>
+          <div class="panel-body">
+            <div style="font-size:13px;color:var(--text-dim);line-height:2">
+              <div style="padding:5px 0;border-bottom:1px solid var(--border);display:flex;gap:8px"><span style="color:var(--green)">›</span><span><strong style="color:var(--text)">You ARE trades.</strong> You run an E-30, know Enverge, live job sites. No tech company can say that.</span></div>
+              <div style="padding:5px 0;border-bottom:1px solid var(--border);display:flex;gap:8px"><span style="color:var(--green)">›</span><span><strong style="color:var(--text)">Tulsa-first.</strong> Local trust beats a faceless SaaS company every time.</span></div>
+              <div style="padding:5px 0;border-bottom:1px solid var(--border);display:flex;gap:8px"><span style="color:var(--green)">›</span><span><strong style="color:var(--text)">5 phone options.</strong> Competitors force one setup. You adapt to the client.</span></div>
+              <div style="padding:5px 0;display:flex;gap:8px"><span style="color:var(--green)">›</span><span><strong style="color:var(--text)">Free trial first.</strong> Zero risk to them. Proof before payment.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-bottom:18px">
+        <div class="panel-header"><div class="panel-title">The Math That Sells Itself</div></div>
+        <table class="data-table">
+          <thead><tr><th>Missed Calls/Week</th><th>Close Rate</th><th>Avg Job Value</th><th>Revenue Lost/Month</th><th>Your Fee</th><th>ROI</th></tr></thead>
+          <tbody>
+            <tr><td>10</td><td>30%</td><td>$800</td><td style="color:var(--red)">$9,600 lost</td><td style="color:var(--green)">$497/mo</td><td style="color:var(--green)">19x</td></tr>
+            <tr><td>5</td><td>30%</td><td>$800</td><td style="color:var(--red)">$4,800 lost</td><td style="color:var(--green)">$497/mo</td><td style="color:var(--green)">10x</td></tr>
+            <tr><td>3</td><td>30%</td><td>$800</td><td style="color:var(--red)">$2,880 lost</td><td style="color:var(--green)">$497/mo</td><td style="color:var(--green)">6x</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Warmest Leads First</div></div>
+          <div class="panel-body">
+            <div style="font-size:12px;color:var(--text-dim);line-height:2.2">
+              <div style="padding:4px 0;border-bottom:1px solid var(--border)">→ <strong style="color:var(--text)">Your boss</strong> — free trial, zero risk, you know the business inside out</div>
+              <div style="padding:4px 0;border-bottom:1px solid var(--border)">→ <strong style="color:var(--text)">Other spray foam guys</strong> you've worked job sites with</div>
+              <div style="padding:4px 0;border-bottom:1px solid var(--border)">→ <strong style="color:var(--text)">Personal network</strong> — anyone who owns a trade business</div>
+              <div style="padding:4px 0">→ <strong style="color:var(--text)">Referrals from client #1</strong> — every trade owner knows 10 others</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Cold Outreach — Tulsa</div></div>
+          <div class="panel-body">
+            <div style="font-size:12px;color:var(--text-dim);line-height:2.2">
+              <div style="padding:4px 0;border-bottom:1px solid var(--border)">→ Google "HVAC Tulsa" — call ones with no reviews or bad reviews</div>
+              <div style="padding:4px 0;border-bottom:1px solid var(--border)">→ Facebook groups for Tulsa contractors</div>
+              <div style="padding:4px 0;border-bottom:1px solid var(--border)">→ Next Door app — trades advertise there constantly</div>
+              <div style="padding:4px 0;border-bottom:1px solid var(--border)">→ Drive around — photograph truck wraps = prospect list</div>
+              <div style="padding:4px 0">→ TikTok/Instagram — raw phone video, trades trust authenticity</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:4px">
+        <div class="panel-header"><div class="panel-title">30-Day Plan</div></div>
+        <div class="panel-body">
+          <div class="pb-timeline">
+            <div class="pb-tl-item"><div class="pb-tl-week">This Week</div><div class="pb-tl-title">Ask your boss</div><div class="pb-tl-desc">Free trial offer. Get his numbers. Come back to Claude — Vapi script written same day. Zero cost to run the trial (~$22).</div></div>
+            <div class="pb-tl-item"><div class="pb-tl-week">Week 2</div><div class="pb-tl-title">Talk to 5 warm contacts</div><div class="pb-tl-desc">Personal network only. No cold calls yet. Just conversations — "I built something, want to see it?"</div></div>
+            <div class="pb-tl-item"><div class="pb-tl-week">Week 3</div><div class="pb-tl-title">Cold call 10 Tulsa businesses</div><div class="pb-tl-desc">HVAC, plumbers, roofers. Lead with the math, not the technology.</div></div>
+            <div class="pb-tl-item" style="padding-bottom:0"><div class="pb-tl-week">Week 4</div><div class="pb-tl-title">Convert trial to paying client</div><div class="pb-tl-desc">Show the data. Leads captured, revenue recovered. Ask for the $497. That's client #1.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ HOW IT RUNS ══ -->
+    <div class="tab-panel new-tab-content" id="tab-howit">
+      <div class="section-header">
+        <div class="section-title">How It Runs</div>
+        <div class="section-sub">// Daily operations — what you do, what runs itself</div>
+      </div>
+
+      <div class="nt-section-label">Live Call Flow</div>
+      <div class="panel" style="margin-bottom:18px">
+        <div class="panel-body">
+          <div class="call-flow">
+            <div class="cf-step"><div class="cf-icon">📞</div><div>Customer calls</div><div class="cf-label">Business number</div></div>
+            <div class="cf-arrow">→</div>
+            <div class="cf-step"><div class="cf-icon">🔀</div><div>Forwarded</div><div class="cf-label">Based on option chosen</div></div>
+            <div class="cf-arrow">→</div>
+            <div class="cf-step"><div class="cf-icon">🤖</div><div>Vapi answers</div><div class="cf-label">Qualifies + books</div></div>
+            <div class="cf-arrow">→</div>
+            <div class="cf-step"><div class="cf-icon">📋</div><div>GHL logs lead</div><div class="cf-label">Auto follow-up fires</div></div>
+            <div class="cf-arrow">→</div>
+            <div class="cf-step"><div class="cf-icon">📱</div><div>Client gets text</div><div class="cf-label">Instant summary</div></div>
+            <div class="cf-arrow">→</div>
+            <div class="cf-step"><div class="cf-icon">👁️</div><div>You see it</div><div class="cf-label">In your hub</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Your Daily Job (5 Minutes)</div></div>
+          <div class="panel-body">
+            <div style="font-size:13px;color:var(--text-dim);line-height:2.2">
+              <div style="padding:5px 0;border-bottom:1px solid var(--border);display:flex;gap:8px"><span style="color:var(--green)">◈</span> Check hub — how many calls came in overnight</div>
+              <div style="padding:5px 0;border-bottom:1px solid var(--border);display:flex;gap:8px"><span style="color:var(--green)">◈</span> Scan lead quality — any issues to flag to client</div>
+              <div style="padding:5px 0;border-bottom:1px solid var(--border);display:flex;gap:8px"><span style="color:var(--green)">◈</span> Check task queue — anything Athena flagged</div>
+              <div style="padding:5px 0;display:flex;gap:8px"><span style="color:var(--green)">◈</span> That's it — unless something breaks</div>
+            </div>
+            <div class="pb-callout green" style="margin-top:16px;margin-bottom:0">
+              Once it's built for one client it takes <strong>one afternoon</strong> to replicate for the next. The system does the labor. You collect the monthly fee.
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">What Breaks + How to Fix It</div></div>
+          <div class="panel-body" style="padding:0">
+            <div class="bfix-row" style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;color:var(--text-muted);text-transform:uppercase;background:var(--surface2)"><div>Problem</div><div>Fix</div></div>
+            <div class="bfix-row"><div class="bfix-prob">AI gives wrong answer</div><div class="bfix-fix">Update Vapi script — live in 2 min</div></div>
+            <div class="bfix-row"><div class="bfix-prob">Client wants different hours</div><div class="bfix-fix">Update schedule in Vapi settings</div></div>
+            <div class="bfix-row"><div class="bfix-prob">Call volume spikes</div><div class="bfix-fix">Nothing — Vapi scales automatically</div></div>
+            <div class="bfix-row"><div class="bfix-prob">Add a team member to routing</div><div class="bfix-fix">Update routing logic in Vapi agent</div></div>
+            <div class="bfix-row"><div class="bfix-prob">GHL workflow stops firing</div><div class="bfix-fix">Check webhook URL — quick reconnect</div></div>
+            <div class="bfix-row" style="border-bottom:none"><div class="bfix-prob">Client wants to change number</div><div class="bfix-fix">Update forwarding, 10 min</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pb-callout blue" style="margin-top:4px">
+        <strong>Most issues are 10-minute fixes.</strong> Nothing requires being on-site. Once built, a client's system can run untouched for months with just your 5-minute daily check.
+      </div>
+    </div>
+
+    <!-- ══ INFRASTRUCTURE ══ -->
+    <div class="tab-panel new-tab-content" id="tab-infra">
+      <div class="section-header">
+        <div class="section-title">Infrastructure</div>
+        <div class="section-sub">// Desktop vs real server — when to upgrade</div>
+      </div>
+
+      <div class="grid-2" style="margin-bottom:18px">
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Current Setup (Free Trial)</div><span class="badge badge-green">Works Fine</span></div>
+          <div class="panel-body">
+            <div style="font-size:13px;color:var(--text-dim);line-height:2">
+              <div style="padding:4px 0;border-bottom:1px solid var(--border);display:flex;gap:8px"><span style="color:var(--green)">✓</span> Your desktop IS the repo</div>
+              <div style="padding:4px 0;border-bottom:1px solid var(--border);display:flex;gap:8px"><span style="color:var(--green)">✓</span> Vercel free tier hosts the hub publicly</div>
+              <div style="padding:4px 0;border-bottom:1px solid var(--border);display:flex;gap:8px"><span style="color:var(--green)">✓</span> Browser localStorage for data</div>
+              <div style="padding:4px 0;border-bottom:1px solid var(--border);display:flex;gap:8px"><span style="color:var(--green)">✓</span> Fine for you personally + free trial</div>
+              <div style="padding:4px 0;display:flex;gap:8px"><span style="color:var(--red)">✗</span> Client-facing portals won't work yet</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Production Setup (Paying Clients)</div><span class="badge badge-amber">Before Client #2</span></div>
+          <div class="panel-body">
+            <div style="font-size:13px;color:var(--text-dim);line-height:2">
+              <div style="padding:4px 0;border-bottom:1px solid var(--border);display:flex;gap:8px"><span style="color:var(--green)">✓</span> Supabase Pro — real database, auth, storage</div>
+              <div style="padding:4px 0;border-bottom:1px solid var(--border);display:flex;gap:8px"><span style="color:var(--green)">✓</span> Vercel Pro — custom domain, faster deploys</div>
+              <div style="padding:4px 0;border-bottom:1px solid var(--border);display:flex;gap:8px"><span style="color:var(--green)">✓</span> Client data stored securely off-device</div>
+              <div style="padding:4px 0;border-bottom:1px solid var(--border);display:flex;gap:8px"><span style="color:var(--green)">✓</span> Johnny + Celeste can access simultaneously</div>
+              <div style="padding:4px 0;display:flex;gap:8px"><span style="color:var(--green)">✓</span> Professional credibility with clients</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-bottom:18px">
+        <div class="panel-header"><div class="panel-title">When to Upgrade</div></div>
+        <table class="data-table">
+          <thead><tr><th>Stage</th><th>Setup</th><th>What You Need</th></tr></thead>
+          <tbody>
+            <tr><td>Right now — free trial</td><td><span class="badge badge-green">Desktop + Vercel free</span></td><td style="color:var(--text-dim)">Nothing extra</td></tr>
+            <tr><td>First paying client</td><td><span class="badge badge-amber">Add Supabase properly</span></td><td style="color:var(--text-dim)">Connect Supabase, upgrade Vercel</td></tr>
+            <tr><td>Client 2–3</td><td><span class="badge badge-amber">Full production stack</span></td><td style="color:var(--text-dim)">Everything connected, all APIs live</td></tr>
+            <tr><td>Client 5+</td><td><span class="badge badge-green">Profitable — reinvest</span></td><td style="color:var(--text-dim)">Better tooling, dedicated domain</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pb-callout green">
+        <strong>Don't over-build before you have revenue.</strong> The current setup is fine until money is moving. Get client #1, then invest in the infrastructure. 3 clients at $497 = $1,491/mo — that covers your entire operating cost with room left over.
+      </div>
+    </div>
+
   </div><!-- /main -->
 </div><!-- /layout -->
 
 <script>
 // ═══════════════════════════════════════════════════════════════
 // DATA LAYER — swap get/set methods to Supabase calls on go-live
-// All app logic reads/writes ONLY through this object.
-// Migration: replace localStorage calls with Supabase REST API.
 // ═══════════════════════════════════════════════════════════════
 const DataLayer = {
-  get(key) {
-    try { return JSON.parse(localStorage.getItem('gcai_' + key)) || []; }
-    catch { return []; }
-  },
-  set(key, val) {
-    localStorage.setItem('gcai_' + key, JSON.stringify(val));
-  }
+  get(key) { try { return JSON.parse(localStorage.getItem('gcai_' + key)) || []; } catch { return []; } },
+  set(key, val) { localStorage.setItem('gcai_' + key, JSON.stringify(val)); }
 };
 
-// ── STATE ──
 let clients   = DataLayer.get('clients');
 let tasks     = DataLayer.get('tasks');
 let prospects = DataLayer.get('prospects');
@@ -1968,8 +1449,7 @@ let prospects = DataLayer.get('prospects');
 // ── CLOCK ──
 setInterval(() => {
   const now = new Date();
-  document.getElementById('clock').textContent =
-    now.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+  document.getElementById('clock').textContent = now.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
 }, 1000);
 
 // ── NAV ──
@@ -1983,7 +1463,7 @@ function showTab(name, el) {
 
 // ── STATS ──
 function refreshStats() {
-  const mrr = clients.reduce((s, c) => s + (c.pkg === 'Pro' ? 1500 : 750), 0);
+  const mrr = clients.reduce((s, c) => s + (c.pkg === 'Pro' ? 797 : 497), 0);
   const openTasks = tasks.filter(t => t.status !== 'Done').length;
   document.getElementById('stat-mrr').textContent = '$' + mrr.toLocaleString();
   document.getElementById('stat-clients').textContent = clients.length;
@@ -1993,8 +1473,8 @@ function refreshStats() {
   document.getElementById('rev-fill').style.width = pct + '%';
   document.getElementById('rev-current').textContent = '$' + mrr.toLocaleString() + ' MRR';
   document.getElementById('fin-mrr').textContent = '$' + mrr.toLocaleString();
-  document.getElementById('fin-margin').textContent = '$' + Math.max(0, mrr - 300).toLocaleString();
-  const setupFees = clients.reduce((s, c) => s + (c.pkg === 'Pro' ? 1000 : 500), 0);
+  document.getElementById('fin-margin').textContent = '$' + Math.max(0, mrr - 310).toLocaleString();
+  const setupFees = clients.reduce((s, c) => s + (c.pkg === 'Pro' ? 500 : 0), 0);
   document.getElementById('fin-setup').textContent = '$' + setupFees.toLocaleString();
   if (document.getElementById('client-mrr-label'))
     document.getElementById('client-mrr-label').textContent = 'MRR: $' + mrr.toLocaleString();
@@ -2011,23 +1491,20 @@ function addClient() {
   DataLayer.set('clients', clients);
   document.getElementById('c-name').value = '';
   document.getElementById('c-niche').value = '';
-  discordAlert(`📋 New client onboarded: **${client.name}** (${client.pkg} — $${client.pkg==='Pro'?'1,500':'750'}/mo)`, 'client');
+  discordAlert(`📋 New client onboarded: **${client.name}** (${client.pkg} — $${client.pkg==='Pro'?'797':'497'}/mo)`, 'client');
   renderClients();
   refreshStats();
 }
 
 function renderClients() {
   const tbody = document.getElementById('client-tbody');
-  if (!clients.length) {
-    tbody.innerHTML = `<tr><td colspan="7"><div class="empty-state"><div class="empty-icon">◻</div><div class="empty-label">No clients yet</div></div></td></tr>`;
-    return;
-  }
+  if (!clients.length) { tbody.innerHTML = `<tr><td colspan="7"><div class="empty-state"><div class="empty-icon">◻</div><div class="empty-label">No clients yet</div></div></td></tr>`; return; }
   tbody.innerHTML = clients.map(c => `
     <tr>
       <td style="font-weight:600">${c.name}</td>
       <td><span class="badge badge-muted">${c.niche || '—'}</span></td>
       <td>${c.pkg}</td>
-      <td style="color:var(--green);font-family:var(--font-mono)">$${c.pkg==='Pro'?'1,500':'750'}/mo</td>
+      <td style="color:var(--green);font-family:var(--font-mono)">$${c.pkg==='Pro'?'797':'497'}/mo</td>
       <td style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim)">${c.date}</td>
       <td><span class="badge badge-green">Active</span></td>
       <td><button class="btn btn-ghost" style="padding:4px 10px;font-size:11px" onclick="removeClient(${c.id})">Remove</button></td>
@@ -2051,7 +1528,6 @@ function addTask() {
   tasks.push(task);
   DataLayer.set('tasks', tasks);
   document.getElementById('t-desc').value = '';
-
   discordAlert(`⬡ New task assigned to **${task.owner}**: ${task.desc} [${task.priority}]`, 'task');
   renderTasks();
   refreshStats();
@@ -2059,28 +1535,17 @@ function addTask() {
 
 function completeTask(id) {
   const t = tasks.find(t => t.id === id);
-  if (t) {
-    t.status = t.status === 'Done' ? 'Open' : 'Done';
-    if (t.status === 'Done') discordAlert(`✅ Task completed by **${t.owner}**: ${t.desc}`, 'task');
-  }
+  if (t) { t.status = t.status === 'Done' ? 'Open' : 'Done'; if (t.status === 'Done') discordAlert(`✅ Task completed by **${t.owner}**: ${t.desc}`, 'task'); }
   DataLayer.set('tasks', tasks);
   renderTasks();
   refreshStats();
 }
 
-function removeTask(id) {
-  tasks = tasks.filter(t => t.id !== id);
-  DataLayer.set('tasks', tasks);
-  renderTasks();
-  refreshStats();
-}
+function removeTask(id) { tasks = tasks.filter(t => t.id !== id); DataLayer.set('tasks', tasks); renderTasks(); refreshStats(); }
 
 function renderTasks() {
   const tbody = document.getElementById('task-tbody');
-  if (!tasks.length) {
-    tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><div class="empty-icon">⬡</div><div class="empty-label">No tasks in queue</div></div></td></tr>`;
-    return;
-  }
+  if (!tasks.length) { tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><div class="empty-icon">⬡</div><div class="empty-label">No tasks in queue</div></div></td></tr>`; return; }
   const priColor = { High: 'badge-red', Normal: 'badge-amber', Low: 'badge-muted' };
   tbody.innerHTML = tasks.map(t => `
     <tr style="${t.status==='Done'?'opacity:0.4':''}">
@@ -2097,7 +1562,7 @@ function renderTasks() {
 }
 
 // ── PIPELINE ──
-const stageMap = { prospect: 'Prospect', demo: 'Demo Booked', closed: 'Closed', onboard: 'Onboarding' };
+const stageMap  = { prospect: 'Prospect', demo: 'Demo Booked', closed: 'Closed', onboard: 'Onboarding' };
 const stageNext = { prospect: 'demo', demo: 'closed', closed: 'onboard', onboard: null };
 
 function addProspect() {
@@ -2116,7 +1581,6 @@ function addProspect() {
 function moveProspect(id) {
   const p = prospects.find(p => p.id === id);
   if (!p || !stageNext[p.stage]) return;
-  const oldStage = stageMap[p.stage];
   p.stage = stageNext[p.stage];
   discordAlert(`◎ Pipeline move: **${p.name}** → ${stageMap[p.stage]}`, 'pipeline');
   DataLayer.set('prospects', prospects);
@@ -2124,22 +1588,14 @@ function moveProspect(id) {
   refreshStats();
 }
 
-function removeProspect(id) {
-  prospects = prospects.filter(p => p.id !== id);
-  DataLayer.set('prospects', prospects);
-  renderPipeline();
-  refreshStats();
-}
+function removeProspect(id) { prospects = prospects.filter(p => p.id !== id); DataLayer.set('prospects', prospects); renderPipeline(); refreshStats(); }
 
 function renderPipeline() {
   ['prospect','demo','closed','onboard'].forEach(stage => {
     const col = document.getElementById('col-' + stage);
     const items = prospects.filter(p => p.stage === stage);
     document.getElementById('count-' + stage).textContent = items.length;
-    if (!items.length) {
-      col.innerHTML = `<div class="empty-state"><div class="empty-icon">◎</div><div class="empty-label">Empty</div></div>`;
-      return;
-    }
+    if (!items.length) { col.innerHTML = `<div class="empty-state"><div class="empty-icon">◎</div><div class="empty-label">Empty</div></div>`; return; }
     col.innerHTML = items.map(p => `
       <div class="pipe-card">
         <div class="pipe-card-name">${p.name}</div>
@@ -2152,31 +1608,18 @@ function renderPipeline() {
   });
 }
 
-function addPrompt() {
-  alert('Prompt builder coming soon — Athena will populate this library.');
-}
+function addPrompt() { alert('Prompt builder coming soon — Athena will populate this library.'); }
 
 // ── DISCORD ──
-function getWebhook() {
-  return localStorage.getItem('gcai_discord_webhook') || '';
-}
+function getWebhook() { return localStorage.getItem('gcai_discord_webhook') || ''; }
 
 async function discordAlert(message, type) {
   const url = getWebhook();
   if (!url || !url.startsWith('https://discord.com/api/webhooks/')) return;
   const colors = { client: 0x00d084, pipeline: 0xf5a623, task: 0x4fc3f7, system: 0xffffff };
-  const payload = {
-    embeds: [{
-      title: '🟢 Green Country AI Services',
-      description: message,
-      color: colors[type] || colors.system,
-      footer: { text: 'GCAI Hub · ' + new Date().toLocaleString() }
-    }]
-  };
-  try {
-    await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-    logDiscordActivity(message, type);
-  } catch(e) { console.warn('Discord webhook failed:', e); }
+  const payload = { embeds: [{ title: '🟢 Green Country AI Services', description: message, color: colors[type] || colors.system, footer: { text: 'GCAI Hub · ' + new Date().toLocaleString() } }] };
+  try { await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); logDiscordActivity(message, type); }
+  catch(e) { console.warn('Discord webhook failed:', e); }
 }
 
 function logDiscordActivity(message, type) {
@@ -2191,10 +1634,7 @@ function renderDiscordFeed() {
   const feed = DataLayer.get('discord_feed');
   const el = document.getElementById('discord-feed');
   if (!el) return;
-  if (!feed.length) {
-    el.innerHTML = `<div class="empty-state"><div class="empty-icon">◉</div><div class="empty-label">No activity yet — webhook inactive</div></div>`;
-    return;
-  }
+  if (!feed.length) { el.innerHTML = `<div class="empty-state"><div class="empty-icon">◉</div><div class="empty-label">No activity yet — webhook inactive</div></div>`; return; }
   const typeColor = { client: 'badge-green', pipeline: 'badge-amber', task: 'badge-blue', system: 'badge-muted' };
   el.innerHTML = feed.map(f => `
     <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)">
@@ -2210,33 +1650,16 @@ function updateWebhookStatus() {
   const badge = document.getElementById('webhook-badge');
   const bar   = document.getElementById('discord-status-bar');
   const statuses = ['wh-s1','wh-s2','wh-s3','wh-s4','wh-s5'];
-  if (badge) {
-    badge.className = active ? 'badge badge-green' : 'badge badge-muted';
-    badge.textContent = active ? 'Active' : 'Inactive';
-  }
-  if (bar) {
-    bar.style.background = active ? 'var(--green-dim)' : 'var(--amber-dim)';
-    bar.style.borderColor = active ? 'var(--green)' : 'var(--amber)';
-    bar.style.color = active ? 'var(--green)' : 'var(--amber)';
-    bar.innerHTML = active ? '✅ &nbsp; ACTIVE — Discord alerts firing on all hub events.' : '🔒 &nbsp; DORMANT — Paste webhook URL in Settings to activate Discord alerts.';
-  }
-  statuses.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.className = active ? 'badge badge-green' : 'badge badge-muted';
-      el.textContent = active ? 'Active' : 'Waiting';
-    }
-  });
+  if (badge) { badge.className = active ? 'badge badge-green' : 'badge badge-muted'; badge.textContent = active ? 'Active' : 'Inactive'; }
+  if (bar) { bar.style.background = active ? 'var(--green-dim)' : 'var(--amber-dim)'; bar.style.borderColor = active ? 'var(--green)' : 'var(--amber)'; bar.style.color = active ? 'var(--green)' : 'var(--amber)'; bar.innerHTML = active ? '✅ &nbsp; ACTIVE — Discord alerts firing on all hub events.' : '🔒 &nbsp; DORMANT — Paste webhook URL in Settings to activate Discord alerts.'; }
+  statuses.forEach(id => { const el = document.getElementById(id); if (el) { el.className = active ? 'badge badge-green' : 'badge badge-muted'; el.textContent = active ? 'Active' : 'Waiting'; } });
   const inp = document.getElementById('discord-webhook-input');
   if (inp && url) inp.value = url;
 }
 
 function saveDiscordSettings() {
   const url = document.getElementById('discord-webhook-input').value.trim();
-  if (url && !url.startsWith('https://discord.com/api/webhooks/')) {
-    alert('Invalid webhook URL. Must start with https://discord.com/api/webhooks/');
-    return;
-  }
+  if (url && !url.startsWith('https://discord.com/api/webhooks/')) { alert('Invalid webhook URL. Must start with https://discord.com/api/webhooks/'); return; }
   localStorage.setItem('gcai_discord_webhook', url);
   updateWebhookStatus();
   if (url) discordAlert('✅ Green Country AI Hub connected to Discord.', 'system');
@@ -2252,18 +1675,10 @@ async function testWebhook() {
 
 // ── SETTINGS ──
 function exportData() {
-  const data = {
-    clients: DataLayer.get('clients'),
-    tasks: DataLayer.get('tasks'),
-    prospects: DataLayer.get('prospects'),
-    discord_feed: DataLayer.get('discord_feed'),
-    exported: new Date().toISOString()
-  };
+  const data = { clients: DataLayer.get('clients'), tasks: DataLayer.get('tasks'), prospects: DataLayer.get('prospects'), discord_feed: DataLayer.get('discord_feed'), exported: new Date().toISOString() };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'gcai_data_export_' + new Date().toISOString().split('T')[0] + '.json';
-  a.click();
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'gcai_data_export_' + new Date().toISOString().split('T')[0] + '.json'; a.click();
 }
 
 function clearData() {
@@ -2280,45 +1695,15 @@ function clearData() {
   const faviconBlob = new Blob([faviconSvg], {type:'image/svg+xml'});
   const faviconUrl  = URL.createObjectURL(faviconBlob);
   document.getElementById('favicon-link').href = faviconUrl;
-
-  const manifest = {
-    name: "Green Country AI Services",
-    short_name: "GCAI Hub",
-    description: "Green Country AI Services — Operations Hub",
-    start_url: "./",
-    display: "standalone",
-    background_color: "#0a0e0f",
-    theme_color: "#00d084",
-    orientation: "landscape",
-    icons: [{ src: faviconUrl, sizes: "any", type: "image/svg+xml", purpose: "any maskable" }]
-  };
+  const manifest = { name: "Green Country AI Services", short_name: "GCAI Hub", description: "Green Country AI Services — Operations Hub", start_url: "./", display: "standalone", background_color: "#0a0e0f", theme_color: "#00d084", orientation: "landscape", icons: [{ src: faviconUrl, sizes: "any", type: "image/svg+xml", purpose: "any maskable" }] };
   const manifestBlob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
   document.getElementById('manifest-link').href = URL.createObjectURL(manifestBlob);
-
-  if ('serviceWorker' in navigator) {
-    const swCode = `const CACHE='gcai-v1';self.addEventListener('install',e=>{self.skipWaiting()});self.addEventListener('activate',e=>{self.clients.claim()});self.addEventListener('fetch',e=>{e.respondWith(fetch(e.request).catch(()=>caches.match(e.request)))});`;
-    const swUrl = URL.createObjectURL(new Blob([swCode], {type:'application/javascript'}));
-    navigator.serviceWorker.register(swUrl).catch(()=>{});
-  }
-
-  window.addEventListener('beforeinstallprompt', e => {
-    e.preventDefault();
-    const btn = document.createElement('button');
-    btn.className = 'btn btn-ghost';
-    btn.style.cssText = 'padding:4px 12px;font-size:11px;font-family:var(--font-mono);letter-spacing:0.06em';
-    btn.textContent = '⬇ Install App';
-    btn.onclick = () => { e.prompt(); btn.remove(); };
-    document.querySelector('.topbar-right').prepend(btn);
-  });
+  if ('serviceWorker' in navigator) { const swCode = `const CACHE='gcai-v1';self.addEventListener('install',e=>{self.skipWaiting()});self.addEventListener('activate',e=>{self.clients.claim()});self.addEventListener('fetch',e=>{e.respondWith(fetch(e.request).catch(()=>caches.match(e.request)))});`; const swUrl = URL.createObjectURL(new Blob([swCode], {type:'application/javascript'})); navigator.serviceWorker.register(swUrl).catch(()=>{}); }
+  window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); const btn = document.createElement('button'); btn.className = 'btn btn-ghost'; btn.style.cssText = 'padding:4px 12px;font-size:11px;font-family:var(--font-mono);letter-spacing:0.06em'; btn.textContent = '⬇ Install App'; btn.onclick = () => { e.prompt(); btn.remove(); }; document.querySelector('.topbar-right').prepend(btn); });
 })();
 
 // ── INIT ──
-renderClients();
-renderTasks();
-renderPipeline();
-refreshStats();
-updateWebhookStatus();
-renderDiscordFeed();
+renderClients(); renderTasks(); renderPipeline(); refreshStats(); updateWebhookStatus(); renderDiscordFeed();
 </script>
 </body>
 </html>
